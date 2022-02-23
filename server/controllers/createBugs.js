@@ -1,9 +1,4 @@
-import express from "express";
-import mongoose from "mongoose";
-
 import Bugs from "../models/bugs.js";
-
-const router = express.Router();
 
 export const createBugs = async (request, response) => {
   console.log(request.body);
@@ -26,5 +21,3 @@ export const createBugs = async (request, response) => {
     response.status(409).json({ message: error.message });
   }
 };
-
-export default router;
