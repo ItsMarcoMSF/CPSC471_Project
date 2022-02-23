@@ -1,5 +1,6 @@
 import Bugs from "../models/bugs.js";
 
+// Will get called multiple times in api to handle getting multiple bugs
 export const getBugsByID = async (request, response) => {
   try {
     // console.log(request.params);
