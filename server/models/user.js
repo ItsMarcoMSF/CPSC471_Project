@@ -14,6 +14,13 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    languages: {
+      type: [String],
+    },
+    projects: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "projects",
+    },
   },
   { timestamps: true }
 );

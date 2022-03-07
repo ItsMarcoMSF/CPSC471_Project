@@ -1,48 +1,83 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import './Register.css'
+import "./Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
-      e.preventDefault()
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [taken, setTaken] = useState(false);
 
-      const form = e.target;
-      const user = {
-          username: form[0].value,
-          email: form[1].value,
-          password: form[2].value,
-      }
+  const registerUser = async (e) => {
+    e.preventDefault();
 
-      fetch("http://localhost:5000/register", {
-          method: "POST",
-          headers: {
-              "Content-type": "application/json"
-          },
-          body: JSON.stringify(user)
-      })
-  }
+    const response = await fetch("http://localhost:5000/register", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (data.message === "Success") {
+        setTaken(false);
+        navigate("/login");
+    } else if (data.message === "Username or email has already been taken") {
+        setTaken(true);
+    }
+  };
 
   useEffect(() => {
     fetch("http://localhost:5000/isUserAuth", {
-        headers: {
-            "x-access-token": localStorage.getItem("token")
-        }
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
     })
-    .then(res => res.json())
-    .then(data => data.isLoggedIn ? navigate("/dashboard") : null)
-  }, [])
+      .then((res) => res.json())
+      .then((data) => (data.isLoggedIn ? navigate("/dashboard") : null));
+  });
 
   return (
-    <form onSubmit={event => handleRegister(event)}>
-        <input required type="text" />
-        <input required type="email" />
-        <input required type="password" />
+    <div className="register-wrapper">
+      <h1>Register</h1>
+      <form onSubmit={registerUser}>
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          type="text"
+          placeholder="Username"
+        />
+        <br />
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          type="email"
+          placeholder="Email"
+        />
+        <br />
+        <input
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          placeholder="Password"
+        />
+        <br />
         <input type="submit" value="Register" />
-    </form>
-  )
-}
+      </form>
+      {taken && 
+        <p>Username or email has already been taken</p>
+      }
+    </div>
+  );
+};
 
-export default Register
+export default Register;

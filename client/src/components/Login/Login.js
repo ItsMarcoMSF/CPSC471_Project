@@ -1,56 +1,78 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import './Login.css'
 
 const Login = () => {
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [failed, setFailed] = useState(false);
     const navigate = useNavigate()
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
-        const form = e.target;
-        const user = {
-            username: form[0].value,
-            password: form[1].value
-        }
-
-        fetch("http://localhost:5000/login", {
+        const response = await fetch("http://localhost:5000/login", {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify({
+                username,
+                password,
+            })
         })
-        .then(res => res.json())
-        .then(data => {
-            localStorage.setItem("token", data.token)
-        })
-        navigate("/dashboard");
+
+        const data = await response.json();
+
+        if(data.token) {
+            localStorage.setItem('token', data.token)
+            setFailed(false);
+            window.location.href = ('/dashboard')
+        } else {
+            setFailed(true);
+        }
+
+
     }
 
     useEffect(() => {
-        const checkLoggedIn = async () => {
-            await fetch("http://localhost:5000/isUserAuth", {
+        const checkLoggedIn = () => {
+            fetch("http://localhost:5000/isUserAuth", {
                 headers: {
                     "x-access-token": localStorage.getItem("token")
                 }
             })
             .then(res => res.json())
-            .then(data => data.isLoggedIn ? navigate("/dashboard") : null)
+            .then(data => data.isLoggedIn ? navigate("/dashboard"): null)
         }
         checkLoggedIn();
-    }, [])
+    })
 
   return (
-    <div className="login-wrapper">
-        <h1>Please Log In</h1>
-        <form onSubmit={ e => handleLogin(e) }>
-            <input required type="text" />
-            <input required type="password" />
-            <input type="submit" value="Submit" />
-        </form>
-    </div>
+    <div className='login-wrapper'>
+			<h1>Login</h1>
+			<form onSubmit={handleLogin}>
+				<input
+					value={username}
+					onChange={(e) => setUsername(e.target.value)}
+					type="text"
+					placeholder="Username"
+				/>
+				<br />
+				<input
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					type="password"
+					placeholder="Password"
+				/>
+				<br />
+				<input type="submit" value="Login" />
+			</form>
+            {failed &&
+                <p>Entered wrong username or password</p>
+            }
+		</div>
   )
 }
 
