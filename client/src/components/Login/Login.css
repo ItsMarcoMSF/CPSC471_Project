@@ -5,5 +5,39 @@
 }
 
 .login-wrapper p {
-  color: red;
+  margin-left: 5px;
+  color: white;
+}
+
+.login-wrapper input {
+  display: block;
+  margin-top: 10px;
+  height: 30px;
+  width: 250px;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  padding-left: 15px;
+  padding-right: 15px;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+.button {
+  background-color: #644aff;
+  margin: 0 auto;
+  width: 100px !important;
+  cursor: pointer;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+  align-items: center;
+}
+
+.signupLink {
+  color: rgb(150, 150, 150);
 }

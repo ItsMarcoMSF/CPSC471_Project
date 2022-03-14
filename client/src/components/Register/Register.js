@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import "./Register.css";
 
@@ -50,32 +50,35 @@ const Register = () => {
     <div className="register-wrapper">
       <h1>Register</h1>
       <form onSubmit={registerUser}>
+        <p>Username</p>
         <input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           type="text"
-          placeholder="Username"
         />
-        <br />
+        <p>Email</p>
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="email"
-          placeholder="Email"
         />
-        <br />
+        <p>Password</p>
         <input
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
-          placeholder="Password"
         />
         <br />
-        <input type="submit" value="Register" />
+        <input className="button" type="submit" value="Register" />
       </form>
       {taken && 
         <p>Username or email has already been taken</p>
       }
+      
+      <div className="login">
+        <p>Already have an account?</p>
+        <Link className="loginLink" to="/login">Log in</Link>
+      </div>
     </div>
   );
 };
