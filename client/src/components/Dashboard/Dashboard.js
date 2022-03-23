@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "./Dashboard.css";
+
 const Dashboard = () => {
   const navigate = useNavigate();
 
@@ -30,6 +32,7 @@ const Dashboard = () => {
   return (
     <div>
       <h2>Dashboard</h2>
+
       <button type="button" onClick={(e) => handleLogout(e)}>
         Log Out
       </button>

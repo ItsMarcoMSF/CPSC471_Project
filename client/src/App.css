@@ -1,3 +1,15 @@
 .wrapper {
   padding: 20px;
+  background: #0b0b0e;
+  opacity: 84%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  font-family: "Oxygen", sans-serif;
+}
+
+.wrapper h1 {
+  color: white;
 }
