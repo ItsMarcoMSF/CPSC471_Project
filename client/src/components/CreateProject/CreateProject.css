@@ -19,17 +19,17 @@
   padding: 40px 50px 30px;
 }
 
-form {
+.container form {
   text-align: left;
 }
 
-form label,
-input {
+.container form label,
+.container input {
   display: block;
   text-align: left;
 }
 
-input {
+.container input {
   width: 100%;
   padding: 15px;
   margin-top: 10px;
