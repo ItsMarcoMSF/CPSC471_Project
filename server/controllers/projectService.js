@@ -33,17 +33,13 @@ export const createProjects = async (req, res) => {
 
 export const getProjects = async (req, res) => {
   try {
-    const limit = 3;
-    const page = req.query.page;
     const userID = req.params.userID;
 
-    // const projects = await Projects.find({
-    //   $or: [{ manager: userID }, { developer: userID }],
-    // })
-    const projects = await Projects.find({ manager: userID })
-      .sort({ name: -1 })
-      .limit(limit)
-      .skip(page * limit);
+    const projects = await Projects.find({
+      $or: [{ manager: userID }, { developers: userID }],
+    }).sort({
+      name: -1,
+    });
 
     res.status(200).json(projects);
   } catch (error) {
@@ -56,12 +52,15 @@ export const getProjectByID = async (req, res) => {
     const id = req.params.id;
     const user = req.params.userID;
 
-    const project = await Projects.find(
-      { _id: id },
-      { $or: [{ manager: user }, { developer: user }] }
-    );
+    const project = await Projects.find({
+      $and: [{ _id: id }, { $or: [{ manager: user }, { developers: user }] }],
+    });
 
-    res.status(200).json(project);
+    if (project.length === 0) {
+      res.status(404).json({ message: "Project Not Found or Invalid Access" });
+    } else {
+      res.status(200).json(project);
+    }
   } catch (error) {
     res.status(404).json({ message: "Project Not Found" });
   }
