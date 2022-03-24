@@ -1,10 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import * as api from "../../api/api.js";
+
+import NavBar from "../NavBar/NavBar";
+import ProjectPage from "../ProjectPage/ProjectPage";
+import CreateProject from "../CreateProject/CreateProject.js";
 
 import "./Dashboard.css";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [projectStage, setProjectStage] = useState(true);
+  const [createStage, setCreateStage] = useState(false);
+
+  const switchToCreate = () => {
+    setProjectStage(false);
+    setCreateStage(true);
+  };
+  const switchToProject = () => {
+    setProjectStage(true);
+    setCreateStage(false);
+  };
 
   useEffect(() => {
     fetch("http://localhost:5000/isUserAuth", {
@@ -13,32 +30,57 @@ const Dashboard = () => {
       },
     })
       .then((res) => res.json())
-      .then((data) =>
-        data.isLoggedIn ? console.log(data.username) : navigate("/login")
-      );
+      .then((data) => (data.isLoggedIn ? null : navigate("/login")));
   });
 
-  const handleLogout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("token");
-    navigate("/login");
+  const [projects, setProjects] = useState([]);
+
+  const loadProjects = async () => {
+    const userID = localStorage.getItem("userID");
+    const payload = {
+      method: "GET",
+    };
+
+    try {
+      const res = await fetch(
+        `http://localhost:5000/${userID}/projects`,
+        payload
+      );
+      const projects = await res.json();
+      setProjects(projects);
+      console.log(projects);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleProfile = (e) => {
-    e.preventDefault();
-    navigate("/profile");
-  };
+  useEffect(() => {
+    loadProjects();
+  }, []);
+
+  const [curProject, setCurProject] = useState(projects[0]);
+
+  useEffect(() => {
+    setCurProject(projects[0]);
+  }, [projects]);
 
   return (
-    <div>
-      <h2>Dashboard</h2>
+    <div className="dashboard-wrapper">
+      <NavBar
+        projects={projects}
+        setProject={setCurProject}
+        curProject={curProject}
+        switchCreate={switchToCreate}
+        switchProject={switchToProject}
+      />
 
-      <button type="button" onClick={(e) => handleLogout(e)}>
-        Log Out
-      </button>
-      <button type="button" onClick={(e) => handleProfile(e)}>
-        Profile
-      </button>
+      {projectStage && <ProjectPage project={curProject} />}
+      {createStage && (
+        <CreateProject
+          refreshProjects={loadProjects}
+          switchStage={switchToProject}
+        />
+      )}
     </div>
   );
 };

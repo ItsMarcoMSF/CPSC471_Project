@@ -17,7 +17,6 @@ const App = () => {
 
   return (
     <div className="wrapper">
-      <h1>Bug Tracker</h1>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />

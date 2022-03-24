@@ -11,7 +11,8 @@ import User from "./models/user.js";
 import Routes from "./routes/bugs.js";
 
 const app = express();
-dotenv.config({path:'server/.env'});
+// dotenv.config({path:'server/.env'});
+dotenv.config();
 
 app.use(bodyParser.json({ limit: "30mb", extended: "true" }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: "true" }));
@@ -20,7 +21,6 @@ app.use(cors());
 // var jwt = require("jsonwebtoken");
 // const bcrypt = require("bcrypt");
 // const User = require("./models/user.js")
-
 
 function verifyJWT(req, res, next) {
   const token = req.headers["x-access-token"]?.split(" ")[1];
@@ -95,6 +95,7 @@ app.post("/login", (req, res) => {
               return res.json({
                 message: "Success",
                 token: "Bearer " + token,
+                userID: dbUser._id,
               });
             }
           );

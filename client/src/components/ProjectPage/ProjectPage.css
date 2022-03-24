@@ -1,0 +1,11 @@
+.project-wrapper {
+  margin: 0;
+  padding: 0;
+  background-color: #4d4d4d;
+  height: 100vh;
+  width: 100%;
+}
+
+h2 {
+  margin: 0;
+}

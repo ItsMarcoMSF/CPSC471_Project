@@ -27,6 +27,7 @@ const Login = () => {
 
     if (data.token) {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("userID", data.userID);
       setFailed(false);
       window.location.href = "/dashboard";
     } else {
@@ -69,7 +70,9 @@ const Login = () => {
       {failed && <p>Entered wrong username or password</p>}
       <div className="signup">
         <p>Don't have an account yet?</p>
-        <Link className="signupLink" to="/register">Sign up</Link>
+        <Link className="signupLink" to="/register">
+          Sign up
+        </Link>
       </div>
     </div>
   );
