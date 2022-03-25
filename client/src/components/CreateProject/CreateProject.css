@@ -1,0 +1,61 @@
+.create-project {
+  margin: 0;
+  padding: 0;
+  background-color: #4d4d4d;
+  height: 100vh;
+  width: 100%;
+  /* padding-top: 50px; */
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 50px;
+  background: #2e2e2e;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  padding: 40px 50px 30px;
+}
+
+.container form {
+  text-align: left;
+}
+
+.container form label,
+.container input {
+  display: block;
+  text-align: left;
+}
+
+.container input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border: rgba(112, 112, 112, 0.25);
+  box-sizing: border-box;
+  color: rgb(37, 37, 37);
+}
+
+form label {
+  margin-top: 20px;
+  color: white;
+}
+
+form button {
+  border-radius: 5px;
+  background: #644aff;
+  color: #fff;
+  border: none;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  padding: 15px 30px;
+  font-size: 16px;
+  margin-top: 15px;
+}
+
+#inputID::placeholder {
+  color: #adaba5;
+}
