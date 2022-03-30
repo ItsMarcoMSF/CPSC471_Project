@@ -6,6 +6,25 @@
   width: 100%;
 }
 
+rectangle-small-left{
+  background-color: white;
+  height: 100px;
+  float: left;
+  width: 45%;
+}
+rectangle-small-right{
+  background-color: white;
+  float: right;
+  height: 200px;
+  width: 45%;
+}
+
+rectangle-large{
+  background-color: white;
+  height: 200px;
+  width: 100%;
+}
+
 h2 {
   margin: 0;
 }
