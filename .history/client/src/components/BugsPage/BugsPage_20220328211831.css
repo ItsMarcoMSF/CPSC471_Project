@@ -1,0 +1,71 @@
+.bugs-wrapper {
+    margin: 0;
+    padding: 0;
+    background-color: #4d4d4d;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  h2 {
+    margin: 10;
+  }
+
+.rptbtn {
+  background-color: #4d4d4d;
+  margin: 0 auto;
+  width: 100vh !important;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  padding: 15px 250px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.rptbtn:hover {
+  background-color: #696969;
+}
+
+  .button {
+    background-color: #4d4d4d;
+    margin: 0 auto;
+    width: 100px !important;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    border-radius: 0;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+  }
+  .button:hover {
+    background-color: #696969;
+  }
+button {
+  background-color: #4d4d4d;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #696969;
+}
+
+.viewDetail {
+  background-color: #4d4d4d;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+}
+.viewDetail:hover {
+  background-color: #696969;
+}
+nav ol{height:75vh; width: 96%;}
+nav ol{overflow:auto; overflow-y:scroll;}
