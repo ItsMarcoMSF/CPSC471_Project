@@ -8,19 +8,29 @@ import ProjectPage from "../ProjectPage/ProjectPage";
 import CreateProject from "../CreateProject/CreateProject.js";
 
 import "./Dashboard.css";
+import BugsPage from "../BugsPage/BugsPage";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [projectStage, setProjectStage] = useState(true);
   const [createStage, setCreateStage] = useState(false);
+  const [bugStage, setBugStage] = useState(false);
 
   const switchToCreate = () => {
     setProjectStage(false);
+    setBugStage(false);
     setCreateStage(true);
   };
   const switchToProject = () => {
-    setProjectStage(true);
     setCreateStage(false);
+    setBugStage(false);
+    setProjectStage(true);
+  };
+
+  const switchToBugs = () => {
+    setProjectStage(false);
+    setCreateStage(false);
+    setBugStage(true);
   };
 
   useEffect(() => {
@@ -58,10 +68,10 @@ const Dashboard = () => {
     loadProjects();
   }, []);
 
-  const [curProject, setCurProject] = useState(projects[0]);
+  const [curProject, setCurProject] = useState({});
 
   useEffect(() => {
-    setCurProject(projects[0]);
+    setCurProject(curProject);
   }, [projects]);
 
   return (
@@ -73,14 +83,20 @@ const Dashboard = () => {
         switchCreate={switchToCreate}
         switchProject={switchToProject}
       />
-
-      {projectStage && <ProjectPage project={curProject} />}
-      {createStage && (
-        <CreateProject
-          refreshProjects={loadProjects}
-          switchStage={switchToProject}
-        />
-      )}
+      <div className="main-content">
+        {bugStage && (
+          <BugsPage project={curProject} switchToProject={switchToProject} />
+        )}
+        {projectStage && (
+          <ProjectPage project={curProject} switchToBugs={switchToBugs} />
+        )}
+        {createStage && (
+          <CreateProject
+            refreshProjects={loadProjects}
+            switchStage={switchToProject}
+          />
+        )}
+      </div>
     </div>
   );
 };

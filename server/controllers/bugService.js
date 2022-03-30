@@ -1,7 +1,7 @@
 import Bugs from "../models/bugs.js";
-import mongooseArchive from 'mongoose-archive';
+import mongooseArchive from "mongoose-archive";
 
-Bugs.plugin(mongooseArchive);
+// Bugs.plugin(mongooseArchive);
 
 export const archiveBug = async (request, response) => {
   console.log(request.body);
@@ -13,20 +13,41 @@ export const archiveBug = async (request, response) => {
 };
 
 export const deleteBug = async (request, response) => {
-    console.log(request.body);
-    const bugID = request.params.bugID;
-  
-    const bug = await Bugs.deleteOne(bugID);
-  
-     response.status(200).json(bug);
-  };
+  console.log(request.body);
+  const bugID = request.params.bugID;
 
-  export const markResolved = async (request, response) => {
-    console.log(request.body);
-    const bugID = request.params.bugID;
-  
-    const bug = await Bugs.findOneAndUpdate(bugID, {$set: {status: true}}, options, callback);
-    //await Bugs.save();
-  
-    response.status(200).json(bug);
-  };
+  const bug = await Bugs.deleteOne(bugID);
+
+  response.status(200).json(bug);
+};
+
+export const markResolved = async (request, response) => {
+  console.log(request.body);
+  const bugID = request.params.bugID;
+
+  const bug = await Bugs.findOneAndUpdate(
+    bugID,
+    { $set: { status: true } },
+    options,
+    callback
+  );
+  //await Bugs.save();
+
+  response.status(200).json(bug);
+};
+
+export const getBugsByPrjID = async (req, res) => {
+  try {
+    const prjID = req.params.projectID;
+
+    const bugs = await Bugs.find({
+      $or: [{ prjID: prjID }],
+    }).sort({
+      id: -1,
+    });
+
+    res.status(200).json(bugs);
+  } catch (error) {
+    res.status(404).json({ message: "No bugs found" });
+  }
+};
