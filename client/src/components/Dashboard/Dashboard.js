@@ -30,7 +30,7 @@ const Dashboard = () => {
   const switchToBugs = () => {
     setProjectStage(false);
     setCreateStage(false);
-    setProjectStage(true);
+    setBugStage(true);
   };
 
   useEffect(() => {
@@ -85,8 +85,12 @@ const Dashboard = () => {
         switchProject={switchToProject}
       />
 
-      {projectStage && <BugsPage/>}
-      {/* {projectStage && <ProjectPage curProject={curProject}/>} */}
+      {bugStage && (
+        <BugsPage project={curProject} switchToProject={switchToProject} />
+      )}
+      {projectStage && (
+        <ProjectPage project={curProject} switchToBugs={switchToBugs} />
+      )}
       {createStage && (
         <CreateProject
           refreshProjects={loadProjects}
