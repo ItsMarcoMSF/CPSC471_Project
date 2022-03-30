@@ -29,10 +29,10 @@ const Register = () => {
     const data = await response.json();
 
     if (data.message === "Success") {
-        setTaken(false);
-        navigate("/login");
+      setTaken(false);
+      navigate("/login");
     } else if (data.message === "Username or email has already been taken") {
-        setTaken(true);
+      setTaken(true);
     }
   };
 
@@ -69,15 +69,15 @@ const Register = () => {
           type="password"
         />
         <br />
-        <input className="button" type="submit" value="Register" />
+        <input className="register-button" type="submit" value="Register" />
       </form>
-      {taken && 
-        <p>Username or email has already been taken</p>
-      }
-      
+      {taken && <p>Username or email has already been taken</p>}
+
       <div className="login">
         <p>Already have an account?</p>
-        <Link className="loginLink" to="/login">Log in</Link>
+        <Link className="loginLink" to="/login">
+          Log in
+        </Link>
       </div>
     </div>
   );
