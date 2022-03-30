@@ -10,11 +10,14 @@ import {
   deleteProject,
 } from "../controllers/projectService.js";
 
+import { getBugsByPrjID } from "../controllers/bugService.js";
+
 const router = express.Router();
 
 router.post("/bugs", createBugs);
 router.get("/bugs/:bugID", getBugsByID);
 router.get("/bugs", getAllBugs);
+router.get("/projects/:projectID/bugs", getBugsByPrjID);
 
 router.get("/:userID/projects", getProjects);
 router.post("/projects", createProjects);

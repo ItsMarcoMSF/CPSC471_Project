@@ -8,19 +8,29 @@ import ProjectPage from "../ProjectPage/ProjectPage";
 import CreateProject from "../CreateProject/CreateProject.js";
 
 import "./Dashboard.css";
+import BugsPage from "../BugsPage/BugsPage";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [projectStage, setProjectStage] = useState(true);
   const [createStage, setCreateStage] = useState(false);
+  const [bugStage, setBugStage] = useState(false);
 
   const switchToCreate = () => {
     setProjectStage(false);
+    setBugStage(false);
     setCreateStage(true);
   };
   const switchToProject = () => {
-    setProjectStage(true);
     setCreateStage(false);
+    setBugStage(false);
+    setProjectStage(true);
+  };
+
+  const switchToBugs = () => {
+    setProjectStage(false);
+    setCreateStage(false);
+    setBugStage(true);
   };
 
   useEffect(() => {
@@ -59,6 +69,7 @@ const Dashboard = () => {
   }, []);
 
   const [curProject, setCurProject] = useState(projects[0]);
+  //const [curBug, setCurBug] = useState
 
   useEffect(() => {
     setCurProject(projects[0]);
@@ -74,7 +85,12 @@ const Dashboard = () => {
         switchProject={switchToProject}
       />
 
-      {projectStage && <ProjectPage project={curProject} />}
+      {bugStage && (
+        <BugsPage project={curProject} switchToProject={switchToProject} />
+      )}
+      {projectStage && (
+        <ProjectPage project={curProject} switchToBugs={switchToBugs} />
+      )}
       {createStage && (
         <CreateProject
           refreshProjects={loadProjects}
