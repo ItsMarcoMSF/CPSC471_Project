@@ -68,11 +68,10 @@ const Dashboard = () => {
     loadProjects();
   }, []);
 
-  const [curProject, setCurProject] = useState(projects[0]);
-  //const [curBug, setCurBug] = useState
+  const [curProject, setCurProject] = useState({});
 
   useEffect(() => {
-    setCurProject(projects[0]);
+    setCurProject(curProject);
   }, [projects]);
 
   return (
@@ -84,19 +83,20 @@ const Dashboard = () => {
         switchCreate={switchToCreate}
         switchProject={switchToProject}
       />
-
-      {bugStage && (
-        <BugsPage project={curProject} switchToProject={switchToProject} />
-      )}
-      {projectStage && (
-        <ProjectPage project={curProject} switchToBugs={switchToBugs} />
-      )}
-      {createStage && (
-        <CreateProject
-          refreshProjects={loadProjects}
-          switchStage={switchToProject}
-        />
-      )}
+      <div className="main-content">
+        {bugStage && (
+          <BugsPage project={curProject} switchToProject={switchToProject} />
+        )}
+        {projectStage && (
+          <ProjectPage project={curProject} switchToBugs={switchToBugs} />
+        )}
+        {createStage && (
+          <CreateProject
+            refreshProjects={loadProjects}
+            switchStage={switchToProject}
+          />
+        )}
+      </div>
     </div>
   );
 };
