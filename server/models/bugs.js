@@ -7,6 +7,7 @@ const bugSchema = mongoose.Schema({
   priority: String,
   status: String,
   deadline: Date,
+  prjID: Number,
 });
 
 var Bugs = mongoose.model("Bugs", bugSchema);
