@@ -13,14 +13,23 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const [projectStage, setProjectStage] = useState(true);
   const [createStage, setCreateStage] = useState(false);
+  const [bugStage, setBugStage] = useState(false);
 
   const switchToCreate = () => {
     setProjectStage(false);
+    setBugStage(false);
     setCreateStage(true);
   };
   const switchToProject = () => {
-    setProjectStage(true);
     setCreateStage(false);
+    setBugStage(false);
+    setProjectStage(true);
+  };
+
+  const switchToBugs = () => {
+    setProjectStage(false);
+    setCreateStage(false);
+    setProjectStage(true);
   };
 
   useEffect(() => {
