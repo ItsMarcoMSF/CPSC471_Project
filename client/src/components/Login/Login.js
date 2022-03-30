@@ -65,7 +65,7 @@ const Login = () => {
           type="password"
         />
         <br />
-        <input className="button" type="submit" value="Log in" />
+        <input className="signin-button" type="submit" value="Log in" />
       </form>
       {failed && <p>Entered wrong username or password</p>}
       <div className="signup">

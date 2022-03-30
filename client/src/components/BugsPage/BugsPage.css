@@ -56,7 +56,7 @@
 .rpt:hover {
   background-color: #696969;
 }
-button {
+/* button {
   background-color: #4d4d4d;
   outline: none;
   border: none;
@@ -67,7 +67,7 @@ button {
 }
 button:hover {
   background-color: #696969;
-}
+} */
 
 .viewDetail {
   background-color: #535353;
