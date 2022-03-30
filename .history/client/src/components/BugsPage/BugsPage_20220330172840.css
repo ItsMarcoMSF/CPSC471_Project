@@ -3,7 +3,7 @@
   width: max-content;
   padding: 0;
   background-color: #535353;
-  height: 100%;
+  height: 50%;
   width: 100%;
 }
 
@@ -29,16 +29,6 @@
   margin-left: 15px;
   margin-bottom: 15px;
   background-color: #535353;
-  outline: none;
-  border: none;
-  border-radius: 0;
-  padding: 15px 32px;
-  text-align: center;
-  font-size: 16px;
-}
-
-.back-btn:hover {
-  background-color: #696969;
 }
 
 .bugs-reported {
@@ -64,6 +54,18 @@
   color: aliceblue;
 }
 .rpt:hover {
+  background-color: #696969;
+}
+button {
+  background-color: #4d4d4d;
+  outline: none;
+  border: none;
+  border-radius: 0;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+}
+button:hover {
   background-color: #696969;
 }
 
