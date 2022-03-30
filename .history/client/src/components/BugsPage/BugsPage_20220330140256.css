@@ -2,13 +2,17 @@
   margin: 0;
   width: max-content;
   padding: 0;
-  background-color: #535353;
+  background-color: #4d4d4d;
   height: 100vh;
   width: 100%;
 }
 
+h2 {
+  margin: 10;
+}
+
 .rptbtn {
-  background-color: #2c2c2c;
+  background-color: #4d4d4d;
   margin: 0 auto;
   width: 25% !important;
   cursor: pointer;
@@ -21,26 +25,23 @@
   align-self: center;
   margin-left: 37.5%;
   font-size: 16px;
-  color: aliceblue;
 }
 
 .back-btn {
   /* float: left; */
   margin-left: 15px;
   margin-bottom: 15px;
-  background-color: #535353;
 }
 
 .bugs-reported {
-  width: 100%;
-  text-align: center;
+  margin-left: 16px;
 }
 
 .rptbtn:hover {
   background-color: #696969;
 }
 
-.rpt {
+.button {
   background-color: #4d4d4d;
   margin: 0 auto;
   width: 100px !important;
@@ -48,12 +49,11 @@
   outline: none;
   border: none;
   border-radius: 0;
-  padding: 15px 10px;
+  padding: 15px 32px;
   text-align: center;
   font-size: 16px;
-  color: aliceblue;
 }
-.rpt:hover {
+.button:hover {
   background-color: #696969;
 }
 button {
@@ -70,31 +70,22 @@ button:hover {
 }
 
 .viewDetail {
-  background-color: #535353;
+  background-color: #4d4d4d;
   outline: none;
   border: none;
   border-radius: 0;
   padding: 15px 32px;
   text-align: center;
   font-size: 16px;
-  width: 90%;
 }
-
 .viewDetail:hover {
   background-color: #696969;
 }
-
 nav ul {
   height: 75vh;
-  width: 95%;
-  text-align: center;
+  width: 96%;
 }
 nav ul {
   overflow: auto;
-  overflow-y: auto;
-}
-
-.enter-detail{
-  width: 20%;
-  height: 25px;
+  overflow-y: scroll;
 }

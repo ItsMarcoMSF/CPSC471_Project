@@ -19,7 +19,7 @@ const BugBtn = ({ bug }) => {
         <DetailPopup
           content={
             <>
-              <h2>Bug's detail</h2>
+              <b>Bug's detail</b>
               {/* <li key={bug._id}> */}
               <>
                 <p>{"ID: " + bug.id}</p>

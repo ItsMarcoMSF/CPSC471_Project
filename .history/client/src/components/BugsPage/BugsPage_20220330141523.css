@@ -2,7 +2,7 @@
   margin: 0;
   width: max-content;
   padding: 0;
-  background-color: #535353;
+  background-color: #4d4d4d;
   height: 100vh;
   width: 100%;
 }
@@ -28,7 +28,6 @@
   /* float: left; */
   margin-left: 15px;
   margin-bottom: 15px;
-  background-color: #535353;
 }
 
 .bugs-reported {
@@ -70,20 +69,17 @@ button:hover {
 }
 
 .viewDetail {
-  background-color: #535353;
+  background-color: #4d4d4d;
   outline: none;
   border: none;
   border-radius: 0;
   padding: 15px 32px;
   text-align: center;
   font-size: 16px;
-  width: 90%;
 }
-
 .viewDetail:hover {
   background-color: #696969;
 }
-
 nav ul {
   height: 75vh;
   width: 95%;
@@ -92,9 +88,4 @@ nav ul {
 nav ul {
   overflow: auto;
   overflow-y: auto;
-}
-
-.enter-detail{
-  width: 20%;
-  height: 25px;
 }

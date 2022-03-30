@@ -88,11 +88,11 @@ const BugsPage = ({ project, switchToProject }) => {
       {getBugs.length > 0 ? (
         <div>
           {/* <h2>{bugs.name}</h2> */}
-          <h2 className="bugs-reported">Bugs reported:</h2>
+          <p className="bugs-reported">Bugs reported:</p>
           <nav>
-            <ul>
+            <div>
               <BugLists bugs={getBugs} toggleDetail={toggleDetail} />
-            </ul>
+            </div>
           </nav>
           {/* <ReportBtn/> */}
           <input
@@ -105,20 +105,18 @@ const BugsPage = ({ project, switchToProject }) => {
             <Popup
               content={
                 <>
-                  <h2>Report a new bug</h2>
+                  <b>Report a new bug</b>
                   <p>Enter details about new bugs here</p>
                   <form onSubmit={(e) => reportBug(e)}>
                     <p>Bug id</p>
                     <input
-                      className="enter-detail"
-                      value={sendBug.id}
+                      value={sendBug.bid}
                       onChange={(e) => handle(e)}
                       id="id"
                       type="number"
                     />
                     <p>Bug name</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.name}
                       onChange={(e) => handle(e)}
                       id="name"
@@ -126,7 +124,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug description</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.description}
                       onChange={(e) => handle(e)}
                       id="description"
@@ -134,7 +131,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug priority</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.priority}
                       onChange={(e) => handle(e)}
                       id="priority"
@@ -142,7 +138,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug deadline</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.deadline}
                       onChange={(e) => handle(e)}
                       id="deadline"
@@ -150,7 +145,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug status</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.status}
                       onChange={(e) => handle(e)}
                       id="status"
@@ -158,7 +152,7 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p />
                     <br />
-                    <input className="rpt" type="submit" value="Report" />
+                    <input className="button" type="submit" value="Report" />
                   </form>
                 </>
               }
@@ -175,12 +169,11 @@ const BugsPage = ({ project, switchToProject }) => {
             <Popup
               content={
                 <>
-                  <h2>Report a new bug</h2>
+                  <b>Report a new bug</b>
                   <p>Enter details about new bugs here</p>
                   <form onSubmit={(e) => reportBug(e)}>
                     <p>Bug id</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.bid}
                       onChange={(e) => handle(e)}
                       id="id"
@@ -188,7 +181,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug name</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.name}
                       onChange={(e) => handle(e)}
                       id="name"
@@ -196,7 +188,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug description</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.description}
                       onChange={(e) => handle(e)}
                       id="description"
@@ -204,7 +195,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug priority</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.priority}
                       onChange={(e) => handle(e)}
                       id="priority"
@@ -212,7 +202,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug deadline</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.deadline}
                       onChange={(e) => handle(e)}
                       id="deadline"
@@ -220,7 +209,6 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p>Bug status</p>
                     <input
-                      className="enter-detail"
                       value={sendBug.status}
                       onChange={(e) => handle(e)}
                       id="status"
@@ -228,7 +216,7 @@ const BugsPage = ({ project, switchToProject }) => {
                     />
                     <p />
                     <br />
-                    <input className="rpt" type="submit" value="Report" />
+                    <input className="button" type="submit" value="Report" />
                   </form>
                 </>
               }

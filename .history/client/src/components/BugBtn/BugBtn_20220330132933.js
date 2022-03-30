@@ -12,23 +12,22 @@ const BugBtn = ({ bug }) => {
       <input
         className="viewDetail"
         type="button"
-        value={bug.id + " - " + bug.name + " - " + bug.status}
+        value={bug._id + " - " + bug.name + " - " + bug.status}
         onClick={toggleDetail}
       />
       {isDetail && (
         <DetailPopup
           content={
             <>
-              <h2>Bug's detail</h2>
-              {/* <li key={bug._id}> */}
-              <>
-                <p>{"ID: " + bug.id}</p>
-                <p>{"Name: " + bug.name}</p>
-                <p>{"Description: " + bug.description}</p>
-                <p>{"Priority: " + bug.priority}</p>
-                <p>{"Deadline: " + bug.deadline.substring(0, 10)}</p>
-                <p>{"Status: " + bug.status}</p>
-              </>
+              <b>Bug's detail</b>
+              <li key={bug._id}>
+                <p>{"id: " + bug.id}</p>
+                <p>{"name: " + bug.name}</p>
+                <p>{"description: " + bug.description}</p>
+                <p>{"priority: " + bug.priority}</p>
+                <p>{"deadline: " + bug.deadline.substring(0, 10)}</p>
+                <p>{"status: " + bug.status}</p>
+              </li>
             </>
           }
           handleClose={toggleDetail}
