@@ -73,6 +73,7 @@ const NavBar = ({
             projects={projects}
             setProject={setProject}
             curProject={curProject}
+            switchToProject={switchProject}
           />
         </div>
       )}
