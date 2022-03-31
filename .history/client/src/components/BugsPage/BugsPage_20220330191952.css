@@ -52,10 +52,6 @@
 
 .rptbtn:hover {
   background-color: #696969;
-  border: #2c2c2c;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
 }
 
 .rpt {

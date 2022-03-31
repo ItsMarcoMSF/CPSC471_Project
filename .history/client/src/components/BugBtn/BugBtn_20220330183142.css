@@ -1,15 +1,14 @@
 .bugID {
     text-align: left;
+    margin-left: 10vh;
 }
 
 .bugName {
     text-align: center;
+    margin-left: 50%;
 }
 
 .bugStatus {
     text-align: right;
-}
-
-.viewShort {
-    width: 100%;
+    margin-right: 10vh;
 }

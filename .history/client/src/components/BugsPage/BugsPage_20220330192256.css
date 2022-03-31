@@ -133,6 +133,12 @@ nav ul {
   width: 95%;
   text-align: center;
   align-items: center;
+  background-image:
+    linear-gradient(
+      to bottom,
+      red,
+      yellow 10%
+    );
 }
 nav ul {
   overflow: auto;

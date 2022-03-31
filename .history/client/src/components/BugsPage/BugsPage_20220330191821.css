@@ -13,7 +13,7 @@
   width: 25% !important;
   cursor: pointer;
   outline: none;
-  /* border: none; */
+  border: none;
   border-radius: 0;
   padding: 15px 50px;
   text-align: center;
@@ -22,10 +22,6 @@
   margin-left: 37.5%;
   font-size: 16px;
   color: aliceblue;
-  border: #2c2c2c;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
 }
 
 .back-btn {
@@ -52,10 +48,6 @@
 
 .rptbtn:hover {
   background-color: #696969;
-  border: #2c2c2c;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
 }
 
 .rpt {
@@ -116,7 +108,7 @@
   border-radius: 8px;
   margin-left: 33px;
   margin-right: 5px;
-  font-size: large;
+  font-size: 18;
 }
 
 .viewShort:hover {

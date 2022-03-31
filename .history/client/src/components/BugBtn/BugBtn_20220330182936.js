@@ -21,7 +21,7 @@ const BugBtn = ({ bug }) => {
         // type="button"
         // value={bug.id + " - " + bug.name + " - " + bug.status}
         onClick={toggleDetail}>
-          <table className="viewShort">
+          <table>
             <th className="bugID">{bug.id}</th>
             <th className="bugName">{bug.name}</th>
             <th className="bugStatus">{bug.status}</th>

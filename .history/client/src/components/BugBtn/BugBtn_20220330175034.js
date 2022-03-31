@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import DetailPopup from "../BugDetail/BugDetail";
-import "./BugBtn.css"
 
 const BugBtn = ({ bug }) => {
   const [isDetail, setIsDetail] = useState(false);
@@ -10,24 +9,12 @@ const BugBtn = ({ bug }) => {
 
   return (
     <div>
-      {/* <input
+      <input
         className="viewDetail"
         type="button"
         value={bug.id + " - " + bug.name + " - " + bug.status}
         onClick={toggleDetail}
-      /> */}
-      <div
-        className="viewDetail"
-        // type="button"
-        // value={bug.id + " - " + bug.name + " - " + bug.status}
-        onClick={toggleDetail}>
-          <table className="viewShort">
-            <th className="bugID">{bug.id}</th>
-            <th className="bugName">{bug.name}</th>
-            <th className="bugStatus">{bug.status}</th>
-          </table>
-      </div>
-
+      />
       {isDetail && (
         <DetailPopup
           content={

@@ -13,7 +13,7 @@
   width: 25% !important;
   cursor: pointer;
   outline: none;
-  /* border: none; */
+  border: none;
   border-radius: 0;
   padding: 15px 50px;
   text-align: center;
@@ -22,10 +22,6 @@
   margin-left: 37.5%;
   font-size: 16px;
   color: aliceblue;
-  border: #2c2c2c;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
 }
 
 .back-btn {
@@ -52,10 +48,6 @@
 
 .rptbtn:hover {
   background-color: #696969;
-  border: #2c2c2c;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
 }
 
 .rpt {
@@ -101,13 +93,12 @@
 } */
 
 .viewShort {
-  background-color: #646464;
-  height: 60px;
+  height: max-content;
   width: 96%;
   /* margin-top: 10px;
   margin-bottom: 10px;*/
-  padding-top: 15px;
-  padding-bottom: 15px; 
+  padding-top: 5px;
+  padding-bottom: 5px; 
   padding-left: 10px;
   padding-right: 10px;
   border: #2c2c2c;
@@ -120,9 +111,9 @@
 }
 
 .viewShort:hover {
-  background-color: #818181;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  background-color: #696969;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-radius: 8px;
   padding-left: 10px;
   padding-right: 10px;
@@ -143,7 +134,6 @@ nav ul {
   width: 25%;
   height: 30px;
   padding-left: 15px;
-  padding-right: 15px;
   border-radius: 8px;
 }
 

@@ -13,7 +13,7 @@
   width: 25% !important;
   cursor: pointer;
   outline: none;
-  /* border: none; */
+  border: none;
   border-radius: 0;
   padding: 15px 50px;
   text-align: center;
@@ -22,10 +22,6 @@
   margin-left: 37.5%;
   font-size: 16px;
   color: aliceblue;
-  border: #2c2c2c;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
 }
 
 .back-btn {
@@ -52,10 +48,6 @@
 
 .rptbtn:hover {
   background-color: #696969;
-  border: #2c2c2c;
-  border-width: 2px;
-  border-style: solid;
-  border-radius: 8px;
 }
 
 .rpt {
@@ -64,7 +56,11 @@
   width: 100px !important;
   cursor: pointer;
   outline: none;
-  border: none;
+  /* border: none; */
+  border: #2c2c2c;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 8px;
   border-radius: 0;
   padding: 15px 10px;
   text-align: center;
@@ -73,6 +69,10 @@
 }
 .rpt:hover {
   background-color: #696969;
+  border: #2c2c2c;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 8px;
 }
 
 .viewDetail {
