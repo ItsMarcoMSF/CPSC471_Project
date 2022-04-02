@@ -42,7 +42,8 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
 
   return (
     <div className="create-project">
-      <div className="container">
+      <h2>Create A Project</h2>
+      <div className="create-container">
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name</label>
           <input
@@ -74,7 +75,9 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
             onChange={(e) => setCategory(e.target.value)}
           />
 
-          <button type="submit">Create</button>
+          <button className="project-submit-btn" type="submit">
+            Create
+          </button>
         </form>
       </div>
     </div>

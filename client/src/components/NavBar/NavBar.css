@@ -6,6 +6,10 @@
   background-color: #2e2e2e;
 }
 
+.navbar-wrapper button {
+  cursor: pointer;
+}
+
 .profile-wrapper {
   display: flex;
   flex-direction: row;
