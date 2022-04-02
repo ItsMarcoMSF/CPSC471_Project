@@ -7,7 +7,7 @@
   /* padding-top: 50px; */
 }
 
-.container {
+.create-container {
   max-width: 500px;
   margin: auto;
   margin-top: 50px;
@@ -19,17 +19,24 @@
   padding: 40px 50px 30px;
 }
 
-.container form {
+.create-project h2 {
+  color: white;
+  text-align: center;
+  margin-top: 30px;
+  text-decoration: underline;
+}
+
+.create-container form {
   text-align: left;
 }
 
-.container form label,
-.container input {
+.create-container form label,
+.create-container input {
   display: block;
   text-align: left;
 }
 
-.container input {
+.create-container input {
   width: 100%;
   padding: 15px;
   margin-top: 10px;
@@ -43,7 +50,7 @@ form label {
   color: white;
 }
 
-form button {
+form .project-submit-btn {
   border-radius: 5px;
   background: #644aff;
   color: #fff;
@@ -54,6 +61,8 @@ form button {
   padding: 15px 30px;
   font-size: 16px;
   margin-top: 15px;
+  cursor: pointer;
+
 }
 
 #inputID::placeholder {
