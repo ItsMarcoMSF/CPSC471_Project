@@ -49,13 +49,13 @@ const Dashboard = () => {
     const userID = localStorage.getItem("userID");
     const payload = {
       method: "GET",
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
     };
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/${userID}/projects`,
-        payload
-      );
+      const res = await fetch(`http://localhost:5000/projects`, payload);
       const projects = await res.json();
       setProjects(projects);
       console.log(projects);

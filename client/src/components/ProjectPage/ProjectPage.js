@@ -2,7 +2,6 @@ import React from "react";
 
 import "./ProjectPage.css";
 
-
 const ProjectPage = ({ project, switchToBugs }) => {
   const isValidProject = !(Object.keys(project).length === 0);
   const mockProject = {
@@ -56,7 +55,6 @@ const ProjectPage = ({ project, switchToBugs }) => {
             Bug Report
           </button>
         </div>
-        </>
       ) : (
         <h2 className="">Choose a project to begin</h2>
       )}

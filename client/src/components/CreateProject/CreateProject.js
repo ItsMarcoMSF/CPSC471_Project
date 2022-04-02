@@ -15,12 +15,10 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userID = localStorage.getItem("userID");
     const newProject = {
       name: name,
       deadline: deadline,
       category: [category],
-      manager: userID,
     };
 
     try {
@@ -29,6 +27,7 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
         },
         body: JSON.stringify(newProject),
       });
