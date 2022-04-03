@@ -21,6 +21,10 @@ const userSchema = mongoose.Schema(
       type: [mongoose.Schema.Types.ObjectId],
       ref: "projects",
     },
+    friends: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "user",
+    },
   },
   { timestamps: true }
 );

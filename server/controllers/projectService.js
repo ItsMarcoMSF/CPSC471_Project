@@ -1,16 +1,9 @@
 import Projects from "../models/projects.js";
 
 export const createProjects = async (req, res) => {
-  const {
-    id,
-    name,
-    start_date,
-    deadline,
-    category,
-    bugs,
-    manager,
-    developers,
-  } = req.body;
+  const managerID = req.user.id;
+  const { id, name, start_date, deadline, category, bugs, developers } =
+    req.body;
   const newProject = new Projects({
     id,
     name,
@@ -18,7 +11,7 @@ export const createProjects = async (req, res) => {
     deadline,
     category,
     bugs,
-    manager,
+    managers: managerID,
     developers,
   });
 
@@ -33,12 +26,11 @@ export const createProjects = async (req, res) => {
 
 export const getProjects = async (req, res) => {
   try {
-    const userID = req.params.userID;
-
+    const userID = req.user.id;
     const projects = await Projects.find({
-      $or: [{ manager: userID }, { developers: userID }],
+      $or: [{ managers: userID }, { developers: userID }],
     }).sort({
-      name: -1,
+      createdAt: -1,
     });
 
     res.status(200).json(projects);
@@ -84,4 +76,37 @@ export const deleteProject = async (req, res) => {
   } catch (error) {
     res.status.json({ message: "Could not delete" });
   }
+};
+
+/*
+ * localhost:5000/projects/:projectID/users
+ */
+export const addDeveloperToProject = async (req, res) => {
+  const projectID = req.params.projectID;
+  const devID = req.body.devID;
+  var result = await Projects.updateOne(
+    { _id: projectID },
+    {
+      $addToSet: {
+        [developers]: devID,
+      },
+    }
+  );
+
+  return res.status(200).send();
+};
+
+export const addManagerToProject = async (req, res) => {
+  const projectID = req.params.projectID;
+  const devID = req.body.devID;
+  var result = await Projects.updateOne(
+    { _id: projectID },
+    {
+      $addToSet: {
+        [managers]: devID,
+      },
+    }
+  );
+
+  return res.status(200).send();
 };

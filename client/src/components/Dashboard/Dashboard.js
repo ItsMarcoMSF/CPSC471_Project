@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import * as api from "../../api/api.js";
-
 import NavBar from "../NavBar/NavBar";
 import ProjectPage from "../ProjectPage/ProjectPage";
 import CreateProject from "../CreateProject/CreateProject.js";
@@ -46,19 +44,18 @@ const Dashboard = () => {
   const [projects, setProjects] = useState([]);
 
   const loadProjects = async () => {
-    const userID = localStorage.getItem("userID");
     const payload = {
       method: "GET",
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
     };
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/${userID}/projects`,
-        payload
-      );
+      const res = await fetch(`http://localhost:5000/projects`, payload);
       const projects = await res.json();
       setProjects(projects);
-      console.log(projects);
+      // console.log(projects);
     } catch (err) {
       console.error(err);
     }
@@ -71,7 +68,7 @@ const Dashboard = () => {
   const [curProject, setCurProject] = useState({});
 
   useEffect(() => {
-    setCurProject(curProject);
+    if (projects.length > 0) setCurProject(projects[0]);
   }, [projects]);
 
   return (
@@ -94,6 +91,7 @@ const Dashboard = () => {
           <CreateProject
             refreshProjects={loadProjects}
             switchStage={switchToProject}
+            setCurProject={setCurProject}
           />
         )}
       </div>
