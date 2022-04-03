@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import {
   login,
   registerUser,
+  getAccountsInfo,
   find,
   addFriend,
 } from "../controllers/userService.js";
@@ -65,6 +66,7 @@ const verifyJWTRequired = (req, res, next) => {
 
 router.post("/register", registerUser);
 router.post("/login", login);
+router.get("/user/self", verifyJWTRequired, getAccountsInfo);
 router.get("/user", verifyJWTRequired, find);
 router.patch("/user", verifyJWTRequired, addFriend);
 router.get("/isUserAuth", verifyJWTRequired, (req, res) => {

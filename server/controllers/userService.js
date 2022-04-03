@@ -75,6 +75,24 @@ export const registerUser = async (req, res) => {
   }
 };
 
+export const getAccountsInfo = async (req, res) => {
+  const userID = req.user.id;
+  try {
+    var result = await User.findById(userID);
+    var trimmedResult = {
+      username: result.username,
+      email: result.email,
+      languages: result.languages,
+      projects: result.projects,
+      friends: result.friends,
+    };
+
+    res.status(200).json(trimmedResult);
+  } catch (err) {
+    res.status(404).json({ error: err });
+  }
+};
+
 export const find = async (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
