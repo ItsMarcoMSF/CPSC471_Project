@@ -15,12 +15,10 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userID = localStorage.getItem("userID");
     const newProject = {
       name: name,
       deadline: deadline,
       category: [category],
-      manager: userID,
     };
 
     try {
@@ -29,6 +27,7 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
         },
         body: JSON.stringify(newProject),
       });
@@ -42,7 +41,8 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
 
   return (
     <div className="create-project">
-      <div className="container">
+      <h2>Create A Project</h2>
+      <div className="create-container">
         <form onSubmit={handleSubmit}>
           <label htmlFor="name">Name</label>
           <input
@@ -74,7 +74,9 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
             onChange={(e) => setCategory(e.target.value)}
           />
 
-          <button type="submit">Create</button>
+          <button className="project-submit-btn" type="submit">
+            Create
+          </button>
         </form>
       </div>
     </div>

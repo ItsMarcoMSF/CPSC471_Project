@@ -2,7 +2,6 @@ import React from "react";
 
 import "./ProjectPage.css";
 
-
 const ProjectPage = ({ project, switchToBugs }) => {
   const isValidProject = !(Object.keys(project).length === 0);
   const mockProject = {

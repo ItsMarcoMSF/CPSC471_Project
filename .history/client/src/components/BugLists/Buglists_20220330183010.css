@@ -1,0 +1,11 @@
+.bugID {
+    text-align: left;
+}
+
+.bugName {
+    text-align: center;
+}
+
+.bugStatus {
+    text-align: right;
+}
