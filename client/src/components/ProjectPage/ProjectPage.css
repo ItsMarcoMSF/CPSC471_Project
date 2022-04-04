@@ -66,6 +66,8 @@
   width: 90%;
   margin: auto;
   margin-top: 10px;
+  text-indent: 20px;
+  border-radius: 10px;
 }
 
 #rectangle-large-bottom{
@@ -79,6 +81,8 @@
   width: 90%;
   margin: auto;
   margin-top: 10px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .bug-report-btn {
@@ -86,6 +90,45 @@
   margin-top: 30px;
   text-align: center;
   padding: auto;
+}
+
+#upcomingTask{
+  text-align: center;
+  grid-row-start: 3;
+  grid-column-start: 2;
+
+  grid-row-end: 4;
+  grid-column-end: 2;
+
+  
+}
+
+#managers{
+  grid-row-start: 5;
+  grid-column-start: 1;
+
+  grid-row-end: 6;
+  grid-column-end: 2;
+
+
+  display: inline-block;
+
+  margin-top: auto;
+  width: 45%;
+}
+
+#developers{
+  grid-row-start: 5;
+  grid-column-start: 1;
+
+  grid-row-end: 6;
+  grid-column-end: 2;
+
+  display: inline-block;
+
+  margin: auto;
+  padding-bottom: 50px;
+  width: 45%;
 }
 
 /* h2 {
