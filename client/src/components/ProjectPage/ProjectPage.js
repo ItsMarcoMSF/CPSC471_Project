@@ -37,26 +37,34 @@ const ProjectPage = ({ project, switchToBugs }) => {
               <h2>Upcoming Task</h2>
               <div className="task-wrapper">
                 {/* <p>{mockProject.upcomingTask.deadline.getDate()}</p> */}
-                <p>{mockProject.upcomingTask.task}</p>
+                <p id="upcomingTask">{mockProject.upcomingTask.task}</p>
               </div>
             </div>
             <div id="rectangle-large-bottom">
               <h2>Project Resources</h2>
-              <h3>Managers</h3>
-              <p>{mockProject.managers}</p>
-              <h3>Developers</h3>
-              <div className="devs-wrapper">
-                {mockProject.developers.map((dev) => (
-                  <p>{dev.name}</p>
-                ))}
+              <div id="managers">
+                <h3>Managers</h3>
+                <p>{mockProject.managers}</p>
+                <p>Kaitlin Culligan</p>
+                <p>Alvin Nguyen</p>
+              </div>
+              <div id="developers">
+                <h3>Developers</h3>
+                <div className="devs-wrapper">
+                  {mockProject.developers.map((dev) => (
+                    <p>{dev.name}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
           <button className="bug-report-btn" onClick={switchToBugs}>
             Bug Report
           </button>
+          <button className="bug-report-btn" >
+            Add Developer
+          </button>
         </div>
-        </>
       ) : (
         <h2 className="">Choose a project to begin</h2>
       )}
