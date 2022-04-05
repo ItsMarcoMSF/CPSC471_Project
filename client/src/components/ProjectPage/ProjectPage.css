@@ -24,6 +24,15 @@
   grid-row-end: 2;
   grid-column-end: 3;
   /* margin-bottom: 30px; */
+
+  color: white;
+  font-size: 35px;
+  text-align: left;
+
+  
+  margin-left: 5%;
+  padding-bottom: 15%;
+  margin-bottom: 15%;
 }
 
 
@@ -90,6 +99,11 @@
   margin-top: 30px;
   text-align: center;
   padding: auto;
+
+  border-radius: 10px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: white;
+  border-color: #2e2e2e;
 }
 
 #upcomingTask{
@@ -129,6 +143,25 @@
   margin: auto;
   padding-bottom: 50px;
   width: 45%;
+}
+
+.dev-dropdown{
+  border-radius: 10px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: white;
+  border-color: #2e2e2e;
+}
+
+.dev-labels{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.dev-form-header{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  font-size: 35px;
 }
 
 /* h2 {

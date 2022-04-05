@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
+import AddDev from "../AddDev/AddDev";
 
 import "./ProjectPage.css";
 
-const ProjectPage = ({ project, switchToBugs }) => {
+const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const isValidProject = !(Object.keys(project).length === 0);
   const mockProject = {
     projectProgress: "75%",
@@ -19,6 +20,13 @@ const ProjectPage = ({ project, switchToBugs }) => {
     ],
   };
   const fetchDevs = async () => {};
+
+  const addDev = async () => {};
+
+  const[isOpen, setIsOpen] = useState(false);
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <div className="project-wrapper">
@@ -60,9 +68,28 @@ const ProjectPage = ({ project, switchToBugs }) => {
           <button className="bug-report-btn" onClick={switchToBugs}>
             Bug Report
           </button>
-          <button className="bug-report-btn" >
+          <button className="bug-report-btn" onClick={togglePopup}>
             Add Developer
           </button>
+            {isOpen && <AddDev content={<>
+              <h2 class="dev-form-header">Add A Developer</h2>
+              <form onSubmit={(e) => addDev(e)}>
+                <p class="dev-labels">Role:</p>
+                  <select class="dev-dropdown" name="dev-roles" id ="dev-roles">
+                    <option value="manager">Manager</option>
+                    <option value="developer">Developer</option>
+                  </select>
+                  <p class="dev-labels">Friend:</p>
+                  <select class="dev-dropdown" name="friends" id ="friends">
+                    <option value="f1">friend 1</option>
+                    <option value="f1">friend 2</option>
+                  </select>
+                  <br></br>
+                <input class="bug-report-btn " type="submit" value="Add" />
+              </form>
+          </>}
+          handleClose={togglePopup}
+          />}
         </div>
       ) : (
         <h2 className="">Choose a project to begin</h2>
