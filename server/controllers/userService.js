@@ -3,9 +3,6 @@ import jwt from "jsonwebtoken";
 
 import User from "../models/user.js";
 
-/*
- * localhost:5000/login
- */
 export const login = (req, res) => {
   const userLoggingIn = req.body;
   try {
@@ -97,13 +94,17 @@ export const find = async (req, res) => {
   const email = req.body.email;
   const username = req.body.username;
   try {
-    var result = await User.find({
+    var result = await User.findOne({
       $or: [{ email: email }, { username: username }],
     });
-
-    res.status(200).json(result);
+    const userBasic = {
+      username: result.username,
+      email: result.email,
+      _id: result._id,
+    };
+    res.status(200).json(userBasic);
   } catch (err) {
-    res.status(404).json({ error: err });
+    res.status(404).json({ message: "User Not Found" });
   }
 };
 
@@ -115,10 +116,29 @@ export const addFriend = async (req, res) => {
       { _id: userID },
       {
         $addToSet: {
-          [friends]: friendID,
+          friends: friendID,
         },
       }
     );
+    res.status(201).send();
+  } catch (err) {
+    res.status(404).json({ error: err });
+  }
+};
+
+export const addLanguage = async (req, res) => {
+  const userID = req.user.id;
+  const language = req.body.language;
+  try {
+    await User.updateOne(
+      { _id: userID },
+      {
+        $addToSet: {
+          languages: language,
+        },
+      }
+    );
+    res.status(200).send();
   } catch (err) {
     res.status(404).json({ error: err });
   }
