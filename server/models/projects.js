@@ -1,26 +1,14 @@
 import mongoose from "mongoose";
 
-import Bugs from "./bugs.js";
-import Manager from "./managers.js";
-import Developers from "./developers.js";
-
-// const BugsSchema = Bugs.toObject();
-// const ManagerSchema = Manager.toObject();
-// const DevelopersSchema = Developers.toObject();
-
 const projectSchema = mongoose.Schema(
   {
-    id: Number,
     name: String,
-    start_date: String,
-    deadline: String,
+    deadline: Date,
     category: [String],
     bugs: { type: [mongoose.Schema.Types.ObjectId], ref: "bugs" },
-    managers: { type: [mongoose.Schema.Types.ObjectId], ref: "user" },
-    developers: { type: [mongoose.Schema.Types.ObjectId], ref: "developers" },
-    // bugs: [Bugs],
-    // manager: Manager,
-    // developers: [Developers],
+    managers: { type: [mongoose.Schema.Types.ObjectId], ref: "users" },
+    developers: { type: [mongoose.Schema.Types.ObjectId], ref: "users" },
+    tasks: { type: [mongoose.Schema.Types.ObjectId], ref: "tasks" },
   },
   { timestamps: true }
 );

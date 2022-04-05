@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-
 import "./CreateProject.css";
 
 const CreateProject = ({ refreshProjects, switchStage }) => {
   const [name, setName] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [deadline, setDeadline] = useState(new Date());
   const [category, setCategory] = useState("");
+
+  const handleDeadline = (newDate) => {
+    setDeadline(newDate);
+  };
 
   const resetForm = () => {
     setName("");
@@ -56,7 +59,7 @@ const CreateProject = ({ refreshProjects, switchStage }) => {
 
           <label htmlFor="deadline">Deadline</label>
           <input
-            type="text"
+            type="date"
             name="deadline"
             id="inputID"
             placeholder="Set a deadline"

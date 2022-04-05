@@ -36,7 +36,8 @@
   text-align: left;
 }
 
-.create-container input {
+.create-container input,
+.date-picker {
   width: 100%;
   padding: 15px;
   margin-top: 10px;
