@@ -7,6 +7,7 @@ const bugSchema = mongoose.Schema({
   status: String,
   deadline: Date,
   prjID: { type: mongoose.Schema.Types.ObjectId, ref: "project" },
+  devID: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 });
 
 var Bugs = mongoose.model("Bugs", bugSchema);

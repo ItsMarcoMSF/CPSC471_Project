@@ -1,11 +1,13 @@
 import Bugs from "../models/bugs.js";
+import Projects from "../models/projects.js";
 import mongooseArchive from "mongoose-archive";
 
 // Bugs.plugin(mongooseArchive);
 
 export const createBugs = async (request, response) => {
   console.log(request.body);
-  const { name, description, priority, status, deadline, prjID } = request.body;
+  const { name, description, priority, status, deadline, prjID, devID } =
+    request.body;
 
   const newBug = new Bugs({
     name,
@@ -14,10 +16,19 @@ export const createBugs = async (request, response) => {
     status,
     deadline,
     prjID,
+    devID,
   });
 
   try {
     await newBug.save();
+    await Projects.updateOne(
+      { _id: prjID },
+      {
+        $addToSet: {
+          bugs: newBug._id,
+        },
+      }
+    );
 
     response.status(201).json(newBug);
   } catch (error) {
@@ -72,15 +83,25 @@ export const markResolved = async (request, response) => {
   response.status(200).json(bug);
 };
 
-export const getBugsByPrjID = async (req, res) => {
-  try {
-    const prjID = req.params.projectID;
+export const getBugs = async (req, res) => {
+  const { userID } = req.query;
+  const prjID = req.params.projectID;
 
-    const bugs = await Bugs.find({
-      $or: [{ prjID: prjID }],
-    }).sort({
-      status: -1,
-    });
+  var bugs;
+  try {
+    if (userID) {
+      bugs = await Bugs.find({
+        $and: [{ prjID: prjID }, { devID: userID }],
+      }).sort({
+        status: -1,
+      });
+    } else {
+      bugs = await Bugs.find({
+        $or: [{ prjID: prjID }],
+      }).sort({
+        status: -1,
+      });
+    }
 
     res.status(200).json(bugs);
   } catch (error) {
