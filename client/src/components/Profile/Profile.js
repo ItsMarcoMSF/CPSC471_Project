@@ -9,6 +9,9 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState({});
   const [profileLoaded, setProfileLoaded] = useState(false);
 
+  const [showLanguage, setShowLanguage] = useState(false);
+  const [language, setLanguage] = useState("");
+
   const loadProfile = async () => {
     const payload = {
       method: "GET",
@@ -44,6 +47,31 @@ const Profile = () => {
     loadProfile();
   }, []);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const newLanguage = {
+      language: language,
+    };
+    const payload = {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+      body: JSON.stringify(newLanguage),
+    };
+    try {
+      await fetch("http://localhost:5000/user/languages", payload);
+
+      setLanguage("");
+      loadProfile();
+      setShowLanguage(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return profileLoaded ? (
     <div className="profile-page-wrapper">
       <h2>Profile</h2>
@@ -68,9 +96,49 @@ const Profile = () => {
           <p>
             Languages:
             <span>
-              <button>Add Languages</button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowLanguage(!showLanguage);
+                }}
+              >
+                Add Languages
+              </button>
             </span>
           </p>
+
+          {showLanguage && (
+            <div className="language-form">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }}
+              >
+                <input
+                  type="text"
+                  value={language}
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setLanguage(e.target.value);
+                  }}
+                  placeholder="Enter a Language to add"
+                />
+
+                <button
+                  type="button"
+                  className="language-close-btn"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setShowLanguage(false);
+                  }}
+                >
+                  x
+                </button>
+              </form>
+            </div>
+          )}
+
           {userProfile.languages.length > 0 && (
             <p className="languages-list">{userProfile.languages.join(", ")}</p>
           )}

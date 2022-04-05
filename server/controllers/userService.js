@@ -126,6 +126,23 @@ export const addFriend = async (req, res) => {
   }
 };
 
+export const getAllFriends = async (req, res) => {
+  const userID = req.user.id;
+  const user = await User.findById(userID);
+  const friendList = user.friends;
+  try {
+    const result = await User.find(
+      { _id: { $in: friendList } },
+      "username email _id"
+    );
+    // result.select(["username", "email", "_id"]);
+
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(404).json({ error: err });
+  }
+};
+
 export const addLanguage = async (req, res) => {
   const userID = req.user.id;
   const language = req.body.language;
