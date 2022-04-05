@@ -287,8 +287,27 @@ Require:
   - JSON object in the form of:
 
           {
-              langauge: String,
+              language: String,
           }
+
+## GET http://localhost:5000/user/friends
+
+Get all user friends
+
+Require:
+
+- headers:
+  - x-access-token: user jwt token
+
+Return:
+
+- An array of User object in the form of:
+
+      {
+        _id: ObjectID,
+        username: String,
+        email: String,
+      }
 
 # Bug routes
 
@@ -323,6 +342,14 @@ Require:
   - x-access-token: user jwt token
 - params:
   - projectID: \_id of the project
+
+Accept:
+
+- query:
+
+  - userID : \_id of the user (returning bugs assigned to the user).
+
+    Example: GET http://localhost:5000/projects/:projectID/bugs?userID=1234123412
 
 Return:
 

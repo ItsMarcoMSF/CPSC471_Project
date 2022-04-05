@@ -50,15 +50,12 @@ export const getProjectDetail = async (req, res) => {
     const devIDs = project.developers;
     const taskIDs = project.tasks;
 
-    var managers = await User.find({
-      _id: { $in: managerIDs },
-    });
-    var devs = await User.find({
-      _id: { $in: devIDs },
-    });
-    var tasks = await Tasks.find({
-      _id: { $in: taskIDs },
-    });
+    var managers = await User.find(
+      { _id: { $in: managerIDs } },
+      "username email _id"
+    );
+    var devs = await User.find({ _id: { $in: devIDs } }, "username email _id");
+    var tasks = await Tasks.find({ _id: { $in: taskIDs } });
 
     const projectDetail = {
       _id: project._id,

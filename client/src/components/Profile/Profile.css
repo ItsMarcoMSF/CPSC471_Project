@@ -48,7 +48,7 @@
     align-self: center;
     width: 70%;
     height: fit-content;
-    max-height: 300px;
+    max-height: 500px;
     background-color: rgb(61, 61, 61);
     outline: solid 1px rgba(0, 0, 0, 0.507);
     border-radius: 5px;
@@ -85,8 +85,32 @@
     width: fit-content;
 }
 
-.languages-list {
-    margin-left: 10px;
+div .languages-list {
+    margin-left: 35px;
+}
+
+.language-form {
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.language-form input {
+    width: 85%;
+    padding: 10px;
+    margin-left: 5%;
+    border: rgba(112, 112, 112, 0.25);
+    box-sizing: border-box;
+    color: rgb(37, 37, 37);
+}
+
+.language-form .language-close-btn {
+    float: right;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    text-align: center;
+    line-height: 30px;
+    width: 10%;
 }
 
 .friends-list {
@@ -130,4 +154,21 @@
 
 .add-btn:hover {
     outline: solid 1px #644aff;
+}
+
+@media screen and (max-width: 700px) {
+  .summary,
+  .friends-list {
+      width: 95%;
+  }
+
+  .summary h3 {
+    margin-top: 15px;
+    margin-left: 15px;
+    }
+
+    .summary p {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 }

@@ -8,12 +8,13 @@ import {
   find,
   addFriend,
   addLanguage,
+  getAllFriends,
 } from "../controllers/userService.js";
 
 import {
   createBugs,
   getBugsByID,
-  getBugsByPrjID,
+  getBugs,
   deleteBug,
   markResolved,
 } from "../controllers/bugService.js";
@@ -77,13 +78,14 @@ router.get("/user/self", verifyJWTRequired, getAccountsInfo);
 router.get("/user", verifyJWTRequired, find);
 router.patch("/user", verifyJWTRequired, addFriend);
 router.patch("/user/languages", verifyJWTRequired, addLanguage);
+router.get("/user/friends", verifyJWTRequired, getAllFriends);
 router.get("/isUserAuth", verifyJWTRequired, (req, res) => {
   res.json({ isLoggedIn: true, username: req.user.username });
 });
 
 router.post("/bugs", createBugs);
 router.get("/bugs/:bugID", getBugsByID);
-router.get("/projects/:projectID/bugs", getBugsByPrjID);
+router.get("/projects/:projectID/bugs", getBugs);
 router.patch("/bugs/:bugID", markResolved);
 router.delete("/bugs/:bugID", deleteBug);
 
