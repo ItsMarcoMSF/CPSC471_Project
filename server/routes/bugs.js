@@ -7,19 +7,26 @@ import {
   getAccountsInfo,
   find,
   addFriend,
+  addLanguage,
 } from "../controllers/userService.js";
 
-import { createBugs } from "../controllers/createBugs.js";
-import { getBugsByID } from "../controllers/getBugsByID.js";
-import { getAllBugs } from "../controllers/getAllBugs.js";
+import {
+  createBugs,
+  getBugsByID,
+  getBugsByPrjID,
+  deleteBug,
+  markResolved,
+} from "../controllers/bugService.js";
+
 import {
   createProjects,
   getProjects,
-  getProjectByID,
   deleteProject,
+  addTask,
+  addDeveloperToProject,
+  addManagerToProject,
+  getProjectDetail,
 } from "../controllers/projectService.js";
-
-import { getBugsByPrjID } from "../controllers/bugService.js";
 
 const router = express.Router();
 
@@ -69,18 +76,31 @@ router.post("/login", login);
 router.get("/user/self", verifyJWTRequired, getAccountsInfo);
 router.get("/user", verifyJWTRequired, find);
 router.patch("/user", verifyJWTRequired, addFriend);
+router.patch("/user/languages", verifyJWTRequired, addLanguage);
 router.get("/isUserAuth", verifyJWTRequired, (req, res) => {
   res.json({ isLoggedIn: true, username: req.user.username });
 });
 
 router.post("/bugs", createBugs);
 router.get("/bugs/:bugID", getBugsByID);
-router.get("/bugs", getAllBugs);
 router.get("/projects/:projectID/bugs", getBugsByPrjID);
+router.patch("/bugs/:bugID", markResolved);
+router.delete("/bugs/:bugID", deleteBug);
 
 router.get("/projects", verifyJWTRequired, getProjects);
 router.post("/projects", verifyJWTRequired, createProjects);
-router.delete("/:userID/projects/:projectID", deleteProject);
-router.get("/:userID/projects/:id", getProjectByID);
+router.delete("/projects/:projectID", verifyJWTRequired, deleteProject);
+router.post("/projects/:projectID/tasks", verifyJWTRequired, addTask);
+router.patch(
+  "/projects/:projectID/devs",
+  verifyJWTRequired,
+  addDeveloperToProject
+);
+router.patch(
+  "/projects/:projectID/managers",
+  verifyJWTRequired,
+  addManagerToProject
+);
+router.get("/projects/:projectID", verifyJWTRequired, getProjectDetail);
 
 export default router;
