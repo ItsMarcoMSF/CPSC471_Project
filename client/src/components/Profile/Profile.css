@@ -5,7 +5,7 @@
 .profile-page-wrapper h2 {
     display: block;
     margin: auto;
-    background-color: #644aff;  
+    background-color: #988AB5;  
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 25px;
@@ -18,7 +18,7 @@
     width: 95%;
     border: none;
     height: 1px;
-    background-color: rgb(48, 48, 48);
+    background-color: rgba(34, 34, 34, 0.445);
 }
 
 .goback-btn {
@@ -58,7 +58,6 @@
 }
 
 .summary h3 {
-    margin-top: 25px;
     margin-left: 25px;
 }
 
@@ -135,12 +134,12 @@ div .languages-list {
 }
 
 .friend-header h3 {
-    margin-left: 15px;
+    margin-left: 25px;
 }
 
 .add-btn {
     margin: auto;
-    margin-right: 15px;
+    margin-right: 25px;
     box-shadow: none;
     background: none;
     border: none;
@@ -154,6 +153,12 @@ div .languages-list {
 
 .add-btn:hover {
     outline: solid 1px #644aff;
+}
+
+.friend-body {
+    max-height: 70%;
+    overflow: hidden;
+    overflow-y: scroll;
 }
 
 @media screen and (max-width: 700px) {

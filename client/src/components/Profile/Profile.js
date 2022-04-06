@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import ProfileFriendList from "../ProfileFriendList/ProfileFriendList";
+import AddFriend from "../AddFriend/AddFriend";
+
 import "./Profile.css";
 
 const Profile = () => {
@@ -9,8 +12,29 @@ const Profile = () => {
   const [userProfile, setUserProfile] = useState({});
   const [profileLoaded, setProfileLoaded] = useState(false);
 
+  const [friends, setFriends] = useState([]);
+
   const [showLanguage, setShowLanguage] = useState(false);
   const [language, setLanguage] = useState("");
+
+  const [addFriend, setAddFriend] = useState(false);
+
+  const loadFriends = async () => {
+    const payload = {
+      method: "GET",
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
+
+    try {
+      const res = await fetch(`http://localhost:5000/user/friends`, payload);
+      const friends = await res.json();
+      setFriends(friends);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const loadProfile = async () => {
     const payload = {
@@ -25,6 +49,7 @@ const Profile = () => {
       const profile = await res.json();
       setUserProfile(profile);
       setProfileLoaded(true);
+      loadFriends();
     } catch (err) {
       console.error(err);
     }
@@ -139,23 +164,34 @@ const Profile = () => {
             </div>
           )}
 
-          {userProfile.languages.length > 0 && (
+          {userProfile.languages.length > 0 ? (
             <p className="languages-list">{userProfile.languages.join(", ")}</p>
+          ) : (
+            <p className="languages-list">No Languages Set</p>
           )}
         </div>
       </div>
       <div className="friends-list">
         <div className="friend-header">
           <h3>Friends List</h3>
-          <button className="add-btn">Add Friend +</button>
+          <button
+            className="add-btn"
+            onClick={(e) => {
+              e.preventDefault();
+              setAddFriend(true);
+            }}
+          >
+            Add Friend +
+          </button>
         </div>
         <hr />
         <div className="friend-body">
-          <p>Marco Truong</p>
-          <p>Marco Truong</p>
-          <p>Marco Truong</p>
+          <ProfileFriendList friends={friends} />
         </div>
       </div>
+      {addFriend && (
+        <AddFriend setAddFriend={setAddFriend} refreshProfile={loadProfile} />
+      )}
     </div>
   ) : null;
 };
