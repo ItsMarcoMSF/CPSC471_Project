@@ -1,0 +1,16 @@
+.friend-card {
+    display: block;
+    height: 50px;
+    margin: 5px 25px;
+}
+
+.friend-card h4 {
+    margin: auto; 
+}
+
+.friend-card p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #988AB5;
+}

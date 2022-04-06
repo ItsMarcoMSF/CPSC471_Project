@@ -91,8 +91,8 @@ export const getAccountsInfo = async (req, res) => {
 };
 
 export const find = async (req, res) => {
-  const email = req.body.email;
-  const username = req.body.username;
+  const email = req.query.search;
+  const username = req.query.search;
   try {
     var result = await User.findOne({
       $or: [{ email: email }, { username: username }],
