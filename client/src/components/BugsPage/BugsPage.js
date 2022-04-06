@@ -15,14 +15,27 @@ const BugsPage = ({ project, switchToProject }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
 
+  var someDate = new Date();
+  someDate.setDate(someDate.getDate() + 3);
+  var date = someDate.toISOString().substring(0, 10);
+
+  const mockup = {
+    developer1: "Marco Truong",
+    developer2: "Kaitlin Culligan",
+    developer3: "Alvin Nguyen",
+  };
+
   const [sendBug, setSendBug] = useState({
-    id: "",
     name: "",
-    description: "",
-    priority: "",
-    deadline: "",
-    status: "",
+    description: "Nothing much",
+    priority: "Medium",
+    deadline: someDate,
+    devName: "Marco Truong",
+    status: "Unresolved",
   });
+  const resetForm = () => {
+    setSendBug("");
+  };
 
   function handle(e) {
     const newbug = { ...sendBug };
@@ -40,11 +53,14 @@ const BugsPage = ({ project, switchToProject }) => {
       deadline: sendBug.deadline,
       status: sendBug.status,
       prjID: project._id,
+      devName: sendBug.devName,
     }).then((res) => {
       console.log(res.data);
       // Success message
       setIsOpen(false);
       fetchBugs();
+      resetForm();
+
     });
   }
 
@@ -59,13 +75,18 @@ const BugsPage = ({ project, switchToProject }) => {
   const fetchBugs = async () => {
     const projID = project._id;
     const payload = {
-      method: "GET",
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
+        },
     };
 
     try {
       const res = await fetch(
         `http://localhost:5000/projects/${projID}/bugs`,
-        payload
+        payload,
       );
       const bug = await res.json();
       setIsLoaded(true);
@@ -79,6 +100,8 @@ const BugsPage = ({ project, switchToProject }) => {
   useEffect(() => {
     fetchBugs();
   }, []);
+
+
 
   return (
     <div className="bugs-wrapper">
@@ -107,15 +130,7 @@ const BugsPage = ({ project, switchToProject }) => {
                 <>
                   <h2>Report a new bug</h2>
                   <p>Enter details about new bugs here</p>
-                  <form onSubmit={(e) => reportBug(e)}>
-                    <p>Bug id</p>
-                    <input
-                      className="enter-detail"
-                      value={sendBug.id}
-                      onChange={(e) => handle(e)}
-                      id="id"
-                      type="number"
-                    />
+                  <form className="report-form" onSubmit={(e) => reportBug(e)}>
                     <p>Bug name</p>
                     <input
                       className="enter-detail"
@@ -123,6 +138,7 @@ const BugsPage = ({ project, switchToProject }) => {
                       onChange={(e) => handle(e)}
                       id="name"
                       type="text"
+                      placeholder="Bug's name"
                     />
                     <p>Bug description</p>
                     <input
@@ -131,15 +147,20 @@ const BugsPage = ({ project, switchToProject }) => {
                       onChange={(e) => handle(e)}
                       id="description"
                       type="text"
+                      placeholder="Bug's description"
                     />
                     <p>Bug priority</p>
-                    <input
-                      className="enter-detail"
-                      value={sendBug.priority}
-                      onChange={(e) => handle(e)}
-                      id="priority"
-                      type="text"
-                    />
+                    <select className="dropdown" id="priority" onChange={(e) => handle(e)}>
+                      <option value="High">High</option>
+                      <option value="Medium" selected>Medium</option>
+                      <option value="Low">Low</option>
+                    </select>
+                    <p>Assign to</p>
+                    <select className="dropdown" id="devName" onChange={(e) => handle(e)}>
+                      <option value={mockup.developer2}>Kaitlin Culligan</option>
+                      <option value={mockup.developer1} selected>Marco Truong</option>
+                      <option value={mockup.developer3}>Alvin Nguyen</option>
+                    </select>
                     <p>Bug deadline</p>
                     <input
                       className="enter-detail"
@@ -147,15 +168,16 @@ const BugsPage = ({ project, switchToProject }) => {
                       onChange={(e) => handle(e)}
                       id="deadline"
                       type="date"
+                      placeholder="Bug's deadline"
                     />
-                    <p>Bug status</p>
-                    <input
-                      className="enter-detail"
-                      value={sendBug.status}
-                      onChange={(e) => handle(e)}
+                    {/* <p>Bug status</p> */}
+                    <p
+                      // className="enter-detail"
+                      // value={sendBug.status}
+                      // onChange={(e) => handle(e)}
+                      value="Unresolved"
                       id="status"
-                      type="text"
-                    />
+                    >Bug status: Unresolved</p>
                     <p />
                     <br />
                     <input className="rpt" type="submit" value="Report" />
@@ -177,15 +199,7 @@ const BugsPage = ({ project, switchToProject }) => {
                 <>
                   <h2>Report a new bug</h2>
                   <p>Enter details about new bugs here</p>
-                  <form onSubmit={(e) => reportBug(e)}>
-                    <p>Bug id</p>
-                    <input
-                      className="enter-detail"
-                      value={sendBug.bid}
-                      onChange={(e) => handle(e)}
-                      id="id"
-                      type="number"
-                    />
+                  <form className="report-form" onSubmit={(e) => reportBug(e)}>
                     <p>Bug name</p>
                     <input
                       className="enter-detail"
@@ -193,6 +207,7 @@ const BugsPage = ({ project, switchToProject }) => {
                       onChange={(e) => handle(e)}
                       id="name"
                       type="text"
+                      placeholder="Bug's name"
                     />
                     <p>Bug description</p>
                     <input
@@ -201,15 +216,20 @@ const BugsPage = ({ project, switchToProject }) => {
                       onChange={(e) => handle(e)}
                       id="description"
                       type="text"
+                      placeholder="Bug's description"
                     />
                     <p>Bug priority</p>
-                    <input
-                      className="enter-detail"
-                      value={sendBug.priority}
-                      onChange={(e) => handle(e)}
-                      id="priority"
-                      type="text"
-                    />
+                    <select className="dropdown" id="priority" onChange={(e) => handle(e)}>
+                      <option value="High">High</option>
+                      <option value="Medium" selected>Medium</option>
+                      <option value="Low">Low</option>
+                    </select>
+                    <p>Assign to</p>
+                    <select className="dropdown" id="devName" onChange={(e) => handle(e)}>
+                      <option value={mockup.developer2}>Kaitlin Culligan</option>
+                      <option value={mockup.developer1} selected>Marco Truong</option>
+                      <option value={mockup.developer3}>Alvin Nguyen</option>
+                    </select>
                     <p>Bug deadline</p>
                     <input
                       className="enter-detail"
@@ -217,15 +237,16 @@ const BugsPage = ({ project, switchToProject }) => {
                       onChange={(e) => handle(e)}
                       id="deadline"
                       type="date"
+                      placeholder="Bug's deadline"
                     />
-                    <p>Bug status</p>
-                    <input
-                      className="enter-detail"
-                      value={sendBug.status}
-                      onChange={(e) => handle(e)}
+                    {/* <p>Bug status</p> */}
+                    <p
+                      // className="enter-detail"
+                      // value={sendBug.status}
+                      // onChange={(e) => handle(e)}
+                      value="Unresolved"
                       id="status"
-                      type="text"
-                    />
+                    >Bug status: Unresolved</p>
                     <p />
                     <br />
                     <input className="rpt" type="submit" value="Report" />
