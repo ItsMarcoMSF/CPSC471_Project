@@ -8,6 +8,10 @@ const BugBtn = ({ bug }) => {
     setIsDetail(!isDetail);
   };
 
+  var someDate = new Date();
+  someDate.setDate(someDate.getDate() + 3);
+  var date = someDate.toISOString().substring(0, 10);
+
   return (
     <div>
       {/* <input
@@ -22,7 +26,7 @@ const BugBtn = ({ bug }) => {
         // value={bug.id + " - " + bug.name + " - " + bug.status}
         onClick={toggleDetail}>
           <table className="viewShort">
-            <th className="bugID">{bug.id}</th>
+            <th className="bugID">{bug._id}</th>
             <th className="bugName">{bug.name}</th>
             <th className="bugStatus">{bug.status}</th>
           </table>
@@ -35,11 +39,15 @@ const BugBtn = ({ bug }) => {
               <h2>Bug's detail</h2>
               {/* <li key={bug._id}> */}
               <>
-                <p>{"ID: " + bug.id}</p>
+                <p>{"ID: " + bug._id}</p>
                 <p>{"Name: " + bug.name}</p>
                 <p>{"Description: " + bug.description}</p>
                 <p>{"Priority: " + bug.priority}</p>
-                <p>{"Deadline: " + bug.deadline.substring(0, 10)}</p>
+                { bug.deadline ? (
+                  <p>{"Deadline: " + bug.deadline.substring(0, 10)}</p>
+                ) : (
+                  <p>{"Deadline: " + date.substring(0, 10)}</p>
+                )}
                 <p>{"Status: " + bug.status}</p>
               </>
             </>
