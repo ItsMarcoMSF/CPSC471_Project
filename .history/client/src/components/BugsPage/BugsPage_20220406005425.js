@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { useMediaQuery } from 'react-responsive'
+import MediaQuery from "react-responsive";
+
 
 import "./BugsPage.css";
 
@@ -10,10 +11,6 @@ import BugLists from "../BugLists/BugLists";
 import ReportBtn from "../ReportBtn/ReportBtn";
 
 const BugsPage = ({ project, switchToProject }) => {
-
-  // const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1224px)' });
-  // const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
-
   const [isLoaded, setIsLoaded] = useState(false);
   const [getBugs, setGetBugs] = useState([]);
 
@@ -135,19 +132,19 @@ const BugsPage = ({ project, switchToProject }) => {
 
   return (
     <div className="bugs-wrapper">
-      {/* {isDesktopOrLaptop && <p>You are a desktop or laptop</p>}
-      {isTabletOrMobile && <p>You are a tablet or mobile</p>} */}
       <button className="back-btn" onClick={switchToProject}>
         Go back
       </button>
       {getBugs.length > 0 ? (
         <div>
+          {/* <h2>{bugs.name}</h2> */}
           <h2 className="bugs-reported">Bugs reported:</h2>
           <nav>
             <ul>
               <BugLists bugs={getBugs} toggleDetail={toggleDetail} />
             </ul>
           </nav>
+          {/* <ReportBtn/> */}
           <input
             className="rptbtn"
             type="button"
@@ -200,7 +197,11 @@ const BugsPage = ({ project, switchToProject }) => {
                       type="date"
                       placeholder="Bug's deadline"
                     />
+                    {/* <p>Bug status</p> */}
                     <p
+                      // className="enter-detail"
+                      // value={sendBug.status}
+                      // onChange={(e) => handle(e)}
                       value="Unresolved"
                       id="status"
                     >Bug status: Unresolved</p>
@@ -213,6 +214,7 @@ const BugsPage = ({ project, switchToProject }) => {
               handleClose={togglePopup}
             />
           )}
+          {/* <ReportBtn/> */}
         </div>
       ) : (
         <div>
@@ -264,7 +266,11 @@ const BugsPage = ({ project, switchToProject }) => {
                       type="date"
                       placeholder="Bug's deadline"
                     />
+                    {/* <p>Bug status</p> */}
                     <p
+                      // className="enter-detail"
+                      // value={sendBug.status}
+                      // onChange={(e) => handle(e)}
                       value="Unresolved"
                       id="status"
                     >Bug status: Unresolved</p>
