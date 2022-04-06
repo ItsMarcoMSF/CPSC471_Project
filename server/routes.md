@@ -220,13 +220,14 @@ Require:
 Return:
 
 - User Information in the form of:
-  {
-  username: String,
-  email: String,
-  languages: [String],
-  projects: [ObjectID],
-  friends: [ObjectID],
-  }
+
+      {
+          username: String,
+          email: String,
+          languages: [String],
+          projects: [ObjectID],
+          friends: [ObjectID],
+      }
 
 ## GET http://localhost:5000/user
 
@@ -236,17 +237,13 @@ Require:
 
 - headers:
   - x-access-token: user jwt token
+- query:
+  - search: String (search by user name or email)
 
-Accept:
+Example:
 
-- body:
-
-  - JSON object in the form of:
-
-          {
-              username: String,
-              email: String,
-          }
+- Search by username: GET http://localhost:5000/user?search=userName
+- Search by email: GET http://localhost:5000/user?search=example@example.com
 
 Return:
 
