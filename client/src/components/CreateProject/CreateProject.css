@@ -70,3 +70,14 @@ form .project-submit-btn {
   color: #adaba5;
 }
 
+@media screen and (max-width: 800px){
+  .create-container {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .create-project h2 {
+    margin-top: 20px;
+  }
+}
