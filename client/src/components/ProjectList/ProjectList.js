@@ -2,7 +2,13 @@ import React from "react";
 
 import ProjectBtn from "../ProjectBtn/ProjectBtn";
 
-const ProjectList = ({ projects, setProject, curProject, switchToProject }) => {
+const ProjectList = ({
+  projects,
+  setProject,
+  curProject,
+  switchToProject,
+  sideBarToggle,
+}) => {
   return (
     <div className="projects-list">
       {projects &&
@@ -13,6 +19,7 @@ const ProjectList = ({ projects, setProject, curProject, switchToProject }) => {
             setProject={setProject}
             curProject={curProject}
             switchToProject={switchToProject}
+            sideBarToggle={sideBarToggle}
           />
         ))}
     </div>

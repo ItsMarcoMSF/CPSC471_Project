@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { Avatar } from "@mui/material";
 
+import { NavBarWrapper, Icon, CloseIcon } from "./NavBarElements";
+
 import ProjectList from "../ProjectList/ProjectList";
 
 import "./NavBar.css";
@@ -13,6 +15,8 @@ const NavBar = ({
   curProject,
   switchCreate,
   switchProject,
+  isOpen,
+  sideBarToggle,
 }) => {
   const navigate = useNavigate();
 
@@ -24,16 +28,21 @@ const NavBar = ({
     e.preventDefault();
     localStorage.removeItem("token");
     localStorage.removeItem("userID");
+    sideBarToggle();
     navigate("/login");
   };
 
   const handleProfile = (e) => {
     e.preventDefault();
+    sideBarToggle();
     navigate("/profile");
   };
 
   return (
-    <div className="navbar-wrapper">
+    <NavBarWrapper isOpen={isOpen}>
+      <Icon isOpen={isOpen} onClick={sideBarToggle}>
+        <CloseIcon />
+      </Icon>
       <a
         className="profile-wrapper"
         onClick={(e) => {
@@ -41,7 +50,7 @@ const NavBar = ({
           setProfileClicked(!profileClicked);
         }}
       >
-        <Avatar sx={{ bgcolor: "#644aff" }}>M</Avatar>
+        {/* <Avatar sx={{ bgcolor: "#644aff" }}>M</Avatar> */}
         <p>Welcome</p>
       </a>
       {profileClicked && (
@@ -59,7 +68,7 @@ const NavBar = ({
           type="button"
           onClick={(e) => {
             e.preventDefault();
-            setProjectClicked(true);
+            setProjectClicked(!projectClicked);
             setCreateClicked(false);
             switchProject();
           }}
@@ -74,6 +83,7 @@ const NavBar = ({
             setProject={setProject}
             curProject={curProject}
             switchToProject={switchProject}
+            sideBarToggle={sideBarToggle}
           />
         </div>
       )}
@@ -84,6 +94,7 @@ const NavBar = ({
             e.preventDefault();
             setProjectClicked(false);
             setCreateClicked(true);
+            sideBarToggle();
             switchCreate();
           }}
           style={createClicked ? { backgroundColor: "#333333" } : null}
@@ -91,7 +102,7 @@ const NavBar = ({
           Create Project
         </button>
       </div>
-    </div>
+    </NavBarWrapper>
   );
 };
 
