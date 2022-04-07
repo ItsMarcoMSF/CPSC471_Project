@@ -1,0 +1,125 @@
+.add-friend-box {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+}
+
+.add-friend-content {
+    width: 80%;
+    max-height: fit-content;
+    margin: 30vh auto;
+    background: #363638;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+    outline: solid thin gray;
+    /* padding-left: 10px;
+      padding-right: 10px; */
+    padding-bottom: 10px;
+}
+
+.search-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-box form label {
+    margin-top: 20px;
+    margin-left: 20px;
+    color: white;
+    font-size: 20px;
+}
+
+.search-box form input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 20px;
+    border: rgba(112, 112, 112, 0.25);
+    box-sizing: border-box;
+    color: rgb(37, 37, 37);
+    align-self: center;
+}
+
+.search-box form button {
+    border-radius: 5px;
+    width: fit-content;
+    margin-top: 30px;
+    margin-left: 20px;
+    background: #988AB5;
+    color: #fff;
+    border: none;
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+}
+
+.add-close-btn {
+    margin: 20px 20px;
+    outline: none;
+    border: none;
+    background-color: none;
+    background: none;
+    font-size: 16px;
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.add-friend-card {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    margin: 10px 25px;
+}
+
+.add-friend-card h4 {
+
+    margin: auto;
+    color:#988AB5; 
+}
+
+.add-friend-card p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: white;
+}
+
+.add-friend-card button {
+    margin: auto;
+    margin-right: 2px;
+
+    width: fit-content;
+    color: #fff;
+    box-shadow: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: #644aff;
+    /* outline: solid 1px #644aff; */
+    text-align: center;
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+    .add-friend-content{
+        width: 95%;
+    }
+}
