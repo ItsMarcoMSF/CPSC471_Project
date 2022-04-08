@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import Axios from "axios";
 import AddDev from "../AddDev/AddDev";
 
@@ -25,7 +26,10 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const [getDevelopers, setGetDevelopers] = useState([]);
   const [getManagers, setGetManagers] = useState([]);
   const [getFriends, setGetFriends] = useState([]);
+  const [getTasks, setGetTasks] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const navigate = useNavigate();
 
   const fetchDevs = async () => {
     const projID = project._id;
@@ -81,7 +85,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/projects/user/friends`,
+        `http://localhost:5000/user/friends`,
         payload
       );
       const friends = await res.json();
@@ -93,12 +97,85 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   };
 
   const fetchTask = async () => {
+    const projID = project._id;
+    const payload = {
+      method: "GET",
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
 
+    try {
+      const res = await fetch(
+        `http://localhost:5000/projects/${projID}/tasks`,
+        payload
+      );
+      const task = await res.json();
+      setGetTasks(task);
+      console.log(task);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const fetchProjectProgress = async () => {};
+  function fetchProjectProgress(){
+    let total = 0;
+    let resolved = 0;
 
-  const fetchPersonalProgress = async () => {};
+    for(let i =0; i<getTasks.length;i++){
+      if(getTasks[i].status==="Resolved"){
+        resolved++;
+      }
+      total++;
+    }
+
+    let percentage = (resolved/total) * 100;
+
+    return percentage;
+  };
+
+  function fetchPersonalProgress(){
+    let total = 0;
+    let resolved = 0;
+
+    for(let i =0; i<getTasks.length;i++){
+      if(getTasks[i]){
+        if(getTasks[i].status==="Resolved"){
+          resolved++;
+        }
+        total++;
+      }
+    }
+
+    let percentage = (resolved/total) * 100;
+
+    return percentage;
+  };
+
+  const deleteProject = async () => {
+    const projID = project._id;
+    const payload = {
+      method: "DELETE",
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
+
+    try {
+      await fetch(
+        `http://localhost:5000/projects/${projID}`,
+        payload
+      );
+     window.location.reload(false);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const refreshProject = () => {
+    project = null;
+    navigate("/dashboard");
+  };
 
   function handleAddDevSubmit(e){
     if(e.target.value === "developer"){
@@ -137,6 +214,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   useEffect(() => {
     //fetchManagers();
    // fetchDevs();
+    fetchTask()
     fetchFriends();
   }, []);
   return (
@@ -146,7 +224,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           <div className="project-page">
             <h2 className="project-name">{project.name}</h2>
             <div id="rectangle-small-left">
-              <h2>Project Progress: {mockProject.projectProgress}</h2>
+              <h2>Project Progress: {fetchProjectProgress}%</h2>
             </div>
             <div id="rectangle-small-right">
               <h2>Your Progress: {mockProject.yourProgress}</h2>
@@ -169,8 +247,8 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               <div id="developers">
                 <h3>Developers</h3>
                 <div className="devs-wrapper">
-                  {getFriends.map((friend) => (
-                    <p>{friend.username}</p>
+                  {getDevelopers.map((developer) => (
+                    <p>{developer.username}</p>
                   ))}
                 </div>
               </div>
@@ -192,7 +270,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                   </select>
                   <p class="dev-labels">Friend:</p>
                   <select class="dev-dropdown" name="dev" id ="dev">
-                    <AddDevFriends friends={getFriends}/>
+                    <AddDevFriends getFriends/>
                   </select>
                   <br></br>
                 <input class="bug-report-btn " type="submit" value="Add" />
@@ -200,6 +278,12 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           </>}
           handleClose={togglePopup}
           />}
+          <button className="bug-report-btn" >
+            Add Task
+          </button>
+          <button className="bug-report-btn" onClick={deleteProject}>
+            Delete This Project
+          </button>
         </div>
       ) : (
         <h2 className="">Choose a project to begin</h2>
