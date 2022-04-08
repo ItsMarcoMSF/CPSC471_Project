@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaBars } from "react-icons/fa";
 
 import NavBar from "../NavBar/NavBar";
 import ProjectPage from "../ProjectPage/ProjectPage";
@@ -13,6 +14,14 @@ const Dashboard = () => {
   const [projectStage, setProjectStage] = useState(true);
   const [createStage, setCreateStage] = useState(false);
   const [bugStage, setBugStage] = useState(false);
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const sideBarToggle = () => {
+    if (window.innerWidth <= 800) {
+      setIsOpen(!isOpen);
+    }
+  };
 
   const switchToCreate = () => {
     setProjectStage(false);
@@ -79,8 +88,13 @@ const Dashboard = () => {
         curProject={curProject}
         switchCreate={switchToCreate}
         switchProject={switchToProject}
+        isOpen={isOpen}
+        sideBarToggle={sideBarToggle}
       />
       <div className="main-content">
+        <div className="mobile-icon" onClick={sideBarToggle}>
+          <FaBars />
+        </div>
         {bugStage && (
           <BugsPage project={curProject} switchToProject={switchToProject} />
         )}

@@ -2,11 +2,18 @@ import React from "react";
 
 import "./ProjectBtn.css";
 
-const ProjectBtn = ({ project, setProject, curProject, switchToProject }) => {
+const ProjectBtn = ({
+  project,
+  setProject,
+  curProject,
+  switchToProject,
+  sideBarToggle,
+}) => {
   const handleProject = (e) => {
     e.preventDefault();
     setProject(project);
     switchToProject();
+    sideBarToggle();
   };
 
   const isCur = project._id === curProject._id;

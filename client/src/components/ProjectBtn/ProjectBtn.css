@@ -13,3 +13,10 @@
 .project-btn:hover {
   background-color: #333333;
 }
+
+@media screen and (max-width: 800px) {
+  .project-btn {
+    height: 60px;
+    font-size: 18px;
+  }
+}
