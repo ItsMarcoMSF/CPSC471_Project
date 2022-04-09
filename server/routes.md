@@ -352,6 +352,7 @@ Require:
               status: String,
               deadline: Date,
               prjID: ObjectID (_id of the project),
+              devID: ObjectID (_id of assigned dev),
           }
 
 ## GET http://localhost:5000/projects/:projectID/bugs
@@ -384,6 +385,7 @@ Return:
             status: String,
             deadline: Date,
             prjID: ObjectID (\_id of the project),
+            devID: ObjectID (_id of assigned dev),
         }
 
 ## PATCH http://localhost:5000/bugs/:bugID
