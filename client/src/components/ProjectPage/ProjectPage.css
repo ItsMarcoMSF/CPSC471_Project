@@ -101,7 +101,6 @@
   padding: auto;
 
   border-radius: 10px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-color: white;
   border-color: #2e2e2e;
 }
@@ -147,19 +146,16 @@
 
 .dev-dropdown{
   border-radius: 10px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background-color: white;
   border-color: #2e2e2e;
 }
 
 .dev-labels{
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: bold;
   font-size: 25px;
 }
 
 .dev-form-header{
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: bold;
   font-size: 35px;
 }
