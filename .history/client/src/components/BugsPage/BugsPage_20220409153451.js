@@ -327,6 +327,9 @@ const BugsPage = ({ project, switchToProject }) => {
               }
               handleClose={togglePopup}
             />
+              }
+              handleClose={togglePopup}
+            />
           )}
         </div>
       )}

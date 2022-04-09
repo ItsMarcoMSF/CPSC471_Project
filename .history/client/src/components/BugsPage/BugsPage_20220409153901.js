@@ -51,7 +51,7 @@ const BugsPage = ({ project, switchToProject }) => {
 
   function reportBug(e) {
     e.preventDefault();
-    Axios.post("http://localhost:5000/bugs", {
+    Axios.post("http://localhost:5000/projects/${projID}/bugs", {
       name: sendBug.name,
       description: sendBug.description,
       priority: sendBug.priority,

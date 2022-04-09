@@ -34,9 +34,8 @@
     cursor: pointer;
     position: fixed;
     /* right: calc(25% - 70px); */
-    /* right: 25%; */
-    right: calc(25% - 35px);
-    top: calc(25% - 12.5px);
+    right: 25%;
+    top: calc(100vh - 73.57vh);
     background: #ededed;
     width: 25px;
     height: 25px;

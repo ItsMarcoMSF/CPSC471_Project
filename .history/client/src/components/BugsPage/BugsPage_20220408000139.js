@@ -36,7 +36,7 @@ const BugsPage = ({ project, switchToProject }) => {
     description: "Nothing much",
     priority: "Medium",
     deadline: someDate,
-    devID: "",
+    // devName: "Marco Truong",
     status: "Unresolved",
   });
   const resetForm = () => {
@@ -58,7 +58,7 @@ const BugsPage = ({ project, switchToProject }) => {
       deadline: sendBug.deadline,
       status: sendBug.status,
       prjID: project._id,
-      devID: sendBug.devID,
+      // devName: sendBug.devName,
     }).then((res) => {
       console.log(res.data);
       // Success message
@@ -102,52 +102,35 @@ const BugsPage = ({ project, switchToProject }) => {
     }
   };
 
-  const fetchDev = async () => {
-    const payload = {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": localStorage.getItem("token"),
-        },
-    };
+  // const fetchDev = async () => {
+  //   const projID = project._id;
+  //   const payload = {
+  //       method: "GET",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //         "x-access-token": localStorage.getItem("token"),
+  //       },
+  //   };
 
-    try {
-      const res = await fetch(
-        `http://localhost:5000/user/friends`,
-        payload,
-      );
-      const dev = await res.json();
-      setIsLoaded(true);
-      setGetDevs(dev);
-      console.log(dev);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //   try {
+  //     const res = await fetch(
+  //       `http://localhost:5000/user/friends`,
+  //       payload,
+  //     );
+  //     const dev = await res.json();
+  //     setIsLoaded(true);
+  //     setGetDevs(dev);
+  //     console.log(dev);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
   useEffect(() => {
     fetchBugs();
   }, []);
 
-  useEffect(() => {
-    fetchDev();
-  }, []);
-
-  function createSelectDevs() {
-    let devs = [];         
-    for (let i = 0; i < getDevs.length; i++) {             
-         devs.push(<option key={i} value="devName">{getDevs[i].username}</option>);   
-         //here I will be creating my options dynamically based on
-         //what props are currently passed to the parent component
-    }
-    return devs;
-};
-
-  function onDropdownSelected(e) {
-    console.log("THE VAL", e.target.value);
-    //here you will see the current selected value of the select input
-  };
 
   return (
     <div className="bugs-wrapper">
@@ -156,7 +139,6 @@ const BugsPage = ({ project, switchToProject }) => {
       <button className="back-btn" onClick={switchToProject}>
         Go back
       </button>
-      <br></br>
       {getBugs.length > 0 ? (
         <div>
           <h2 className="bugs-reported">Bugs reported:</h2>
@@ -208,23 +190,6 @@ const BugsPage = ({ project, switchToProject }) => {
                       <option value={mockup.developer1} selected>Marco Truong</option>
                       <option value={mockup.developer3}>Alvin Nguyen</option>
                     </select> */}
-                    {/* <nav>
-                        <ol start={index}>
-                            {getBugs.map(bug => (
-                            <li key={bug.id}>
-                                <input className="viewDetail"
-                                    type="button"
-                                    value= {bug.id + " - " + bug.name + " - " + bug.status}
-                                    onClick={toggleDetail}
-                                />
-                            </li>
-                            ))}
-                        </ol>
-                    </nav> */}
-                    <br></br>
-                    <select id="devID" value={sendBug.devID} onChange={(e) => onDropdownSelected(e)} label="Multiple Select" multiple>
-                      {createSelectDevs()}
-                    </select>
                     <p>Bug deadline</p>
                     <input
                       className="enter-detail"
@@ -289,23 +254,6 @@ const BugsPage = ({ project, switchToProject }) => {
                       <option value={mockup.developer1} selected>Marco Truong</option>
                       <option value={mockup.developer3}>Alvin Nguyen</option>
                     </select> */}
-                    {/* <nav>
-                        <ol start={index}>
-                            {getBugs.map(bug => (
-                            <li key={bug.id}>
-                                <input className="viewDetail"
-                                    type="button"
-                                    value= {bug.id + " - " + bug.name + " - " + bug.status}
-                                    onClick={toggleDetail}
-                                />
-                            </li>
-                            ))}
-                        </ol>
-                    </nav> */}
-                    <br></br>
-                    <select id="devID" value={sendBug.devID} onChange={(e) => onDropdownSelected(e)} label="Multiple Select" multiple>
-                      {createSelectDevs()}
-                    </select>
                     <p>Bug deadline</p>
                     <input
                       className="enter-detail"

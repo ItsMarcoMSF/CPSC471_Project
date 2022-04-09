@@ -35,8 +35,8 @@
     position: fixed;
     /* right: calc(25% - 70px); */
     /* right: 25%; */
-    right: calc(25% - 35px);
-    top: calc(25% - 12.5px);
+    right: calc(25%-25px);
+    top: calc(25% - 25px);
     background: #ededed;
     width: 25px;
     height: 25px;

@@ -16,7 +16,7 @@ export const createBugs = async (request, response) => {
     status,
     deadline,
     prjID,
-    devID,
+    devName,
   });
 
   try {

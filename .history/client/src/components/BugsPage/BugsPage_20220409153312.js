@@ -289,23 +289,6 @@ const BugsPage = ({ project, switchToProject }) => {
                       <option value={mockup.developer1} selected>Marco Truong</option>
                       <option value={mockup.developer3}>Alvin Nguyen</option>
                     </select> */}
-                    {/* <nav>
-                        <ol start={index}>
-                            {getBugs.map(bug => (
-                            <li key={bug.id}>
-                                <input className="viewDetail"
-                                    type="button"
-                                    value= {bug.id + " - " + bug.name + " - " + bug.status}
-                                    onClick={toggleDetail}
-                                />
-                            </li>
-                            ))}
-                        </ol>
-                    </nav> */}
-                    <br></br>
-                    <select id="devID" value={sendBug.devID} onChange={(e) => onDropdownSelected(e)} label="Multiple Select" multiple>
-                      {createSelectDevs()}
-                    </select>
                     <p>Bug deadline</p>
                     <input
                       className="enter-detail"

@@ -11,7 +11,7 @@
 .rptbtn {
   background-color: #2c2c2c;
   /* margin: 0 auto; */
-  /* width: 25% !important; */
+  width: 25% !important;
   cursor: pointer;
   outline: none;
   /* border: none; */
@@ -28,7 +28,7 @@
 }
 
 .back-btn {
-  float: left;
+  /* float: left; */
   margin-left: 15px;
   margin-bottom: 15px;
   background-color: #535353;
@@ -44,10 +44,9 @@
   background-color: #696969;
 }
 
-h2.bugs-reported {
+.bugs-reported {
   width: 100%;
   text-align: center;
-  display: inline-block;
 }
 
 .rptbtn:hover {
@@ -94,7 +93,7 @@ h2.bugs-reported {
   margin-bottom: 10px; */
   width: 80%;
   margin: 2%;
-  /* margin-right: 3%; */
+  margin-right: 3%;
 }
 
 /* .viewDetail:hover {
@@ -134,7 +133,7 @@ h2.bugs-reported {
 
 nav ul {
   height: 75vh;
-  width: 90%;
+  width: 95%;
   text-align: center;
   align-items: center;
 }

@@ -26,7 +26,7 @@ const BugBtn = ({ bug }) => {
         // value={bug.id + " - " + bug.name + " - " + bug.status}
         onClick={toggleDetail}>
           <table className="viewShort">
-            {/* <th className="bugID">{bug._id}</th> */}
+            <th className="bugID">{bug._id}</th>
             <th className="bugName">{bug.name}</th>
             <th className="bugStatus">{bug.status}</th>
           </table>
@@ -48,7 +48,7 @@ const BugBtn = ({ bug }) => {
                 ) : (
                   <p>{"Deadline: " + date.substring(0, 10)}</p>
                 )}
-                <p>{"Assigned to: " + bug.devName}</p>
+                <p>{"Assigned to: " + bug.devID}</p>
                 <p>{"Status: " + bug.status}</p>
               </>
             </>

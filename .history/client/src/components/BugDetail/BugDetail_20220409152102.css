@@ -16,11 +16,8 @@
     width: 50%;
     margin: auto auto;
     height: auto;
-    top: 25%;
-    /* margin-top: ;
-    margin-left: 25%; */
-    /* max-height: 70vh;
-    margin-top: calc(100vh - 72vh); */
+    max-height: 70vh;
+    margin-top: calc(100vh - 72vh);
     background: #fff;
     border-radius: 4px;
     padding: 20px;
@@ -34,9 +31,8 @@
     cursor: pointer;
     position: fixed;
     /* right: calc(25% - 70px); */
-    /* right: 25%; */
-    right: calc(25% - 35px);
-    top: calc(25% - 12.5px);
+    right: 25%;
+    top: calc(100vh - 73.57vh);
     background: #ededed;
     width: 25px;
     height: 25px;

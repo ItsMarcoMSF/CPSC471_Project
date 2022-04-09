@@ -44,10 +44,10 @@
   background-color: #696969;
 }
 
-h2.bugs-reported {
-  width: 100%;
+.bugs-reported {
+  /* width: 100%; */
+  float: center;
   text-align: center;
-  display: inline-block;
 }
 
 .rptbtn:hover {
@@ -134,7 +134,7 @@ h2.bugs-reported {
 
 nav ul {
   height: 75vh;
-  width: 90%;
+  width: 95%;
   text-align: center;
   align-items: center;
 }

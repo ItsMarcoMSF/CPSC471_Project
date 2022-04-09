@@ -92,7 +92,7 @@ h2.bugs-reported {
   align-items: center;
   /* margin-top: 10px;
   margin-bottom: 10px; */
-  width: 80%;
+  width: 100%;
   margin: 2%;
   /* margin-right: 3%; */
 }
@@ -134,7 +134,7 @@ h2.bugs-reported {
 
 nav ul {
   height: 75vh;
-  width: 90%;
+  width: 95%;
   text-align: center;
   align-items: center;
 }

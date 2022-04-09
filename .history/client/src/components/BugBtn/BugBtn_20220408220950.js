@@ -48,7 +48,7 @@ const BugBtn = ({ bug }) => {
                 ) : (
                   <p>{"Deadline: " + date.substring(0, 10)}</p>
                 )}
-                <p>{"Assigned to: " + bug.devName}</p>
+                <p>{"Assigned to: " + bug.devID}</p>
                 <p>{"Status: " + bug.status}</p>
               </>
             </>

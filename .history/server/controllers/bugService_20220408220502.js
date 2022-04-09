@@ -6,7 +6,7 @@ import mongooseArchive from "mongoose-archive";
 
 export const createBugs = async (request, response) => {
   console.log(request.body);
-  const { name, description, priority, status, deadline, prjID, devName } =
+  const { name, description, priority, status, deadline, prjID, devID } =
     request.body;
 
   const newBug = new Bugs({
@@ -16,7 +16,7 @@ export const createBugs = async (request, response) => {
     status,
     deadline,
     prjID,
-    devID,
+    devName,
   });
 
   try {
