@@ -97,10 +97,11 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     }
   };
 
-  const fetchProjectProgress = async () => {
+  const fetchProjectProgress = () => {
     let total = 0;
     let resolved = 0;
     let today = new Date();
+    if(projectDetails.tasks){
       for (let i = 0; i < projectDetails.tasks.length; i++) {
           if (projectDetails.tasks[i].deadline < today) {
             resolved++;
@@ -108,7 +109,11 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           total++;
   
       }
-      
+    }
+
+    if(total == 0){
+      total = 1;
+    }
 
     let percentage = Math.round((resolved / total) * 100);
 
@@ -116,35 +121,39 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     setProjectProgress(`Project Progress: ${percentage}%`);
   };
 
-  const fetchPersonalProgress = async () => {
+  const fetchPersonalProgress = () => {
     let total = 0;
     let resolved = 0;
     let today = new Date();
-    
-    for (let i = 0; i < projectDetails.tasks.length; i++) {
-        if (projectDetails.tasks[i].deadline < today) {
-          resolved++;
-        }
-        total++;
+    if(projectDetails.tasks){
+      for (let i = 0; i < projectDetails.tasks.length; i++) {
+          if (projectDetails.tasks[i].deadline < today) {
+            resolved++;
+          }
+          total++;
 
+      }
     }
-    
+    if(total == 0){
+      total = 1;
+    }
     let percentage = Math.round((resolved / total) * 100);
 
     setPersonalProgress(`Your Progress: ${percentage}%`);
   };
 
-  const findNextTask = async ()=>{
-
-      let next = projectDetails.tasks[0];
-      let today = new Date();
-      for (let i = 1; i < projectDetails.tasks.length; i++) {
-        if (projectDetails.tasks[i].deadline < next.deadline && projectDetails.tasks[i].deadline > today) {
-          next = projectDetails.tasks[i];
+  const findNextTask = ()=>{
+      setNextTask("No upcoming tasks");
+      if(projectDetails.tasks){
+        let next = projectDetails.tasks[0];
+        let today = new Date();
+        for (let i = 1; i < projectDetails.tasks.length; i++) {
+          if (projectDetails.tasks[i].deadline < next.deadline && projectDetails.tasks[i].deadline > today) {
+            next = projectDetails.tasks[i];
+          }
         }
+        setNextTask(next.name);
       }
-      setNextTask(next.name);
-  
     };
 
   const deleteProject = async () => {
