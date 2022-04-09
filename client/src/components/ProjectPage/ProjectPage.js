@@ -1,8 +1,11 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import AddDev from "../AddDev/AddDev";
 
 import "./ProjectPage.css";
+import AddDevFriends from "../AddDevFriends/AddDevFriends";
 
 const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const navigate = useNavigate();
@@ -22,9 +25,11 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     ],
   };
 
+
   const [projectDetails, setProjectDetails] = useState({});
   const [getFriends, setGetFriends] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
 
   const [addOption, setAddOption] = useState("");
   const [devToAdd, setDevToAdd] = useState("");
@@ -33,6 +38,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+
 
   const fetchProjectDetails = async () => {
     if (!isValidProject) {
@@ -179,6 +185,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     fetchFriends();
   }, [project]);
 
+
   return (
     <div className="project-wrapper">
       {isLoaded ? (
@@ -195,28 +202,34 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               <h2>Upcoming Task</h2>
               <div className="task-wrapper">
                 {/* <p>{mockProject.upcomingTask.deadline.getDate()}</p> */}
+
                 <p id="upcomingTask">
                   {projectDetails.tasks.length > 0 &&
                     projectDetails.tasks[0].name}
                 </p>
+
               </div>
             </div>
             <div id="rectangle-large-bottom">
               <h2>Project Resources</h2>
               <div id="managers">
                 <h3>Managers</h3>
+
                 {projectDetails &&
                   projectDetails.managers.map((manager) => (
                     <p>{manager.name}</p>
                   ))}
+
               </div>
               <div id="developers">
                 <h3>Developers</h3>
                 <div className="devs-wrapper">
+
                   {projectDetails &&
                     projectDetails.developers.map((developer) => (
                       <p>{developer.username}</p>
                     ))}
+
                 </div>
               </div>
             </div>
@@ -275,6 +288,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
             />
           )}
           <button className="bug-report-btn">Add Task</button>
+
           <button className="bug-report-btn" onClick={deleteProject}>
             Delete This Project
           </button>
