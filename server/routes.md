@@ -152,6 +152,7 @@ A JSON object containing the details of a project in the form of:
       managers: [Object] (array of object),
       developers: [Object] (array of object),
       tasks: [Object] (array of object),
+      projectProgress, Number,
     }
 
 # User Routes

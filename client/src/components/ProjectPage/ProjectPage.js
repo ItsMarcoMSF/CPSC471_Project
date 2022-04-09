@@ -10,26 +10,10 @@ import "./ProjectPage.css";
 const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const navigate = useNavigate();
   const isValidProject = !(Object.keys(project).length === 0);
-  const mockProject = {
-    projectProgress: "75%",
-    yourProgress: "60%",
-    upcomingTask: {
-      task: "api gateway testing",
-      deadline: new Date(Date.parse("2022-04-12")),
-    },
-    managers: ["Marco Truong"],
-    developers: [
-      { name: "Marco Truong" },
-      { name: "Kaitlin Culligan" },
-      { name: "Alvin Nguyen" },
-    ],
-  };
-
 
   const [projectDetails, setProjectDetails] = useState({});
   const [getFriends, setGetFriends] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
 
   const [addOption, setAddOption] = useState("");
   const [devToAdd, setDevToAdd] = useState("");
@@ -38,16 +22,12 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const [taskDeadline, setTaskDeadline] = useState(new Date());
   const [taskStatus, setTaskStatus] = useState("");
 
-  const [projectProgress, setProjectProgress] = useState("");
-  const [personalProgress, setPersonalProgress] = useState("");
-  const [nextTask, setNextTask] = useState({});
-
   const [isOpenDev, setIsOpenDev] = useState(false);
   const togglePopup = () => {
     setIsOpenDev(!isOpenDev);
   };
 
-  const[isOpenTask, setIsOpenTask] = useState(false);
+  const [isOpenTask, setIsOpenTask] = useState(false);
   const toggleTaskPopup = () => {
     setIsOpenTask(!isOpenTask);
   };
@@ -97,70 +77,13 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     }
   };
 
-  const fetchProjectProgress = () => {
-    let total = 0;
-    let resolved = 0;
-    let today = new Date();
-    if(projectDetails.tasks){
-      for (let i = 0; i < projectDetails.tasks.length; i++) {
-          if (projectDetails.tasks[i].deadline < today) {
-            resolved++;
-          }
-          total++;
-  
-      }
-    }
-
-    if(total == 0){
-      total = 1;
-    }
-
-    let percentage = Math.round((resolved / total) * 100);
-
-    console.log(percentage);
-    setProjectProgress(`Project Progress: ${percentage}%`);
-  };
-
-  const fetchPersonalProgress = () => {
-    let total = 0;
-    let resolved = 0;
-    let today = new Date();
-    if(projectDetails.tasks){
-      for (let i = 0; i < projectDetails.tasks.length; i++) {
-          if (projectDetails.tasks[i].deadline < today) {
-            resolved++;
-          }
-          total++;
-
-      }
-    }
-    if(total == 0){
-      total = 1;
-    }
-    let percentage = Math.round((resolved / total) * 100);
-
-    setPersonalProgress(`Your Progress: ${percentage}%`);
-  };
-
-  const findNextTask = ()=>{
-      setNextTask("No upcoming tasks");
-      if(projectDetails.tasks){
-        let next = projectDetails.tasks[0];
-        let today = new Date();
-        for (let i = 1; i < projectDetails.tasks.length; i++) {
-          if (projectDetails.tasks[i].deadline < next.deadline && projectDetails.tasks[i].deadline > today) {
-            next = projectDetails.tasks[i];
-          }
-        }
-        setNextTask(next.name);
-      }
-    };
-
   const deleteProject = async () => {
     const projID = project._id;
     const payload = {
       method: "DELETE",
-      headers: {},
+      headers: {
+        "x-access-token": localStorage.getItem("token"),
+      },
     };
 
     try {
@@ -169,11 +92,6 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     } catch (err) {
       console.error(err);
     }
-  };
-
-  const refreshProject = () => {
-    project = null;
-    navigate("/dashboard");
   };
 
   const handleAddDevSubmit = async (e) => {
@@ -196,7 +114,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
         `http://localhost:5000/projects/${projID}/${addOption}`,
         payload
       );
-      refreshProject();
+      fetchProjectDetails();
       togglePopup();
     } catch (err) {
       console.log(err);
@@ -241,6 +159,8 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
         body: JSON.stringify(newTask),
       });
       resetForm();
+      toggleTaskPopup();
+      fetchProjectDetails();
     } catch (err) {
       console.log(err);
     }
@@ -249,13 +169,9 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   useEffect(() => {
     if (isValidProject) {
       fetchProjectDetails();
-      fetchPersonalProgress();
-      fetchProjectProgress();
-      findNextTask();
     }
     fetchFriends();
   }, [project]);
-
 
   return (
     <div className="project-wrapper">
@@ -264,44 +180,49 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           <div className="project-page">
             <h2 className="project-name">{project.name}</h2>
             <div id="rectangle-small-left">
-              <h2>{projectProgress}</h2>
+              <h2>Project Progress:</h2>
+              <p>{projectDetails.projectProgress}</p>
             </div>
             <div id="rectangle-small-right">
-              <h2>{personalProgress}</h2>
+              <h2>Personal Progress:</h2>
+              <p>{projectDetails.projectProgress}</p>
             </div>
             <div id="rectangle-large-top">
               <h2>Upcoming Task</h2>
               <div className="task-wrapper">
-                {/* <p>{mockProject.upcomingTask.deadline.getDate()}</p> */}
-
                 <p id="upcomingTask">
-                  {nextTask}
+                  {projectDetails.tasks.length > 0
+                    ? projectDetails.tasks[0].name
+                    : "No upcoming Task"}
                 </p>
-
               </div>
             </div>
             <div id="rectangle-large-bottom">
               <h2>Project Resources</h2>
               <div id="managers">
                 <h3>Managers</h3>
-                    <div className="devs-wrapper">
-                {projectDetails &&
-                  projectDetails.managers.map((manager) => (
-                    <p>{projectDetails.managers.length > 0 && manager.username}</p>
-                  ))}
-                  </div>
-
+                <div className="devs-wrapper">
+                  {projectDetails &&
+                    projectDetails.managers.map((manager) => (
+                      <p>
+                        {projectDetails.managers.length > 0 && manager.username}
+                      </p>
+                    ))}
+                </div>
               </div>
               <div id="developers">
                 <h3>Developers</h3>
                 <div className="devs-wrapper">
                   {projectDetails &&
                     projectDetails.developers.map((developer) => (
-                      <p>{projectDetails.developers.length > 0 && developer.username}</p>
+                      <p>
+                        {projectDetails.developers.length > 0 &&
+                          developer.username}
+                      </p>
                     ))}
                 </div>
               </div>
-            </div> 
+            </div>
           </div>
           <button className="bug-report-btn" onClick={switchToBugs}>
             Bug Report
@@ -356,47 +277,54 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               handleClose={togglePopup}
             />
           )}
-          <button className="bug-report-btn" onClick={toggleTaskPopup}>Add Task</button>
+          <button className="bug-report-btn" onClick={toggleTaskPopup}>
+            Add Task
+          </button>
 
-          {isOpenTask && <AddTask content={<>
-            <form onSubmit={createTask}>
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                name="name"
-                id="inputID"
-                placeholder="Task Name..."
-                value={taskName}
-                onChange={(e) => setTaskName(e.target.value)}
-              />
+          {isOpenTask && (
+            <AddTask
+              content={
+                <>
+                  <form onSubmit={createTask}>
+                    <label htmlFor="name">Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      id="inputID"
+                      placeholder="Task Name..."
+                      value={taskName}
+                      onChange={(e) => setTaskName(e.target.value)}
+                    />
 
-              <label htmlFor="deadline">Deadline</label>
-              <input
-                type="date"
-                name="deadline"
-                id="inputID"
-                placeholder="Set a deadline"
-                value={taskDeadline}
-                onChange={(e) => setTaskDeadline(e.target.value)}
-              />
+                    <label htmlFor="deadline">Deadline</label>
+                    <input
+                      type="date"
+                      name="deadline"
+                      id="inputID"
+                      placeholder="Set a deadline"
+                      value={taskDeadline}
+                      onChange={(e) => setTaskDeadline(e.target.value)}
+                    />
 
-              <label htmlFor="status">Status</label>
-              <input
-                type="text"
-                name="status"
-                id="inputID"
-                placeholder="Set a Status"
-                value={taskStatus}
-                onChange={(e) => setTaskStatus(e.target.value)}
-              />
+                    <label htmlFor="status">Status</label>
+                    <input
+                      type="text"
+                      name="status"
+                      id="inputID"
+                      placeholder="Set a Status"
+                      value={taskStatus}
+                      onChange={(e) => setTaskStatus(e.target.value)}
+                    />
 
-              <button className="project-submit-btn" type="submit">
-                Create
-              </button>
-            </form>
-            </>}
-          handleClose={toggleTaskPopup}
-          />}
+                    <button className="project-submit-btn" type="submit">
+                      Create
+                    </button>
+                  </form>
+                </>
+              }
+              handleClose={toggleTaskPopup}
+            />
+          )}
           <button className="bug-report-btn" onClick={deleteProject}>
             Delete This Project
           </button>
