@@ -134,8 +134,6 @@ export const deleteProject = async (req, res) => {
 export const addDeveloperToProject = async (req, res) => {
   const projectID = req.params.projectID;
   const devID = req.body.devID;
-  console.log(projectID);
-  console.log(devID);
   try {
     await Projects.updateOne(
       { _id: projectID },

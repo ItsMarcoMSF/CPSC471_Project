@@ -94,7 +94,7 @@ router.post("/projects", verifyJWTRequired, createProjects);
 router.delete("/projects/:projectID", verifyJWTRequired, deleteProject);
 router.post("/projects/:projectID/tasks", verifyJWTRequired, addTask);
 router.patch(
-  "/projects/:projectID/devs",
+  "/projects/:projectID/developers",
   verifyJWTRequired,
   addDeveloperToProject
 );
