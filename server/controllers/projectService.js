@@ -55,7 +55,32 @@ export const getProjectDetail = async (req, res) => {
       "username email _id"
     );
     var devs = await User.find({ _id: { $in: devIDs } }, "username email _id");
-    var tasks = await Tasks.find({ _id: { $in: taskIDs } });
+    var tasks = await Tasks.find({ _id: { $in: taskIDs } }).sort({
+      deadline: 1,
+    });
+
+    const calcProjectProgress = () => {
+      let total = 0;
+      let resolved = 0;
+      let today = new Date();
+      if (tasks.length > 0) {
+        for (let i = 0; i < tasks.length; i++) {
+          if (tasks[i].deadline < today) {
+            resolved++;
+          }
+          total++;
+        }
+      }
+
+      if (total === 0) {
+        total = 1;
+      }
+
+      let percentage = Math.round((resolved / total) * 100);
+      return percentage;
+    };
+
+    var projectProgress = calcProjectProgress();
 
     const projectDetail = {
       _id: project._id,
@@ -65,6 +90,7 @@ export const getProjectDetail = async (req, res) => {
       managers: managers,
       developers: devs,
       tasks: tasks,
+      projectProgress: projectProgress,
       createdAt: project.createdAt,
       updatedAt: project.updatedAt,
     };
