@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -39,11 +38,19 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const [taskDeadline, setTaskDeadline] = useState(new Date());
   const [taskStatus, setTaskStatus] = useState("");
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [projectProgress, setProjectProgress] = useState("");
+  const [personalProgress, setPersonalProgress] = useState("");
+  const [nextTask, setNextTask] = useState({});
+
+  const [isOpenDev, setIsOpenDev] = useState(false);
   const togglePopup = () => {
-    setIsOpen(!isOpen);
+    setIsOpenDev(!isOpenDev);
   };
 
+  const[isOpenTask, setIsOpenTask] = useState(false);
+  const toggleTaskPopup = () => {
+    setIsOpenTask(!isOpenTask);
+  };
 
   const fetchProjectDetails = async () => {
     if (!isValidProject) {
@@ -90,39 +97,55 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     }
   };
 
-  function fetchProjectProgress() {
+  const fetchProjectProgress = async () => {
     let total = 0;
     let resolved = 0;
-
-    for (let i = 0; i < projectDetails.tasks.length; i++) {
-      if (projectDetails.tasks[i].status === "Resolved") {
-        resolved++;
+    let today = new Date();
+      for (let i = 0; i < projectDetails.tasks.length; i++) {
+          if (projectDetails.tasks[i].deadline < today) {
+            resolved++;
+          }
+          total++;
+  
       }
-      total++;
-    }
+      
 
-    let percentage = (resolved / total) * 100;
+    let percentage = Math.round((resolved / total) * 100);
 
-    return percentage;
-  }
+    console.log(percentage);
+    setProjectProgress(`Project Progress: ${percentage}%`);
+  };
 
-  function fetchPersonalProgress() {
+  const fetchPersonalProgress = async () => {
     let total = 0;
     let resolved = 0;
-
+    let today = new Date();
+    
     for (let i = 0; i < projectDetails.tasks.length; i++) {
-      if (projectDetails.tasks[i]) {
-        if (projectDetails.tasks[i].status === "Resolved") {
+        if (projectDetails.tasks[i].deadline < today) {
           resolved++;
         }
         total++;
-      }
+
     }
+    
+    let percentage = Math.round((resolved / total) * 100);
 
-    let percentage = (resolved / total) * 100;
+    setPersonalProgress(`Your Progress: ${percentage}%`);
+  };
 
-    return percentage;
-  }
+  const findNextTask = async ()=>{
+
+      let next = projectDetails.tasks[0];
+      let today = new Date();
+      for (let i = 1; i < projectDetails.tasks.length; i++) {
+        if (projectDetails.tasks[i].deadline < next.deadline && projectDetails.tasks[i].deadline > today) {
+          next = projectDetails.tasks[i];
+        }
+      }
+      setNextTask(next.name);
+  
+    };
 
   const deleteProject = async () => {
     const projID = project._id;
@@ -183,11 +206,6 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     return options;
   };
 
-  const[isOpenTask, setIsOpenTask] = useState(false);
-  const toggleTaskPopup = () => {
-    setIsOpenTask(!isOpenTask);
-  };
-
   const resetForm = () => {
     setTaskName("");
     setTaskDeadline("");
@@ -222,6 +240,9 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
   useEffect(() => {
     if (isValidProject) {
       fetchProjectDetails();
+      fetchPersonalProgress();
+      fetchProjectProgress();
+      findNextTask();
     }
     fetchFriends();
   }, [project]);
@@ -234,10 +255,10 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           <div className="project-page">
             <h2 className="project-name">{project.name}</h2>
             <div id="rectangle-small-left">
-              <h2>Project Progress: {fetchProjectProgress}%</h2>
+              <h2>{projectProgress}</h2>
             </div>
             <div id="rectangle-small-right">
-              <h2>Your Progress: {mockProject.yourProgress}</h2>
+              <h2>{personalProgress}</h2>
             </div>
             <div id="rectangle-large-top">
               <h2>Upcoming Task</h2>
@@ -245,8 +266,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                 {/* <p>{mockProject.upcomingTask.deadline.getDate()}</p> */}
 
                 <p id="upcomingTask">
-                  {projectDetails.tasks.length > 0 &&
-                    projectDetails.tasks[0].name}
+                  {nextTask}
                 </p>
 
               </div>
@@ -255,12 +275,12 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               <h2>Project Resources</h2>
               <div id="managers">
                 <h3>Managers</h3>
-
+                    <div className="devs-wrapper">
                 {projectDetails &&
                   projectDetails.managers.map((manager) => (
-                    <p>{manager.name}</p>
+                    <p>{projectDetails.managers.length > 0 && manager.username}</p>
                   ))}
-
+                  </div>
 
               </div>
               <div id="developers">
@@ -268,13 +288,11 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                 <div className="devs-wrapper">
                   {projectDetails &&
                     projectDetails.developers.map((developer) => (
-                      <p>{developer.username}</p>
+                      <p>{projectDetails.developers.length > 0 && developer.username}</p>
                     ))}
-
-
                 </div>
               </div>
-            </div>
+            </div> 
           </div>
           <button className="bug-report-btn" onClick={switchToBugs}>
             Bug Report
@@ -282,7 +300,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           <button className="bug-report-btn" onClick={togglePopup}>
             Add Developer
           </button>
-          {isOpen && (
+          {isOpenDev && (
             <AddDev
               content={
                 <>
@@ -329,7 +347,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               handleClose={togglePopup}
             />
           )}
-          <button className="bug-report-btn">Add Task</button>
+          <button className="bug-report-btn" onClick={toggleTaskPopup}>Add Task</button>
 
           {isOpenTask && <AddTask content={<>
             <form onSubmit={createTask}>
