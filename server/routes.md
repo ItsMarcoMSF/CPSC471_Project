@@ -129,6 +129,31 @@ Accept:
               devID: String (_id of a user)
           }
 
+## GET http://localhost:5000/projects/:projectID
+
+Get Project Details
+
+Require:
+
+- headers:
+  - x-access-token: user jwt token
+- params:
+  - projectID: id of project to delete
+
+Return:
+
+A JSON object containing the details of a project in the form of:
+
+    {
+      _id: String (ObjectID of project),
+      name: String,
+      deadline: Date,
+      bugs: [ObjectID] (array of objectID of bugs in project),
+      managers: [Object] (array of object),
+      developers: [Object] (array of object),
+      tasks: [Object] (array of object),
+    }
+
 # User Routes
 
 ## POST http://localhost:5000/login
