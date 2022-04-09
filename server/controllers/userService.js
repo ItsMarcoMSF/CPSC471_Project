@@ -129,7 +129,7 @@ export const addFriend = async (req, res) => {
 export const getAllFriends = async (req, res) => {
   const userID = req.user.id;
   const user = await User.findById(userID);
-  const friendList = user.friends;
+  const friendList = req.user.friends;
   try {
     const result = await User.find(
       { _id: { $in: friendList } },

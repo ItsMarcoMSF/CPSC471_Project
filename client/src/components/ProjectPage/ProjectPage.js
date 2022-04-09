@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 import AddDev from "../AddDev/AddDev";
 
+import AddTask from "../AddTask/AddTask";
+
 import "./ProjectPage.css";
-import AddDevFriends from "../AddDevFriends/AddDevFriends";
 
 const ProjectPage = ({ project, switchToBugs, Popup }) => {
   const navigate = useNavigate();
@@ -33,6 +34,10 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
 
   const [addOption, setAddOption] = useState("");
   const [devToAdd, setDevToAdd] = useState("");
+
+  const [taskName, setTaskName] = useState("");
+  const [taskDeadline, setTaskDeadline] = useState(new Date());
+  const [taskStatus, setTaskStatus] = useState("");
 
   const [isOpen, setIsOpen] = useState(false);
   const togglePopup = () => {
@@ -178,6 +183,42 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     return options;
   };
 
+  const[isOpenTask, setIsOpenTask] = useState(false);
+  const toggleTaskPopup = () => {
+    setIsOpenTask(!isOpenTask);
+  };
+
+  const resetForm = () => {
+    setTaskName("");
+    setTaskDeadline("");
+    setTaskStatus("");
+  };
+
+  const createTask = async (e) => {
+    const projID = project._id;
+    e.preventDefault();
+    const newTask = {
+      name: taskName,
+      deadline: taskDeadline,
+      status: taskStatus,
+    };
+
+    try {
+      await fetch(`http://localhost:5000/projects/${projID}/tasks`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify(newTask),
+      });
+      resetForm();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     if (isValidProject) {
       fetchProjectDetails();
@@ -220,15 +261,16 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                     <p>{manager.name}</p>
                   ))}
 
+
               </div>
               <div id="developers">
                 <h3>Developers</h3>
                 <div className="devs-wrapper">
-
                   {projectDetails &&
                     projectDetails.developers.map((developer) => (
                       <p>{developer.username}</p>
                     ))}
+
 
                 </div>
               </div>
@@ -289,6 +331,45 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           )}
           <button className="bug-report-btn">Add Task</button>
 
+          {isOpenTask && <AddTask content={<>
+            <form onSubmit={createTask}>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="inputID"
+                placeholder="Task Name..."
+                value={taskName}
+                onChange={(e) => setTaskName(e.target.value)}
+              />
+
+              <label htmlFor="deadline">Deadline</label>
+              <input
+                type="date"
+                name="deadline"
+                id="inputID"
+                placeholder="Set a deadline"
+                value={taskDeadline}
+                onChange={(e) => setTaskDeadline(e.target.value)}
+              />
+
+              <label htmlFor="status">Status</label>
+              <input
+                type="text"
+                name="status"
+                id="inputID"
+                placeholder="Set a Status"
+                value={taskStatus}
+                onChange={(e) => setTaskStatus(e.target.value)}
+              />
+
+              <button className="project-submit-btn" type="submit">
+                Create
+              </button>
+            </form>
+            </>}
+          handleClose={toggleTaskPopup}
+          />}
           <button className="bug-report-btn" onClick={deleteProject}>
             Delete This Project
           </button>
