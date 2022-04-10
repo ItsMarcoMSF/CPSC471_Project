@@ -38,5 +38,18 @@
   font-size: 20px;
 }
 
+.task-form-header{
+  font-weight: bold;
+  font-size: 35px;
+  color: black;
+}
+
+.task-labels{
+  font-weight: bold;
+  font-size: 25px;
+  color: black;
+}
+
+
 
   

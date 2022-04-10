@@ -38,4 +38,21 @@
     font-size: 20px;
   }
 
+  .dev-dropdown{
+    border-radius: 10px;
+    background-color: white;
+    border-color: #2e2e2e;
+  }
+  
+  .dev-labels{
+    font-weight: bold;
+    font-size: 25px;
+    color: black;
+  }
+  
+  .dev-form-header{
+    font-weight: bold;
+    font-size: 35px;
+    color: black;
+  }
   
