@@ -152,6 +152,7 @@ A JSON object containing the details of a project in the form of:
       managers: [Object] (array of object),
       developers: [Object] (array of object),
       tasks: [Object] (array of object),
+      projectProgress, Number,
     }
 
 # User Routes
@@ -352,6 +353,7 @@ Require:
               status: String,
               deadline: Date,
               prjID: ObjectID (_id of the project),
+              devID: ObjectID (_id of assigned dev),
           }
 
 ## GET http://localhost:5000/projects/:projectID/bugs
@@ -384,6 +386,8 @@ Return:
             status: String,
             deadline: Date,
             prjID: ObjectID (\_id of the project),
+            devID: ObjectID (_id of assigned dev),
+            devName: String,
         }
 
 ## PATCH http://localhost:5000/bugs/:bugID

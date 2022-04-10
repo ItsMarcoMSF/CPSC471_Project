@@ -1,14 +1,17 @@
 import Bugs from "../models/bugs.js";
 import Projects from "../models/projects.js";
+import User from "../models/user.js";
 import mongooseArchive from "mongoose-archive";
 
 // Bugs.plugin(mongooseArchive);
 
 export const createBugs = async (request, response) => {
-  console.log(request.body);
+  // console.log(request.body);
   const { name, description, priority, status, deadline, prjID, devID } =
     request.body;
 
+  const dev = await User.findById(devID);
+  const devName = dev.username;
   const newBug = new Bugs({
     name,
     description,
@@ -17,6 +20,7 @@ export const createBugs = async (request, response) => {
     deadline,
     prjID,
     devID,
+    devName: devName,
   });
 
   try {

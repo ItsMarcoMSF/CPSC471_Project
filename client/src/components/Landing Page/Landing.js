@@ -20,6 +20,8 @@ const Landing = () => {
     <div>
       <h1>Bug Tracker</h1>
       <h2>Landing Page</h2>
+      <p>This project is a simple bug tracker with some additional features such as progess tracking. To view more detail, feel free to have a try by click the log in button below</p>
+      <button><a href="./login">Click here to log in</a></button>
     </div>
   );
 };
