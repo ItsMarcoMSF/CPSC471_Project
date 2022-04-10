@@ -14,11 +14,12 @@
     height: auto;
     max-height: 70vh;
     margin-top: calc(100vh - 85vh - 20px);
-    background: #fff;
+    background-color: rgb(61, 61, 61);
     border-radius: 4px;
     padding: 20px;
     border: 1px solid #999;
     overflow: auto;
+    color: white;
   }
    
   .close-icon {
@@ -27,7 +28,7 @@
     position: fixed;
     right: calc(15% - 30px);
     top: calc(100vh - 85vh - 33px);
-    background: #ededed;
+    background-color: rgb(61, 61, 61);
     width: 25px;
     height: 25px;
     border-radius: 50%;
@@ -37,4 +38,21 @@
     font-size: 20px;
   }
 
+  .dev-dropdown{
+    border-radius: 10px;
+    background-color: white;
+    border-color: #2e2e2e;
+  }
+  
+  .dev-labels{
+    font-weight: bold;
+    font-size: 25px;
+    color: black;
+  }
+  
+  .dev-form-header{
+    font-weight: bold;
+    font-size: 35px;
+    color: black;
+  }
   
