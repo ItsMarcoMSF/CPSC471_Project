@@ -180,12 +180,10 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           <div className="project-page">
             <h2 className="project-name">{project.name}</h2>
             <div id="rectangle-small-left">
-              <h2>Project Progress:</h2>
-              <p>{projectDetails.projectProgress}</p>
+              <h2>Project Progress: {projectDetails.projectProgress}</h2>
             </div>
             <div id="rectangle-small-right">
-              <h2>Personal Progress:</h2>
-              <p>{projectDetails.projectProgress}</p>
+              <h2>Personal Progress: {projectDetails.projectProgress}</h2>
             </div>
             <div id="rectangle-large-top">
               <h2>Upcoming Task</h2>
@@ -234,11 +232,12 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
             <AddDev
               content={
                 <>
-                  <h2 class="dev-form-header">Add A Developer</h2>
+                <div className="form">
+                  <h2 className="dev-form-header">Add A Developer</h2>
                   <form onSubmit={(e) => handleAddDevSubmit(e)}>
                     <p class="dev-labels">Role:</p>
                     <select
-                      class="dev-dropdown"
+                      className="dev-dropdown"
                       name="dev-roles"
                       id="dev-roles"
                       onChange={(e) => {
@@ -253,7 +252,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                       <option value="managers">Manager</option>
                       <option value="developers">Developer</option>
                     </select>
-                    <p class="dev-labels">Friend:</p>
+                    <p className="dev-labels">Friend:</p>
                     <select
                       className="dev-dropdown"
                       name="dev"
@@ -270,8 +269,9 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                       {devOptions()}
                     </select>
                     <br></br>
-                    <input class="bug-report-btn " type="submit" value="Add" />
+                    <input className="bug-report-btn " type="submit" value="Add" />
                   </form>
+                  </div>
                 </>
               }
               handleClose={togglePopup}
@@ -286,7 +286,9 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               content={
                 <>
                   <form onSubmit={createTask}>
-                    <label htmlFor="name">Name</label>
+                    <h2 className="task-form-header">Add A Task</h2>
+                    <label className="task-labels" htmlFor="name">Name</label>
+                    <br></br>
                     <input
                       type="text"
                       name="name"
@@ -295,8 +297,9 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                       value={taskName}
                       onChange={(e) => setTaskName(e.target.value)}
                     />
-
-                    <label htmlFor="deadline">Deadline</label>
+                    <br></br>
+                    <label className="task-labels" htmlFor="deadline">Deadline</label>
+                   <br></br>
                     <input
                       type="date"
                       name="deadline"
@@ -305,8 +308,9 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                       value={taskDeadline}
                       onChange={(e) => setTaskDeadline(e.target.value)}
                     />
-
-                    <label htmlFor="status">Status</label>
+                    <br></br>
+                    <label className="task-labels" htmlFor="status">Status</label>
+                    <br></br>
                     <input
                       type="text"
                       name="status"
@@ -315,8 +319,8 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                       value={taskStatus}
                       onChange={(e) => setTaskStatus(e.target.value)}
                     />
-
-                    <button className="project-submit-btn" type="submit">
+                    <br></br>
+                    <button className="bug-report-btn" type="submit">
                       Create
                     </button>
                   </form>

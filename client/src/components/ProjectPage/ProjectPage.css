@@ -42,12 +42,14 @@
 
   grid-row-end: 3;
   grid-column-end: 2;
-  background-color: white;
+  background-color: rgb(61, 61, 61);
   height: 80%;
   width: 80%;
   margin: auto;
   text-align: center;
   border-radius: 40px;
+
+  color: white;
 }
 
 #rectangle-small-right{
@@ -56,12 +58,14 @@
 
   grid-row-end: 3;
   grid-column-end: 3;
-  background-color: white;
+  background-color: rgb(61, 61, 61);
   height: 80%;
   width: 80%;
   margin: auto;
   text-align: center;
   border-radius: 40px;
+
+  color: white
 }
 
 #rectangle-large-top{
@@ -70,13 +74,15 @@
 
   grid-row-end: 4;
   grid-column-end: 3;
-  background-color: white;
+  background-color: rgb(61, 61, 61);
   height: fit-content;
   width: 90%;
   margin: auto;
   margin-top: 10px;
   text-indent: 20px;
   border-radius: 10px;
+
+  color: white;
 }
 
 #rectangle-large-bottom{
@@ -85,24 +91,31 @@
 
   grid-row-end: 5;
   grid-column-end: 3;
-  background-color: white;
+  background-color: rgb(61, 61, 61);
   height: fit-content;
   width: 90%;
   margin: auto;
   margin-top: 10px;
   border-radius: 10px;
   text-align: center;
+
+  color: white;
 }
 
 .bug-report-btn {
-  height: 30px;
-  margin-top: 30px;
-  text-align: center;
-  padding: auto;
-
-  border-radius: 10px;
-  background-color: white;
-  border-color: #2e2e2e;
+  border-radius: 5px;
+  background: #644aff;
+  color: #fff;
+  border: none;
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.16);
+  padding: 15px 30px;
+  margin-left:5px;
+  margin-right: 5px;
+  font-size: 16px;
+  margin-top: 15px;
+  cursor: pointer;
 }
 
 #upcomingTask{
@@ -153,13 +166,27 @@
 .dev-labels{
   font-weight: bold;
   font-size: 25px;
+  color: black;
 }
 
 .dev-form-header{
   font-weight: bold;
   font-size: 35px;
+  color: black;
 }
 
+
+.task-form-header{
+  font-weight: bold;
+  font-size: 35px;
+  color: black;
+}
+
+.task-labels{
+  font-weight: bold;
+  font-size: 25px;
+  color: black;
+}
 /* h2 {
   margin: 0;
 } */
