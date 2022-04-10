@@ -139,33 +139,6 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     setTaskStatus("");
   };
 
-  const createTask = async (e) => {
-    const projID = project._id;
-    e.preventDefault();
-    const newTask = {
-      name: taskName,
-      deadline: taskDeadline,
-      status: taskStatus,
-    };
-
-    try {
-      await fetch(`http://localhost:5000/projects/${projID}/tasks`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": localStorage.getItem("token"),
-        },
-        body: JSON.stringify(newTask),
-      });
-      resetForm();
-      toggleTaskPopup();
-      fetchProjectDetails();
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     if (isValidProject) {
       fetchProjectDetails();
@@ -180,12 +153,10 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           <div className="project-page">
             <h2 className="project-name">{project.name}</h2>
             <div id="rectangle-small-left">
-              <h2>Project Progress:</h2>
-              <p>{projectDetails.projectProgress}</p>
+              <h2>Project Progress: {projectDetails.projectProgress}</h2>
             </div>
             <div id="rectangle-small-right">
-              <h2>Personal Progress:</h2>
-              <p>{projectDetails.projectProgress}</p>
+              <h2>Personal Progress: {projectDetails.projectProgress}</h2>
             </div>
             <div id="rectangle-large-top">
               <h2>Upcoming Task</h2>
@@ -232,49 +203,11 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           </button>
           {isOpenDev && (
             <AddDev
-              content={
-                <>
-                  <h2 class="dev-form-header">Add A Developer</h2>
-                  <form onSubmit={(e) => handleAddDevSubmit(e)}>
-                    <p class="dev-labels">Role:</p>
-                    <select
-                      class="dev-dropdown"
-                      name="dev-roles"
-                      id="dev-roles"
-                      onChange={(e) => {
-                        e.preventDefault();
-                        setAddOption(e.target.value);
-                      }}
-                    >
-                      <option disabled selected value>
-                        {" "}
-                        -- select an option --{" "}
-                      </option>
-                      <option value="managers">Manager</option>
-                      <option value="developers">Developer</option>
-                    </select>
-                    <p class="dev-labels">Friend:</p>
-                    <select
-                      className="dev-dropdown"
-                      name="dev"
-                      id="dev"
-                      onChange={(e) => {
-                        e.preventDefault();
-                        setDevToAdd(e.target.value);
-                      }}
-                    >
-                      <option disabled selected value>
-                        {" "}
-                        -- select an option --{" "}
-                      </option>
-                      {devOptions()}
-                    </select>
-                    <br></br>
-                    <input class="bug-report-btn " type="submit" value="Add" />
-                  </form>
-                </>
-              }
+            options={devOptions}
+              id={project._id}
+              details={fetchProjectDetails}
               handleClose={togglePopup}
+              friends={getFriends}
             />
           )}
           <button className="bug-report-btn" onClick={toggleTaskPopup}>
@@ -282,47 +215,10 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           </button>
 
           {isOpenTask && (
-            <AddTask
-              content={
-                <>
-                  <form onSubmit={createTask}>
-                    <label htmlFor="name">Name</label>
-                    <input
-                      type="text"
-                      name="name"
-                      id="inputID"
-                      placeholder="Task Name..."
-                      value={taskName}
-                      onChange={(e) => setTaskName(e.target.value)}
-                    />
-
-                    <label htmlFor="deadline">Deadline</label>
-                    <input
-                      type="date"
-                      name="deadline"
-                      id="inputID"
-                      placeholder="Set a deadline"
-                      value={taskDeadline}
-                      onChange={(e) => setTaskDeadline(e.target.value)}
-                    />
-
-                    <label htmlFor="status">Status</label>
-                    <input
-                      type="text"
-                      name="status"
-                      id="inputID"
-                      placeholder="Set a Status"
-                      value={taskStatus}
-                      onChange={(e) => setTaskStatus(e.target.value)}
-                    />
-
-                    <button className="project-submit-btn" type="submit">
-                      Create
-                    </button>
-                  </form>
-                </>
-              }
+            <AddTask 
+              id={project._id}
               handleClose={toggleTaskPopup}
+              details={fetchProjectDetails}
             />
           )}
           <button className="bug-report-btn" onClick={deleteProject}>
