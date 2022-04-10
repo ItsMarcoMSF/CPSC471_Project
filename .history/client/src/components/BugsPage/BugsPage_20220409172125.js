@@ -59,14 +59,7 @@ const BugsPage = ({ project, switchToProject }) => {
         "x-access-token": localStorage.getItem("token"),
       },
     };
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-    }
-    Axios.post("http://localhost:5000/bugs",
+    Axios.post("http://localhost:5000/bugs",payload,
     {
       name: sendBug.name,
       description: sendBug.description,
@@ -75,7 +68,7 @@ const BugsPage = ({ project, switchToProject }) => {
       status: sendBug.status,
       prjID: project._id,
       devID: sendBug.devID,
-    }, config).then((res) => {
+    }).then((res) => {
       console.log(res.data);
       // Success message
       setIsOpen(false);

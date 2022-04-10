@@ -51,23 +51,7 @@ const BugsPage = ({ project, switchToProject }) => {
 
   function reportBug(e) {
     e.preventDefault();
-    const payload = {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-    };
-    const config = {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-    }
-    Axios.post("http://localhost:5000/bugs",
-    {
+    Axios.post("http://localhost:5000/projects/${projID}/bugs", {
       name: sendBug.name,
       description: sendBug.description,
       priority: sendBug.priority,
@@ -75,7 +59,7 @@ const BugsPage = ({ project, switchToProject }) => {
       status: sendBug.status,
       prjID: project._id,
       devID: sendBug.devID,
-    }, config).then((res) => {
+    }).then((res) => {
       console.log(res.data);
       // Success message
       setIsOpen(false);
@@ -153,7 +137,7 @@ const BugsPage = ({ project, switchToProject }) => {
   function createSelectDevs() {
     let devs = [];         
     for (let i = 0; i < getDevs.length; i++) {             
-         devs.push(<option key={i} value={getDevs[i]._id}>{getDevs[i].username}</option>);   
+         devs.push(<option key={i} value="devName">{getDevs[i].username}</option>);   
          //here I will be creating my options dynamically based on
          //what props are currently passed to the parent component
     }
@@ -238,7 +222,7 @@ const BugsPage = ({ project, switchToProject }) => {
                         </ol>
                     </nav> */}
                     <br></br>
-                    <select id="devID" value={sendBug.devID} onChange={(e) => handle(e)} label="Multiple Select" multiple>
+                    <select id="devID" value={sendBug.devID} onChange={(e) => onDropdownSelected(e)} label="Multiple Select" multiple>
                       {createSelectDevs()}
                     </select>
                     <p>Bug deadline</p>
@@ -319,7 +303,7 @@ const BugsPage = ({ project, switchToProject }) => {
                         </ol>
                     </nav> */}
                     <br></br>
-                    <select id="devID" value={sendBug.devID} onChange={(e) => handle(e)} label="Multiple Select" multiple>
+                    <select id="devID" value={sendBug.devID} onChange={(e) => onDropdownSelected(e)} label="Multiple Select" multiple>
                       {createSelectDevs()}
                     </select>
                     <p>Bug deadline</p>
