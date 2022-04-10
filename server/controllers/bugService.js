@@ -6,11 +6,11 @@ import mongooseArchive from "mongoose-archive";
 // Bugs.plugin(mongooseArchive);
 
 export const createBugs = async (request, response) => {
-  console.log(request.body);
+  // console.log(request.body);
   const { name, description, priority, status, deadline, prjID, devID } =
     request.body;
 
-  const dev = User.findById(devID);
+  const dev = await User.findById(devID);
   const devName = dev.username;
   const newBug = new Bugs({
     name,
@@ -20,7 +20,7 @@ export const createBugs = async (request, response) => {
     deadline,
     prjID,
     devID,
-    devName,
+    devName: devName,
   });
 
   try {
