@@ -1,0 +1,12 @@
+
+.bugName {
+    text-align: left;
+    /* margin-left: 50%; */
+    padding-top: 40%;
+}
+
+.bugStatus {
+    text-align: right;
+    margin-right: 10vh;
+    width: 10%;
+}
