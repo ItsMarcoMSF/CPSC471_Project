@@ -2,8 +2,9 @@
   margin: 0;
   padding: 0;
   background-color: #4d4d4d;
-  height: 100%;
+  height: fit-content;
   width: 100%;
+  padding-bottom: 20px;
 }
 
 .project-wrapper hr {
@@ -41,9 +42,9 @@
   font-size: 35px;
   text-align: left;
 
-  
-  margin-left: 5%;
-  margin-bottom: 15%;
+  margin:auto;
+  width: 80%;
+  align-self: center;
 
 }
 
@@ -102,7 +103,7 @@
   width: 90%;
   margin: auto;
   margin-top: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
 
   color: white;
 }
@@ -118,7 +119,7 @@
   width: 90%;
   margin: auto;
   margin-top: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
   max-height: 250px;
 
@@ -220,6 +221,7 @@
   width: 90%;
   margin: auto;
   align-self: center;
+  margin-bottom: 20px;
 }
 
 .bug-report-btn{
@@ -267,8 +269,7 @@
   }
 
   .project-name{
-    margin-bottom: 10px;
-    padding-bottom: none;
+    padding: 15px 0;
   }
 
   #rectangle-small-right, #rectangle-small-left {

@@ -67,3 +67,12 @@
     right: calc(7% - 30px);
   }
 }
+
+@media screen and (max-width: 600px) {
+  .task-close-icon {
+    background: none;
+    border: none;
+    right: calc(12% - 30px);
+    top:calc(100vh - 85vh - 10px)
+  }
+}
