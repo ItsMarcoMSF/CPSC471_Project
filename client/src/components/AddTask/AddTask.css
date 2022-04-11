@@ -1,4 +1,4 @@
-.popup-box {
+.task-popup-box {
   position: fixed;
   background: #00000050;
   width: 100%;
@@ -7,7 +7,7 @@
   left: 0;
 }
  
-.box {
+.task-box {
   position: relative;
   width: 70%;
   margin: 0 auto;
@@ -22,11 +22,11 @@
   color: white;
 }
  
-.close-icon {
+.task-close-icon {
   content: 'x';
   cursor: pointer;
   position: fixed;
-  right: calc(15% - 30px);
+  right: calc(7% - 30px);
   top: calc(100vh - 85vh - 33px);
   background-color: rgb(61, 61, 61);
   width: 25px;
@@ -41,15 +41,25 @@
 .task-form-header{
   font-weight: bold;
   font-size: 35px;
-  color: black;
 }
 
 .task-labels{
   font-weight: bold;
   font-size: 25px;
-  color: black;
 }
 
+.task-form input {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border: rgba(112, 112, 112, 0.25);
+  box-sizing: border-box;
+  color: rgb(37, 37, 37);
+  margin-bottom: 10px;
+}
 
-
-  
+@media screen and (max-width: 800px) {
+  .task-box{
+    width: 85%;
+  }
+}
