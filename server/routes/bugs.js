@@ -83,11 +83,11 @@ router.get("/isUserAuth", verifyJWTRequired, (req, res) => {
   res.json({ isLoggedIn: true, username: req.user.username });
 });
 
-router.post("/bugs", createBugs);
-router.get("/bugs/:bugID", getBugsByID);
-router.get("/projects/:projectID/bugs", getBugs);
-router.patch("/bugs/:bugID", markResolved);
-router.delete("/bugs/:bugID", deleteBug);
+router.post("/bugs", verifyJWTRequired, createBugs);
+router.get("/bugs/:bugID", verifyJWTRequired, getBugsByID);
+router.get("/projects/:projectID/bugs", verifyJWTRequired, getBugs);
+router.patch("/bugs/:bugID", verifyJWTRequired, markResolved);
+router.delete("/bugs/:bugID", verifyJWTRequired, deleteBug);
 
 router.get("/projects", verifyJWTRequired, getProjects);
 router.post("/projects", verifyJWTRequired, createProjects);
