@@ -4,9 +4,10 @@ import Axios from "axios";
 import DetailPopup from "../BugDetail/BugDetail";
 import "./BugBtn.css"
 
-const BugBtn = ({ project, bug, fetchBugs }) => {
+const BugBtn = ({ project, bug }) => {
   const [isDetail, setIsDetail] = useState(false);
   const toggleDetail = () => {
+    setIsOpen(!isOpen);
     setIsDetail(!isDetail);
   };
 
@@ -16,6 +17,8 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [getBugs, setGetBugs] = useState([]);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const [markResolved, setMarkResolved] = useState({
     status: "Resolved",
@@ -65,8 +68,8 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
     }, config).then((res) => {
       console.log(res.data);
       // Success message
-      setIsDetail(false);
-      fetchBugs();
+      setIsOpen(false);
+      // fetchBugs();
       // resetForm();
     });
   }

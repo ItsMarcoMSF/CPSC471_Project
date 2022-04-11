@@ -4,7 +4,7 @@ import Axios from "axios";
 import DetailPopup from "../BugDetail/BugDetail";
 import "./BugBtn.css"
 
-const BugBtn = ({ project, bug, fetchBugs }) => {
+const BugBtn = ({ project, bug }) => {
   const [isDetail, setIsDetail] = useState(false);
   const toggleDetail = () => {
     setIsDetail(!isDetail);
@@ -66,7 +66,7 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
       console.log(res.data);
       // Success message
       setIsDetail(false);
-      fetchBugs();
+      // fetchBugs();
       // resetForm();
     });
   }

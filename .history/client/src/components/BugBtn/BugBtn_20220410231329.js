@@ -4,9 +4,10 @@ import Axios from "axios";
 import DetailPopup from "../BugDetail/BugDetail";
 import "./BugBtn.css"
 
-const BugBtn = ({ project, bug, fetchBugs }) => {
+const BugBtn = ({ project, bug }) => {
   const [isDetail, setIsDetail] = useState(false);
   const toggleDetail = () => {
+    setIsOpen(!isOpen);
     setIsDetail(!isDetail);
   };
 
@@ -16,6 +17,8 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [getBugs, setGetBugs] = useState([]);
+
+  const [isOpen, setIsOpen] = useState(false);
 
   const [markResolved, setMarkResolved] = useState({
     status: "Resolved",
@@ -46,12 +49,20 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   fetchBugs();
-  // }, []);
+  useEffect(() => {
+    fetchBugs();
+  }, []);
 
   function markAsResolved(e) {
     e.preventDefault();
+    const payload = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
+    };
     const config = {
       headers: {
         Accept: "application/json",
@@ -59,14 +70,14 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
         "x-access-token": localStorage.getItem("token"),
       },
     }
-    Axios.patch(`http://localhost:5000/bugs/${bug._id}`,
+    Axios.patch("http://localhost:5000/bugs/${bug._id}",
     {
       status: markResolved.status,
     }, config).then((res) => {
       console.log(res.data);
       // Success message
-      setIsDetail(false);
-      fetchBugs();
+      setIsOpen(false);
+      // fetchBugs();
       // resetForm();
     });
   }
