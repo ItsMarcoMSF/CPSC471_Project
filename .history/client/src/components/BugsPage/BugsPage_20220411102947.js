@@ -144,7 +144,12 @@ const BugsPage = ({ project, switchToProject }) => {
       //   fetch(`http://localhost:5000/user/friends`, payload,),
       //   fetch(`http://localhost:5000/user/self`, payload,),
       // ]);
+      const res2 = await fetch(
+        `http://localhost:5000/user/self`,
+        payload,
+      );
       const dev = await res.json();
+      dev = await res2.json();
       setIsLoaded(true);
       setGetDevs(dev);
       console.log(dev);
@@ -160,37 +165,6 @@ const BugsPage = ({ project, switchToProject }) => {
   useEffect(() => {
     fetchDev();
   }, []);
-
-  // const fetchAssign = async() =>{
-  //   const url1 = `http://localhost:5000/user/self`;
-  //   const url2 = `http://localhost:5000/user/friends`;
-  //   let myDevs = [];
-  //   const payload = {
-  //     method: "GET",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "x-access-token": localStorage.getItem("token"),
-  //     },
-  //   };
-  //   try {
-  //     myDevs.push(fetch(url1, payload));
-  //     myDevs.push(fetch(url2, payload));
-  //     const res = await Promise.all(myDevs);
-    
-  //     const dev = res.json();
-  //     setIsLoaded(true);
-  //     setGetDevs(dev);
-  //     console.log(dev);
-  //   }
-  //   catch(err) {
-  //     console.log(err);
-  //   };
-  // };
-
-  // useEffect(() => {
-  //   fetchAssign();
-  // }, []);
 
   function createSelectDevs() {
     let devs = [];         

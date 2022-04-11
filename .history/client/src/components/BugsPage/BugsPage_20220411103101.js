@@ -161,37 +161,6 @@ const BugsPage = ({ project, switchToProject }) => {
     fetchDev();
   }, []);
 
-  // const fetchAssign = async() =>{
-  //   const url1 = `http://localhost:5000/user/self`;
-  //   const url2 = `http://localhost:5000/user/friends`;
-  //   let myDevs = [];
-  //   const payload = {
-  //     method: "GET",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "x-access-token": localStorage.getItem("token"),
-  //     },
-  //   };
-  //   try {
-  //     myDevs.push(fetch(url1, payload));
-  //     myDevs.push(fetch(url2, payload));
-  //     const res = await Promise.all(myDevs);
-    
-  //     const dev = res.json();
-  //     setIsLoaded(true);
-  //     setGetDevs(dev);
-  //     console.log(dev);
-  //   }
-  //   catch(err) {
-  //     console.log(err);
-  //   };
-  // };
-
-  // useEffect(() => {
-  //   fetchAssign();
-  // }, []);
-
   function createSelectDevs() {
     let devs = [];         
     for (let i = 0; i < getDevs.length; i++) {             

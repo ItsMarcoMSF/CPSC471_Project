@@ -17,8 +17,6 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [getBugs, setGetBugs] = useState([]);
 
-  const [rd, setRd] = useState(false);
-
   const [markResolved, setMarkResolved] = useState({
     status: "Resolved",
   });
@@ -68,7 +66,6 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
       console.log(res.data);
       // Success message
       setIsDetail(false);
-      setRd(true);
       fetchBugs();
       // resetForm();
     });
@@ -91,16 +88,26 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
 
   return (
     <div>
+      {/* <input
+        className="viewDetail"
+        type="button"
+        value={bug.id + " - " + bug.name + " - " + bug.status}
+        onClick={toggleDetail}
+      /> */}
       <div
         className="viewDetail"
+        // type="button"
+        // value={bug.id + " - " + bug.name + " - " + bug.status}
         onClick={toggleDetail}>
           <table className="viewShort">
+            {/* <th className="bugID">{bug._id}</th> */}
             <th className="bugName">{bug.name}</th>
-            { bug.status == "Resolved" ? (
+            if ({bug.status} = "Resolved") {
               <th className="bugStatus rd">{bug.status}</th>
-            ) : (
+            } else {
               <th className="bugStatus urd">{bug.status}</th>
-            ) }
+            }
+            {/* <th className="bugStatus">{bug.status}</th> */}
           </table>
       </div>
 
@@ -109,17 +116,25 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
           content={
             <>
               <h2>Bug's detail</h2>
+              {/* <li key={bug._id}> */}
               <>
                 <div class="col-2 col-s-2">
+                  {/* <p>{"ID: " + bug._id}</p> */}
                   <p><b>Name: </b> {bug.name}</p>
                   { bug.deadline ? (
                     <p><b>Deadline: </b> {bug.deadline.substring(0, 10)}</p>
                   ) : (
                     <p><b>Deadline: </b> {date.substring(0, 10)}</p>
                   )}
+                  {/* <p className="detaildes detailsmall"><b>Description: </b> {bug.description}</p> */}
                 </div>
                 <div class="col-3 col-s-3">
                   <p><b>Priority: </b> {bug.priority}</p>
+                  {/* { bug.deadline ? (
+                    <p><b>Deadline: </b> {bug.deadline.substring(0, 10)}</p>
+                  ) : (
+                    <p><b>Deadline: </b> {date.substring(0, 10)}</p>
+                  )} */}
                   <p><b>Assign to: </b> {bug.devName}</p>
                   <p><b>Status: </b> {bug.status}</p>
                 </div>
