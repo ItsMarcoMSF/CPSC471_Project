@@ -281,7 +281,7 @@ nav ul {
 @media only screen and (min-width: 600px) {
   /* For tablets: */
   .col-s-1 {width: 37.5%; float: right; text-align: right; margin-right: 12.5%;}
-  .col-s-2 {width: 50%; float: left; text-align: left; margin-left: 12.5%; margin-right: 5%;}
+  .col-s-2 {width: 5525%; float: left; text-align: left; margin-left: 12.5%;}
   .col-s-3 {width: 20%; float: right; text-align: right; margin-right: 12.5%;}
   .col-s-4 {width: 33.33%;}
   .col-s-5 {width: 41.66%;}
@@ -305,7 +305,7 @@ nav ul {
 @media only screen and (min-width: 768px) {
   /* For desktop: */
   .col-1 {width: 37.5%; float: right; text-align: right; margin-right: 12.5%;}
-  .col-2 {width: 50%; float: left; text-align: left; margin-left: 12.5%; margin-right: 5%;}
+  .col-2 {width: 55%; float: left; text-align: left; margin-left: 12.5%;}
   .col-3 {width: 20%; float: right; text-align: left; margin-right: 12.5%;}
   .col-4 {width: 33.33%;}
   .col-5 {width: 41.66%;}

@@ -115,18 +115,18 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
               <>
                 <div class="col-2 col-s-2">
                   {/* <p>{"ID: " + bug._id}</p> */}
-                  <p><b>Name: </b> {bug.name}</p>
-                  <p className="detaildes detailsmall"><b>Description: </b> {bug.description}</p>
+                  <p>{"Name: " + bug.name}</p>
+                  <p className="detaildes">{"Description: " + bug.description}</p>
                 </div>
                 <div class="col-3 col-s-3">
-                  <p><b>Priority: </b> {bug.priority}</p>
+                  <p>{"Priority: " + bug.priority}</p>
                   { bug.deadline ? (
-                    <p><b>Deadline: </b> {bug.deadline.substring(0, 10)}</p>
+                    <p>{"Deadline: " + bug.deadline.substring(0, 10)}</p>
                   ) : (
-                    <p><b>Deadline: </b> {date.substring(0, 10)}</p>
+                    <p>{"Deadline: " + date.substring(0, 10)}</p>
                   )}
-                  <p><b>Assign to: </b> {bug.devName}</p>
-                  <p><b>Status: </b> {bug.status}</p>
+                  <p>{"Assigned to: " + bug.devName}</p>
+                  <p>{"Status: " + bug.status}</p>
                 </div>
                 <div className="detailfooter">
                   <input className="mark-resolved" type="button" value="Mark as resolved" onClick={(e) => markAsResolved(e)}></input>
