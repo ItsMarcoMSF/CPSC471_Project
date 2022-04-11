@@ -1,0 +1,103 @@
+/* Popup style */
+.popup-box {
+  position: fixed;
+  background: #00000050;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  /* opacity: 80%; */
+}
+
+@media only screen and (min-width: 768px) {
+  .popup-box {
+    position: fixed;
+    background: #00000050;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* opacity: 80%; */
+  }
+  .box {
+    position: relative;
+    width: 60%;
+    height: auto;
+    margin: auto auto;
+    top: 7vh;
+    height: auto;
+    max-height: 80vh;
+    background: rgb(222, 222, 222);
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid #999;
+    /* overflow: auto; */
+    text-align: center;
+  }
+   
+  .close-icon {
+    content: 'x';
+    cursor: pointer;
+    position: fixed;
+    right: calc(20% - 35px);
+    top: calc(7vh - 12.5px);
+    background: #ededed;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 20px;
+    text-align: center;
+    border: 1px solid #999;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 767px){
+  .popup-box {
+    position: fixed;
+    background: #00000050;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    /* opacity: 80%; */
+  }
+  .box {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    margin: auto auto;
+    top: 11%;
+    height: auto;
+    max-height: 80vh;
+    background: rgb(222, 222, 222);
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid #999;
+    overflow: auto;
+    text-align: center;
+  }
+   
+  .close-icon {
+    content: 'Close';
+    cursor: pointer;
+    position: absolute;
+    right: 0%;
+    top: 0%;
+    background: rgb(222, 222, 222);
+    width: 10% !important;
+    height: 25px;
+    border-radius: 8px;
+    line-height: 20px;
+    padding-top: 3px;
+    text-align: center;
+    /* border: 1px solid #999; */
+    font-size: 20px;
+  }
+}
