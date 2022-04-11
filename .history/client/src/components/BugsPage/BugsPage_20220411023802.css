@@ -294,7 +294,7 @@ nav ul {
   .col-s-11 {width: 91.66%;}
   .col-s-12 {width: 100%;}
   .col-s-0 {width: 37.5%; float: left; text-align: left; margin-left: 12.5%;}
-  .detailsmall {text-align: left; height: 100vh; overflow-y: scroll;}
+  .detailsmall {text-align: left; height: 75vh; overflow-y: scroll;}
   .input-label{
     text-align: left;
     margin-left: 17%;
@@ -302,7 +302,7 @@ nav ul {
   .detailfooter {
     width: 45%;
     text-align: center;
-    padding: 1px;
+    padding: 2px;
     position: fixed; 
     bottom: 30%;
     left: 50%;

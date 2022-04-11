@@ -125,6 +125,8 @@ const BugsPage = ({ project, switchToProject }) => {
     }
   };
 
+  const devURL = [`http://localhost:5000/user/friends`, `http://localhost:5000/user/self`]
+
   const fetchDev = async () => {
     const payload = {
         method: "GET",
@@ -136,14 +138,15 @@ const BugsPage = ({ project, switchToProject }) => {
     };
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/user/friends`,
-        payload,
-      );
-      // const data = await Promise.all([
-      //   fetch(`http://localhost:5000/user/friends`, payload,),
-      //   fetch(`http://localhost:5000/user/self`, payload,),
-      // ]);
+      // const res = await fetch(
+      //   `http://localhost:5000/user/friends`,
+      //   payload,
+      // );
+      // const devURL = [`http://localhost:5000/user/friends`, `http://localhost:5000/user/self`]
+      const res = await Promise.all([
+        fetch(`http://localhost:5000/user/friends`, payload,),
+        fetch(`http://localhost:5000/user/self`, payload,),
+      ]);
       const dev = await res.json();
       setIsLoaded(true);
       setGetDevs(dev);

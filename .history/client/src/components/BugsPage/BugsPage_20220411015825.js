@@ -144,7 +144,35 @@ const BugsPage = ({ project, switchToProject }) => {
       //   fetch(`http://localhost:5000/user/friends`, payload,),
       //   fetch(`http://localhost:5000/user/self`, payload,),
       // ]);
-      const dev = await res.json();
+      const dev = await data.json();
+      setIsLoaded(true);
+      setGetDevs(dev);
+      console.log(dev);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const fetchSelf = async () => {
+    const payload = {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "x-access-token": localStorage.getItem("token"),
+        },
+    };
+
+    try {
+      const res = await fetch(
+        `http://localhost:5000/user/friends`,
+        payload,
+      );
+      // const data = await Promise.all([
+      //   fetch(`http://localhost:5000/user/friends`, payload,),
+      //   fetch(`http://localhost:5000/user/self`, payload,),
+      // ]);
+      const dev = await data.json();
       setIsLoaded(true);
       setGetDevs(dev);
       console.log(dev);
@@ -159,6 +187,10 @@ const BugsPage = ({ project, switchToProject }) => {
 
   useEffect(() => {
     fetchDev();
+  }, []);
+
+  useEffect(() => {
+    fetchSelf();
   }, []);
 
   function createSelectDevs() {

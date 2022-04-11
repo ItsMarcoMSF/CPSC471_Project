@@ -136,14 +136,14 @@ const BugsPage = ({ project, switchToProject }) => {
     };
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/user/friends`,
-        payload,
-      );
-      // const data = await Promise.all([
-      //   fetch(`http://localhost:5000/user/friends`, payload,),
-      //   fetch(`http://localhost:5000/user/self`, payload,),
-      // ]);
+      // const res = await fetch(
+      //   `http://localhost:5000/user/friends`,
+      //   payload,
+      // );
+      const res = await Promise.all([
+        fetch(`http://localhost:5000/user/friends`, payload,).then((response) => response.json()),
+        fetch(`http://localhost:5000/user/self`, payload,).then((response) => response.json()),
+      ]);
       const dev = await res.json();
       setIsLoaded(true);
       setGetDevs(dev);
