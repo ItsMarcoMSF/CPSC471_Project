@@ -83,7 +83,7 @@ export const markResolved = async (request, response) => {
   try {
     const bug = await Bugs.findOneAndUpdate(
       { _id: bugID },
-      { $set: { status: "resolved" } }
+      { $set: { status: "Resolved" } }
     );
 
     response.status(200).json(bug);
