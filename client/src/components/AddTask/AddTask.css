@@ -26,7 +26,7 @@
   content: 'x';
   cursor: pointer;
   position: fixed;
-  right: calc(7% - 30px);
+  right: calc(15% - 34px);
   top: calc(100vh - 85vh - 33px);
   background-color: rgb(61, 61, 61);
   width: 25px;
@@ -61,5 +61,18 @@
 @media screen and (max-width: 800px) {
   .task-box{
     width: 85%;
+  }
+
+  .task-close-icon {
+    right: calc(7% - 30px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .task-close-icon {
+    background: none;
+    border: none;
+    right: calc(12% - 30px);
+    top:calc(100vh - 85vh - 10px)
   }
 }

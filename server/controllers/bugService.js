@@ -68,7 +68,7 @@ export const deleteBug = async (request, response) => {
   const bugID = request.params.bugID;
 
   try {
-    await Bugs.deleteOne(bugID);
+    await Bugs.deleteOne({ _id: bugID });
 
     response.status(200).json({ message: "Success" });
   } catch (err) {
