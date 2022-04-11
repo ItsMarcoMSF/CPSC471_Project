@@ -67,24 +67,29 @@ export const deleteBug = async (request, response) => {
   console.log(request.body);
   const bugID = request.params.bugID;
 
-  const bug = await Bugs.deleteOne(bugID);
+  try {
+    await Bugs.deleteOne(bugID);
 
-  response.status(200).json(bug);
+    response.status(200).json({ message: "Success" });
+  } catch (err) {
+    response.status(400).json({ error: err });
+  }
 };
 
 export const markResolved = async (request, response) => {
   console.log(request.body);
   const bugID = request.params.bugID;
 
-  const bug = await Bugs.findOneAndUpdate(
-    { _id: bugID },
-    { $set: { status: "resolved" } },
-    options,
-    callback
-  );
-  //await Bugs.save();
+  try {
+    const bug = await Bugs.findOneAndUpdate(
+      { _id: bugID },
+      { $set: { status: "resolved" } }
+    );
 
-  response.status(200).json(bug);
+    response.status(200).json(bug);
+  } catch (err) {
+    response.status(400).json({ error: err });
+  }
 };
 
 export const getBugs = async (req, res) => {
