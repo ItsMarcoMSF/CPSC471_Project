@@ -1,4 +1,4 @@
-.popup-box {
+.adddev-popup-box {
     position: fixed;
     background: #00000050;
     width: 100%;
@@ -7,7 +7,7 @@
     left: 0;
   }
    
-  .box {
+  .adddev-box {
     position: relative;
     width: 70%;
     margin: 0 auto;
@@ -22,7 +22,7 @@
     color: white;
   }
    
-  .close-icon {
+  .adddev-close-icon {
     content: 'x';
     cursor: pointer;
     position: fixed;
@@ -47,12 +47,31 @@
   .dev-labels{
     font-weight: bold;
     font-size: 25px;
-    color: black;
+    margin: 5px 0;
   }
   
   .dev-form-header{
     font-weight: bold;
     font-size: 35px;
-    color: black;
+  }
+
+  .dev-form select {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    border: rgba(112, 112, 112, 0.25);
+    box-sizing: border-box;
+    color: rgb(37, 37, 37);
+    margin-bottom: 10px;
+    border-radius: 2px;
   }
   
+  @media screen and (max-width: 800px) {
+    .adddev-box{
+      width: 85%;
+    }
+  
+    .adddev-close-icon {
+      right: calc(7% - 30px);
+    }
+  }
