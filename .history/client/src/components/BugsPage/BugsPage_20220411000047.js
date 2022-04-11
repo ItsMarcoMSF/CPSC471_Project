@@ -37,17 +37,10 @@ const BugsPage = ({ project, switchToProject }) => {
     priority: "Medium",
     deadline: someDate,
     devID: "",
+    status: "Unresolved",
   });
   const resetForm = () => {
-    setSendBug(
-      {
-        name: "",
-        description: "",
-        priority: "Medium",
-        deadline: someDate,
-        devID: "",
-      }
-    );
+    setSendBug("");
   };
 
   function handle(e) {
@@ -79,7 +72,7 @@ const BugsPage = ({ project, switchToProject }) => {
       description: sendBug.description,
       priority: sendBug.priority,
       deadline: sendBug.deadline,
-      status: "Unresolved",
+      status: sendBug.status,
       prjID: project._id,
       devID: sendBug.devID,
     }, config).then((res) => {
@@ -160,7 +153,7 @@ const BugsPage = ({ project, switchToProject }) => {
   function createSelectDevs() {
     let devs = [];         
     for (let i = 0; i < getDevs.length; i++) {             
-         devs.push(<option key={i} value={getDevs[i]._id}>{getDevs[i].username}</option>);   
+         devs.push(<option key={i}>{getDevs[i].username}</option>);   
          //here I will be creating my options dynamically based on
          //what props are currently passed to the parent component
     }
@@ -230,8 +223,7 @@ const BugsPage = ({ project, switchToProject }) => {
                           <option value="Low">Low</option>
                         </select>                    
                         <h3 className="input-label">Assign to</h3>
-                        <select className="enter-selection" id="devID" onChange={(e) => handle(e)} label="Multiple Select" required>
-                          <option disabled selected value="">{" "} -- select a developer -- {" "}</option>
+                        <select className="enter-selection" id="devID" value={sendBug.devID} onChange={(e) => {e.preventDefault; handle(e)}} label="Multiple Select" multiple required>
                           {createSelectDevs()}
                         </select>
                       </div>
@@ -300,8 +292,7 @@ const BugsPage = ({ project, switchToProject }) => {
                           <option value="Low">Low</option>
                         </select>                    
                         <h3 className="input-label">Assign to</h3>
-                        <select className="enter-selection" id="devID" onChange={(e) => handle(e)} label="Multiple Select" required>
-                          <option disabled selected value="">{" "} -- select a developer -- {" "}</option>
+                        <select className="enter-selection" id="devID" value={sendBug.devID} onChange={(e) => handle(e)} label="Multiple Select" multiple required>
                           {createSelectDevs()}
                         </select>
                       </div>

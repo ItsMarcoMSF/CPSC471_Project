@@ -37,17 +37,10 @@ const BugsPage = ({ project, switchToProject }) => {
     priority: "Medium",
     deadline: someDate,
     devID: "",
+    status: "Unresolved",
   });
   const resetForm = () => {
-    setSendBug(
-      {
-        name: "",
-        description: "",
-        priority: "Medium",
-        deadline: someDate,
-        devID: "",
-      }
-    );
+    setSendBug("");
   };
 
   function handle(e) {
@@ -300,8 +293,7 @@ const BugsPage = ({ project, switchToProject }) => {
                           <option value="Low">Low</option>
                         </select>                    
                         <h3 className="input-label">Assign to</h3>
-                        <select className="enter-selection" id="devID" onChange={(e) => handle(e)} label="Multiple Select" required>
-                          <option disabled selected value="">{" "} -- select a developer -- {" "}</option>
+                        <select className="enter-selection" id="devID" value={sendBug.devID} onChange={(e) => handle(e)} label="Multiple Select" multiple required>
                           {createSelectDevs()}
                         </select>
                       </div>

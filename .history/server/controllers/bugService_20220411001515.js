@@ -108,7 +108,7 @@ export const getBugs = async (req, res) => {
       bugs = await Bugs.find({
         $or: [{ prjID: prjID }],
       }).sort({
-        status: -1,
+        status: 1,
       });
     }
 

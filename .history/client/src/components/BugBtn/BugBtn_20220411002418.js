@@ -80,9 +80,15 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
         "x-access-token": localStorage.getItem("token"),
       },
     }
-    Axios.delete(`http://localhost:5000/bugs/${bug._id}`, config).then(() => {
+    Axios.delete(`http://localhost:5000/bugs/${bug._id}`,
+    {
+      status: markResolved.status,
+    }, config).then((res) => {
+      console.log(res.data);
+      // Success message
       setIsDetail(false);
       fetchBugs();
+      // resetForm();
     });
   }
 

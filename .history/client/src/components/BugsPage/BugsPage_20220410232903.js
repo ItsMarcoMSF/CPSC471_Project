@@ -37,17 +37,10 @@ const BugsPage = ({ project, switchToProject }) => {
     priority: "Medium",
     deadline: someDate,
     devID: "",
+    status: "Unresolved",
   });
   const resetForm = () => {
-    setSendBug(
-      {
-        name: "",
-        description: "",
-        priority: "Medium",
-        deadline: someDate,
-        devID: "",
-      }
-    );
+    setSendBug("");
   };
 
   function handle(e) {
@@ -79,7 +72,7 @@ const BugsPage = ({ project, switchToProject }) => {
       description: sendBug.description,
       priority: sendBug.priority,
       deadline: sendBug.deadline,
-      status: "Unresolved",
+      status: sendBug.status,
       prjID: project._id,
       devID: sendBug.devID,
     }, config).then((res) => {
@@ -226,12 +219,11 @@ const BugsPage = ({ project, switchToProject }) => {
                         <h3 className="input-label">Bug priority</h3>
                         <select className="dropdown enter-selection" id="priority" onChange={(e) => handle(e)}>
                           <option value="High">High</option>
-                          <option value="Medium" selected>Medium</option>
+                          <option value="Medium">Medium</option>
                           <option value="Low">Low</option>
                         </select>                    
                         <h3 className="input-label">Assign to</h3>
-                        <select className="enter-selection" id="devID" onChange={(e) => handle(e)} label="Multiple Select" required>
-                          <option disabled selected value="">{" "} -- select a developer -- {" "}</option>
+                        <select className="enter-selection" id="devID" value={sendBug.devID} onChange={(e) => handle(e)} label="Multiple Select" multiple>
                           {createSelectDevs()}
                         </select>
                       </div>
@@ -296,12 +288,11 @@ const BugsPage = ({ project, switchToProject }) => {
                         <h3 className="input-label">Bug priority</h3>
                         <select className="dropdown enter-selection" id="priority" onChange={(e) => handle(e)}>
                           <option value="High">High</option>
-                          <option value="Medium" selected>Medium</option>
+                          <option value="Medium">Medium</option>
                           <option value="Low">Low</option>
                         </select>                    
                         <h3 className="input-label">Assign to</h3>
-                        <select className="enter-selection" id="devID" onChange={(e) => handle(e)} label="Multiple Select" required>
-                          <option disabled selected value="">{" "} -- select a developer -- {" "}</option>
+                        <select className="enter-selection" id="devID" value={sendBug.devID} onChange={(e) => handle(e)} label="Multiple Select" multiple>
                           {createSelectDevs()}
                         </select>
                       </div>

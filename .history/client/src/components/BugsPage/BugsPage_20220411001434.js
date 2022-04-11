@@ -39,15 +39,7 @@ const BugsPage = ({ project, switchToProject }) => {
     devID: "",
   });
   const resetForm = () => {
-    setSendBug(
-      {
-        name: "",
-        description: "",
-        priority: "Medium",
-        deadline: someDate,
-        devID: "",
-      }
-    );
+    setSendBug("");
   };
 
   function handle(e) {

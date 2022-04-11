@@ -102,13 +102,13 @@ export const getBugs = async (req, res) => {
       bugs = await Bugs.find({
         $and: [{ prjID: prjID }, { devID: userID }],
       }).sort({
-        status: -1,
+        status: 1,
       });
     } else {
       bugs = await Bugs.find({
         $or: [{ prjID: prjID }],
       }).sort({
-        status: -1,
+        status: 1,
       });
     }
 
