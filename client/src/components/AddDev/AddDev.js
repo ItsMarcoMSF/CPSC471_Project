@@ -62,8 +62,9 @@ const AddDev = (props) => {
                 e.preventDefault();
                 setAddOption(e.target.value);
               }}
+              required
             >
-              <option disabled selected value>
+              <option disabled selected value="">
                 {" "}
                 -- select an option --{" "}
               </option>
@@ -79,8 +80,9 @@ const AddDev = (props) => {
                 e.preventDefault();
                 setDevToAdd(e.target.value);
               }}
+              required
             >
-              <option disabled selected value>
+              <option disabled selected value="">
                 {" "}
                 -- select an option --{" "}
               </option>

@@ -66,3 +66,12 @@
     border-radius: 2px;
   }
   
+  @media screen and (max-width: 800px) {
+    .adddev-box{
+      width: 85%;
+    }
+  
+    .adddev-close-icon {
+      right: calc(7% - 30px);
+    }
+  }

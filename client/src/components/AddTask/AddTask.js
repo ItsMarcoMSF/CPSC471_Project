@@ -59,6 +59,7 @@ const AddTask = (props) => {
             placeholder="Task Name..."
             value={taskName}
             onChange={(e) => setTaskName(e.target.value)}
+            required
           />
           <br></br>
           <label className="task-labels" htmlFor="deadline">
