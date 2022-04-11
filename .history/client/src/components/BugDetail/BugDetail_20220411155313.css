@@ -86,9 +86,9 @@
       height: 25px;
       border-radius: 8px;
       line-height: 20px;
-      padding-top: 5px;
+      padding-top: 4px;
       text-align: center;
-      border: 0px solid #999;
+      border: 1px solid #999;
       font-size: 20px;
     }
   }

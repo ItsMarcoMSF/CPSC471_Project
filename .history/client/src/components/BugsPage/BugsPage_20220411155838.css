@@ -524,20 +524,20 @@ nav ul {
     text-align: left;
     margin-left: 17%;
   }
-  .detaildes {text-align: left; height: 45vh; overflow: auto; overflow-y: auto; width: 72.3%; margin-left: 13.85%;}
+  .detaildes {text-align: left; height: 40vh; overflow: auto; overflow-y: auto;}
   .detailfooter {
     width: 55%;
     height: 39%;
     text-align: center;
     padding: 5px;
     position: fixed; 
-    bottom: 38%;
+    bottom: 40%;
     left: 50%;
     transform: translate(-50%, 25%);
     /* width: 90%; */
   }
   .mark-resolved{
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 10%;
     margin-right: 10%;
     background-color: #2c2c2c;
@@ -554,7 +554,7 @@ nav ul {
     border-radius: 8px;
   }
   .delete-bug{
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 10%;
     margin-right: 10%;
     background-color: #2c2c2c;

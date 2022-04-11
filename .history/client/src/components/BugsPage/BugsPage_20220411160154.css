@@ -531,13 +531,13 @@ nav ul {
     text-align: center;
     padding: 5px;
     position: fixed; 
-    bottom: 38%;
+    bottom: 39%;
     left: 50%;
     transform: translate(-50%, 25%);
     /* width: 90%; */
   }
   .mark-resolved{
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 10%;
     margin-right: 10%;
     background-color: #2c2c2c;
@@ -554,7 +554,7 @@ nav ul {
     border-radius: 8px;
   }
   .delete-bug{
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 10%;
     margin-right: 10%;
     background-color: #2c2c2c;

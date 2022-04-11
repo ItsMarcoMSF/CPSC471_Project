@@ -87,17 +87,17 @@
   .close-icon {
     content: 'Close';
     cursor: pointer;
-    position: absolute;
-    right: 0%;
-    top: 0%;
-    background: rgb(222, 222, 222);
-    width: 10% !important;
-    height: 25px;
+    /* position: fixed; */
+    right: 10%;
+    bottom: 10%;
+    background: #ededed;
+    width: 100px;
+    height: 32px;
     border-radius: 8px;
     line-height: 20px;
-    padding-top: 5px;
+    padding-top: 8px;
     text-align: center;
-    border: 0px solid #999;
+    border: 1px solid #999;
     font-size: 20px;
   }
 }
