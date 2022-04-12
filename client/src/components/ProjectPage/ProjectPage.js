@@ -153,13 +153,19 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           <div className="project-page">
             <h2 className="project-name">{project.name}</h2>
             <div id="rectangle-small-left">
-              <h2>Project Progress: {projectDetails.projectProgress}</h2>
+              <h3>Project Progress: {projectDetails.projectProgress}%</h3>
             </div>
             <div id="rectangle-small-right">
-              <h2>Personal Progress: {projectDetails.projectProgress}</h2>
+              <h3>Personal Progress: {projectDetails.projectProgress}%</h3>
             </div>
             <div id="rectangle-large-top">
-              <h2>Upcoming Task</h2>
+              <div className="task-header">
+                <h3>Upcoming Tasks</h3>
+                <button className="add-task-btn" onClick={toggleTaskPopup}>
+                  Add Task
+                </button>
+              </div>
+              <hr />
               <div className="task-wrapper">
                 <p id="upcomingTask">
                   {projectDetails.tasks.length > 0
@@ -169,61 +175,66 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               </div>
             </div>
             <div id="rectangle-large-bottom">
-              <h2>Project Resources</h2>
-              <div id="managers">
-                <h3>Managers</h3>
-                <div className="devs-wrapper">
-                  {projectDetails &&
-                    projectDetails.managers.map((manager) => (
-                      <p>
-                        {projectDetails.managers.length > 0 && manager.username}
-                      </p>
-                    ))}
-                </div>
+              <div className="resources-header">
+                <h3>Project Resources</h3>
+                <button className="add-member-btn" onClick={togglePopup}>
+                  Add Member
+                </button>
               </div>
-              <div id="developers">
-                <h3>Developers</h3>
-                <div className="devs-wrapper">
-                  {projectDetails &&
-                    projectDetails.developers.map((developer) => (
-                      <p>
-                        {projectDetails.developers.length > 0 &&
-                          developer.username}
-                      </p>
-                    ))}
+              <hr />
+              <div className="resources">
+                <div id="managers">
+                  <h4>Managers</h4>
+                  <div className="managers-wrapper">
+                    {projectDetails &&
+                      projectDetails.managers.map((manager) => (
+                        <p>
+                          {projectDetails.managers.length > 0 &&
+                            manager.username}
+                        </p>
+                      ))}
+                  </div>
+                </div>
+                <div id="developers">
+                  <h4>Developers</h4>
+                  <div className="devs-wrapper">
+                    {projectDetails &&
+                      projectDetails.developers.map((developer) => (
+                        <p>
+                          {projectDetails.developers.length > 0 &&
+                            developer.username}
+                        </p>
+                      ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <button className="bug-report-btn" onClick={switchToBugs}>
-            Bug Report
-          </button>
-          <button className="bug-report-btn" onClick={togglePopup}>
-            Add Developer
-          </button>
+          <div className="project-page-footer">
+            <button className="bug-report-btn" onClick={switchToBugs}>
+              Bug Report
+            </button>
+            <button className="delete-project-btn" onClick={deleteProject}>
+              Delete Project
+            </button>
+          </div>
           {isOpenDev && (
             <AddDev
-            options={devOptions}
+              options={devOptions}
               id={project._id}
               details={fetchProjectDetails}
               handleClose={togglePopup}
               friends={getFriends}
             />
           )}
-          <button className="bug-report-btn" onClick={toggleTaskPopup}>
-            Add Task
-          </button>
 
           {isOpenTask && (
-            <AddTask 
+            <AddTask
               id={project._id}
               handleClose={toggleTaskPopup}
               details={fetchProjectDetails}
             />
           )}
-          <button className="bug-report-btn" onClick={deleteProject}>
-            Delete This Project
-          </button>
         </div>
       ) : (
         <h2 className="">Choose a project to begin</h2>

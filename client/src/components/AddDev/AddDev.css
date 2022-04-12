@@ -1,4 +1,4 @@
-.popup-box {
+.adddev-popup-box {
     position: fixed;
     background: #00000050;
     width: 100%;
@@ -7,52 +7,80 @@
     left: 0;
   }
    
-  .box {
-    position: relative;
-    width: 70%;
-    margin: 0 auto;
-    height: auto;
-    max-height: 70vh;
-    margin-top: calc(100vh - 85vh - 20px);
-    background-color: rgb(61, 61, 61);
-    border-radius: 4px;
-    padding: 20px;
-    border: 1px solid #999;
-    overflow: auto;
-    color: white;
-  }
-   
-  .close-icon {
-    content: 'x';
-    cursor: pointer;
-    position: fixed;
-    right: calc(15% - 30px);
-    top: calc(100vh - 85vh - 33px);
-    background-color: rgb(61, 61, 61);
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    line-height: 20px;
-    text-align: center;
-    border: 1px solid #999;
-    font-size: 20px;
+.adddev-box {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 85vh - 20px);
+  background-color: rgb(61, 61, 61);
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
+  color: white;
+}
+ 
+.adddev-close-icon {
+  content: 'x';
+  cursor: pointer;
+  position: fixed;
+  right: calc(15% - 30px);
+  top: calc(100vh - 85vh - 33px);
+  background-color: rgb(61, 61, 61);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #999;
+  font-size: 20px;
+}
+
+.dev-dropdown{
+  border-radius: 10px;
+  background-color: white;
+  border-color: #2e2e2e;
+}
+
+.dev-labels{
+  font-weight: bold;
+  font-size: 25px;
+  margin: 5px 0;
+}
+
+.dev-form-header{
+  font-weight: bold;
+  font-size: 35px;
+}
+
+.dev-form select {
+  width: 100%;
+  padding: 15px;
+  margin-top: 10px;
+  border: rgba(112, 112, 112, 0.25);
+  box-sizing: border-box;
+  color: rgb(37, 37, 37);
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+  
+@media screen and (max-width: 800px) {
+  .adddev-box{
+    width: 85%;
   }
 
-  .dev-dropdown{
-    border-radius: 10px;
-    background-color: white;
-    border-color: #2e2e2e;
+  .adddev-close-icon {
+    right: calc(7% - 30px);
   }
-  
-  .dev-labels{
-    font-weight: bold;
-    font-size: 25px;
-    color: black;
+}
+
+@media screen and (max-width: 600px) {
+  .adddev-close-icon {
+    background: none;
+    border: none;
+    right: calc(12% - 30px);
+    top:calc(100vh - 85vh - 10px)
   }
-  
-  .dev-form-header{
-    font-weight: bold;
-    font-size: 35px;
-    color: black;
-  }
-  
+}

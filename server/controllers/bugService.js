@@ -6,11 +6,18 @@ import mongooseArchive from "mongoose-archive";
 // Bugs.plugin(mongooseArchive);
 
 export const createBugs = async (request, response) => {
-  // console.log(request.body);
+  const selfID = request.user.id;
   const { name, description, priority, status, deadline, prjID, devID } =
     request.body;
 
-  const dev = await User.findById(devID);
+  var assignID;
+  if (devID === "$self") {
+    assignID = selfID;
+  } else {
+    assignID = devID;
+  }
+
+  const dev = await User.findById(assignID);
   const devName = dev.username;
   const newBug = new Bugs({
     name,
@@ -19,7 +26,7 @@ export const createBugs = async (request, response) => {
     status,
     deadline,
     prjID,
-    devID,
+    devID: assignID,
     devName: devName,
   });
 
@@ -67,24 +74,29 @@ export const deleteBug = async (request, response) => {
   console.log(request.body);
   const bugID = request.params.bugID;
 
-  const bug = await Bugs.deleteOne(bugID);
+  try {
+    await Bugs.deleteOne({ _id: bugID });
 
-  response.status(200).json(bug);
+    response.status(200).json({ message: "Success" });
+  } catch (err) {
+    response.status(400).json({ error: err });
+  }
 };
 
 export const markResolved = async (request, response) => {
   console.log(request.body);
   const bugID = request.params.bugID;
 
-  const bug = await Bugs.findOneAndUpdate(
-    { _id: bugID },
-    { $set: { status: "resolved" } },
-    options,
-    callback
-  );
-  //await Bugs.save();
+  try {
+    const bug = await Bugs.findOneAndUpdate(
+      { _id: bugID },
+      { $set: { status: "Resolved" } }
+    );
 
-  response.status(200).json(bug);
+    response.status(200).json(bug);
+  } catch (err) {
+    response.status(400).json({ error: err });
+  }
 };
 
 export const getBugs = async (req, res) => {
