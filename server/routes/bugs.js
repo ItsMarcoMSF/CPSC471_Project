@@ -24,6 +24,7 @@ import {
   getProjects,
   deleteProject,
   addTask,
+  deleteTask,
   addDeveloperToProject,
   addManagerToProject,
   getProjectDetail,
@@ -93,6 +94,7 @@ router.get("/projects", verifyJWTRequired, getProjects);
 router.post("/projects", verifyJWTRequired, createProjects);
 router.delete("/projects/:projectID", verifyJWTRequired, deleteProject);
 router.post("/projects/:projectID/tasks", verifyJWTRequired, addTask);
+router.delete("/tasks/:taskID", verifyJWTRequired, deleteTask);
 router.patch(
   "/projects/:projectID/developers",
   verifyJWTRequired,

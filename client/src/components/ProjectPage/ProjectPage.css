@@ -133,9 +133,19 @@
 }
 
 
+.task-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
 
 #upcomingTask{
-  text-align: center;
+  margin-left: 35px;
+}
+
+.task-deadline {
+  margin: auto;
+  margin-right: 25px;
 }
 
 .resources {
@@ -252,6 +262,27 @@
   cursor: pointer;
 }
 
+.task-del-btn button {
+  outline: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+  color: rgb(107, 107, 107);
+  font-weight: bold;
+}
+
+.task-del-btn button:hover {
+  color: #dd3737;
+}
+
+.loading-progress {
+  margin: auto;
+  align-self: center;
+  align-items: center;
+  width: 100%;
+}
 
 @media screen and (max-width: 900px) {
   #rectangle-small-right h2,
