@@ -1,4 +1,5 @@
 import Projects from "../models/projects.js";
+import Bugs from "../models/bugs.js";
 import Tasks from "../models/task.js";
 import User from "../models/user.js";
 
@@ -59,28 +60,29 @@ export const getProjectDetail = async (req, res) => {
       deadline: 1,
     });
 
-    const calcProjectProgress = () => {
-      let total = 0;
-      let resolved = 0;
-      let today = new Date();
-      if (tasks.length > 0) {
-        for (let i = 0; i < tasks.length; i++) {
-          if (tasks[i].deadline < today) {
-            resolved++;
-          }
-          total++;
-        }
-      }
+    let total = await Bugs.countDocuments({ prjID: projectID });
+    let resolved = await Bugs.countDocuments({
+      $and: [{ prjID: projectID }, { status: "Resolved" }],
+    });
 
-      if (total === 0) {
-        total = 1;
-      }
+    if (total === 0) {
+      total = 1;
+    }
 
-      let percentage = Math.round((resolved / total) * 100);
-      return percentage;
-    };
+    let percentage = Math.round((resolved / total) * 100);
 
-    var projectProgress = calcProjectProgress();
+    let totalBugs = await Bugs.countDocuments({
+      $and: [{ devID: userID }, { prjID: projectID }],
+    });
+    let resolvedBugs = await Bugs.countDocuments({
+      $and: [{ devID: userID }, { prjID: projectID }, { status: "Resolved" }],
+    });
+
+    if (totalBugs === 0) {
+      totalBugs = 1;
+    }
+
+    let percentageUser = Math.round((resolvedBugs / totalBugs) * 100);
 
     const projectDetail = {
       _id: project._id,
@@ -90,7 +92,9 @@ export const getProjectDetail = async (req, res) => {
       managers: managers,
       developers: devs,
       tasks: tasks,
-      projectProgress: projectProgress,
+      projectProgress: percentage,
+      userProgress: percentageUser,
+      isManager: project.managers.includes(userID),
       createdAt: project.createdAt,
       updatedAt: project.updatedAt,
     };
@@ -98,14 +102,6 @@ export const getProjectDetail = async (req, res) => {
     res.status(200).json(projectDetail);
   } catch (error) {
     res.status(404).json({ message: "No projects found or Invalid Access" });
-  }
-};
-
-export const editProjects = async (req, res) => {
-  try {
-    const project = req.body.project;
-  } catch (error) {
-    res.status(400).json({ message: "error editing the project" });
   }
 };
 
@@ -135,6 +131,18 @@ export const addTask = async (req, res) => {
     res.status(201).json({ message: "Success" });
   } catch (error) {
     res.status(404).json({ message: "Project Not Found" });
+  }
+};
+
+export const deleteTask = async (req, res) => {
+  const taskID = req.params.taskID;
+
+  try {
+    await Tasks.deleteOne({ _id: taskID });
+
+    res.status(201).json({ message: "Success" });
+  } catch (error) {
+    res.status(404).json({ message: "Could not delete" });
   }
 };
 

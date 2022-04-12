@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { CircularProgress, Stack } from "@mui/material";
 
 import AddDev from "../AddDev/AddDev";
 
@@ -7,20 +7,12 @@ import AddTask from "../AddTask/AddTask";
 
 import "./ProjectPage.css";
 
-const ProjectPage = ({ project, switchToBugs, Popup }) => {
-  const navigate = useNavigate();
+const ProjectPage = ({ project, switchToBugs }) => {
   const isValidProject = !(Object.keys(project).length === 0);
 
   const [projectDetails, setProjectDetails] = useState({});
   const [getFriends, setGetFriends] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const [addOption, setAddOption] = useState("");
-  const [devToAdd, setDevToAdd] = useState("");
-
-  const [taskName, setTaskName] = useState("");
-  const [taskDeadline, setTaskDeadline] = useState(new Date());
-  const [taskStatus, setTaskStatus] = useState("");
 
   const [isOpenDev, setIsOpenDev] = useState(false);
   const togglePopup = () => {
@@ -94,30 +86,20 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
     }
   };
 
-  const handleAddDevSubmit = async (e) => {
-    e.preventDefault();
-    const projID = project._id;
+  const deleteTask = async (taskID) => {
     const payload = {
-      method: "PATCH",
+      method: "DELETE",
       headers: {
-        Accept: "application/json",
-        "content-type": "application/json",
         "x-access-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({
-        devID: devToAdd,
-      }),
     };
 
     try {
-      await fetch(
-        `http://localhost:5000/projects/${projID}/${addOption}`,
-        payload
-      );
+      await fetch(`http://localhost:5000/tasks/${taskID}`, payload);
+
       fetchProjectDetails();
-      togglePopup();
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
 
@@ -131,12 +113,6 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
       );
     }
     return options;
-  };
-
-  const resetForm = () => {
-    setTaskName("");
-    setTaskDeadline("");
-    setTaskStatus("");
   };
 
   useEffect(() => {
@@ -156,7 +132,7 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
               <h3>Project Progress: {projectDetails.projectProgress}%</h3>
             </div>
             <div id="rectangle-small-right">
-              <h3>Personal Progress: {projectDetails.projectProgress}%</h3>
+              <h3>Personal Progress: {projectDetails.userProgress}%</h3>
             </div>
             <div id="rectangle-large-top">
               <div className="task-header">
@@ -172,6 +148,21 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
                     ? projectDetails.tasks[0].name
                     : "No upcoming Task"}
                 </p>
+                {projectDetails.tasks.length > 0 ? (
+                  <p className="task-deadline">
+                    {projectDetails.tasks[0].deadline.substring(0, 10)}
+                    <span className="task-del-btn">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          deleteTask(projectDetails.tasks[0]._id);
+                        }}
+                      >
+                        x
+                      </button>
+                    </span>
+                  </p>
+                ) : null}
               </div>
             </div>
             <div id="rectangle-large-bottom">
@@ -214,9 +205,12 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
             <button className="bug-report-btn" onClick={switchToBugs}>
               Bug Report
             </button>
-            <button className="delete-project-btn" onClick={deleteProject}>
-              Delete Project
-            </button>
+
+            {projectDetails.isManager && (
+              <button className="delete-project-btn" onClick={deleteProject}>
+                Delete Project
+              </button>
+            )}
           </div>
           {isOpenDev && (
             <AddDev
@@ -237,7 +231,9 @@ const ProjectPage = ({ project, switchToBugs, Popup }) => {
           )}
         </div>
       ) : (
-        <h2 className="">Choose a project to begin</h2>
+        <Stack alignItems="center" marginTop={20}>
+          <CircularProgress />
+        </Stack>
       )}
     </div>
   );
