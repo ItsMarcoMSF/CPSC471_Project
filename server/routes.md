@@ -21,16 +21,16 @@ Return:
 
 - Array of Projects in the form of:
 
-        {
-            name: String,
-            deadline: Date,
-            category: [String],
-            bugs: [ObjectID],
-            managers: [ObjectID],
-            developers: [ObjectID],
-            tasks: [ObjectID],
-            _id: String (Project ID),
-        }
+      {
+        name: String,
+        deadline: Date,
+        category: [String],
+        bugs: [ObjectID],
+        managers: [ObjectID],
+        developers: [ObjectID],
+        tasks: [ObjectID],
+        _id: String (Project ID),
+      }
 
 ## POST http://localhost:5000/projects
 
@@ -47,11 +47,11 @@ Accept:
 
   - Project JSON object in the form of:
 
-          {
-              name: String,
-              deadline: Date,
-              category: String,
-          }
+        {
+          name: String,
+          deadline: Date,
+          category: String,
+        }
 
 ## DELETE http://localhost:5000/projects/:projectID
 
@@ -86,6 +86,17 @@ Accept:
               deadline: Date,
               status: String,
           }
+
+## DELETE http://localhost:5000/tasks/:taskID
+
+Delete a Task
+
+Require:
+
+- headers:
+  - x-access-token: user jwt token
+- params:
+  - taskID: id of task to delete
 
 ## PATCH http://localhost:5000/projects/:projectID/devs
 
@@ -153,6 +164,7 @@ A JSON object containing the details of a project in the form of:
       developers: [Object] (array of object),
       tasks: [Object] (array of object),
       projectProgress, Number,
+      isManager: Boolean,
     }
 
 # User Routes

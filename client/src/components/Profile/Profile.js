@@ -112,10 +112,10 @@ const Profile = () => {
         <p>
           Email: <span>{userProfile.email}</span>
         </p>
-        <p>
+        {/* <p>
           Password:
           <button>Change Password</button>
-        </p>
+        </p> */}
 
         <div>
           <p>

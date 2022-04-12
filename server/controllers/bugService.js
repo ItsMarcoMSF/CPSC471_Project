@@ -71,7 +71,6 @@ export const archiveBug = async (request, response) => {
 };
 
 export const deleteBug = async (request, response) => {
-  console.log(request.body);
   const bugID = request.params.bugID;
 
   try {
@@ -84,7 +83,6 @@ export const deleteBug = async (request, response) => {
 };
 
 export const markResolved = async (request, response) => {
-  console.log(request.body);
   const bugID = request.params.bugID;
 
   try {
