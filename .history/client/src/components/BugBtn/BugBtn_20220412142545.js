@@ -4,8 +4,6 @@ import Axios from "axios";
 import DetailPopup from "../BugDetail/BugDetail";
 import "./BugBtn.css"
 
-
-// Toggle bug's detail pop up when clicked
 const BugBtn = ({ project, bug, fetchBugs }) => {
   const [isDetail, setIsDetail] = useState(false);
   const toggleDetail = () => {
@@ -40,6 +38,7 @@ const BugBtn = ({ project, bug, fetchBugs }) => {
       setIsDetail(false);
       setRd(true);
       fetchBugs();
+      // resetForm();
     });
   }
 

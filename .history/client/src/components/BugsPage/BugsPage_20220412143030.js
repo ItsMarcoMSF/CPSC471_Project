@@ -19,7 +19,13 @@ const BugsPage = ({ project, switchToProject }) => {
 
   var someDate = new Date();
   someDate.setDate(someDate.getDate() + 3);
-  var date = someDate.toISOString().substring(0, 10);  // default deadline for new bug in case dev doesn't assign deadline (by default: 3 days from today)
+  var date = someDate.toISOString().substring(0, 10);
+
+  const mockup = {
+    developer1: "Marco Truong",
+    developer2: "Kaitlin Culligan",
+    developer3: "Alvin Nguyen",
+  };
 
   const [sendBug, setSendBug] = useState({
     name: "",
@@ -157,6 +163,10 @@ const BugsPage = ({ project, switchToProject }) => {
     return devs;
 };
 
+  function onDropdownSelected(e) {
+    console.log("THE VAL", e.target.value);
+    //here you will see the current selected value of the select input
+  };
 
   return (
     <div className="bugs-wrapper">
@@ -237,7 +247,9 @@ const BugsPage = ({ project, switchToProject }) => {
                           value="Unresolved"
                           id="status"
                         >Bug status: Unresolved</h3>
-                      </div>                      <br/>
+                      </div>
+                      {/* <p/> */}
+                      <br/>
                       <input className="rpt" type="submit" value="Report" />
                     </div>
                   </form>
@@ -309,6 +321,7 @@ const BugsPage = ({ project, switchToProject }) => {
                           id="status"
                         >Bug status: Unresolved</h3>
                       </div>
+                      {/* <p/> */}
                       <br/>
                       <input className="rpt" type="submit" value="Report" />
                     </div>

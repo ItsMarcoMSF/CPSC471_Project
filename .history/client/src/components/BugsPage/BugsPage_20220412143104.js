@@ -19,7 +19,13 @@ const BugsPage = ({ project, switchToProject }) => {
 
   var someDate = new Date();
   someDate.setDate(someDate.getDate() + 3);
-  var date = someDate.toISOString().substring(0, 10);  // default deadline for new bug in case dev doesn't assign deadline (by default: 3 days from today)
+  var date = someDate.toISOString().substring(0, 10);
+
+  const mockup = {
+    developer1: "Marco Truong",
+    developer2: "Kaitlin Culligan",
+    developer3: "Alvin Nguyen",
+  };
 
   const [sendBug, setSendBug] = useState({
     name: "",
