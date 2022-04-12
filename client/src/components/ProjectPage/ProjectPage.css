@@ -186,19 +186,6 @@
   margin: 8px 0;
 }
 
-
-/* .task-form-header{
-  font-weight: bold;
-  font-size: 35px;
-  color: black;
-}
-
-.task-labels{
-  font-weight: bold;
-  font-size: 25px;
-  color: black;
-} */
-
 .resources-header,
 .task-header {
   display: flex;
