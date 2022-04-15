@@ -4,12 +4,9 @@ import Axios from "axios";
 import "./BugsPage.css";
 
 import Popup from "../CreateBug/CreateBug";
-import DetailPopup from "../BugDetail/BugDetail";
 import BugLists from "../BugLists/BugLists";
-import ReportBtn from "../ReportBtn/ReportBtn";
 
 const BugsPage = ({ project, switchToProject }) => {
-
   const [getDevs, setGetDevs] = useState([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
@@ -30,15 +27,13 @@ const BugsPage = ({ project, switchToProject }) => {
     devID: "",
   });
   const resetForm = () => {
-    setSendBug(
-      {
-        name: "",
-        description: "",
-        priority: "Medium",
-        deadline: someDate,
-        devID: "",
-      }
-    );
+    setSendBug({
+      name: "",
+      description: "",
+      priority: "Medium",
+      deadline: someDate,
+      devID: "",
+    });
   };
 
   function handle(e) {
@@ -49,31 +44,26 @@ const BugsPage = ({ project, switchToProject }) => {
 
   function reportBug(e) {
     e.preventDefault();
-    const payload = {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-access-token": localStorage.getItem("token"),
-      },
-    };
     const config = {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
         "x-access-token": localStorage.getItem("token"),
       },
-    }
-    Axios.post("http://localhost:5000/bugs",
-    {
-      name: sendBug.name,
-      description: sendBug.description,
-      priority: sendBug.priority,
-      deadline: sendBug.deadline,
-      status: "Unresolved",
-      prjID: project._id,
-      devID: sendBug.devID,
-    }, config).then((res) => {
+    };
+    Axios.post(
+      "http://localhost:5000/bugs",
+      {
+        name: sendBug.name,
+        description: sendBug.description,
+        priority: sendBug.priority,
+        deadline: sendBug.deadline,
+        status: "Unresolved",
+        prjID: project._id,
+        devID: sendBug.devID,
+      },
+      config
+    ).then((res) => {
       console.log(res.data);
       // Success message
       setIsOpen(false);
@@ -93,18 +83,18 @@ const BugsPage = ({ project, switchToProject }) => {
   const fetchBugs = async () => {
     const projID = project._id;
     const payload = {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": localStorage.getItem("token"),
-        },
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
     };
 
     try {
       const res = await fetch(
         `http://localhost:5000/projects/${projID}/bugs`,
-        payload,
+        payload
       );
       const bug = await res.json();
       setIsLoaded(true);
@@ -117,19 +107,16 @@ const BugsPage = ({ project, switchToProject }) => {
 
   const fetchDev = async () => {
     const payload = {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "x-access-token": localStorage.getItem("token"),
-        },
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-access-token": localStorage.getItem("token"),
+      },
     };
 
     try {
-      const res = await fetch(
-        `http://localhost:5000/user/friends`,
-        payload,
-      );
+      const res = await fetch(`http://localhost:5000/user/friends`, payload);
       const dev = await res.json();
       setIsLoaded(true);
       setGetDevs(dev);
@@ -148,14 +135,18 @@ const BugsPage = ({ project, switchToProject }) => {
   }, []);
 
   function createSelectDevs() {
-    let devs = [];         
-    for (let i = 0; i < getDevs.length; i++) {             
-         devs.push(<option key={i} value={getDevs[i]._id}>{getDevs[i].username}</option>);   
-         //here I will be creating my options dynamically based on
-         //what props are currently passed to the parent component
+    let devs = [];
+    for (let i = 0; i < getDevs.length; i++) {
+      devs.push(
+        <option key={i} value={getDevs[i]._id}>
+          {getDevs[i].username}
+        </option>
+      );
+      //here I will be creating my options dynamically based on
+      //what props are currently passed to the parent component
     }
     return devs;
-};
+  }
 
   return (
     <div className="bugs-wrapper">
@@ -168,7 +159,11 @@ const BugsPage = ({ project, switchToProject }) => {
           <h2 className="bugs-reported">Bugs reported:</h2>
           <nav>
             <ul className="ul-styles">
-              <BugLists bugs={getBugs} toggleDetail={toggleDetail} fetchBugs={fetchBugs} />
+              <BugLists
+                bugs={getBugs}
+                toggleDetail={toggleDetail}
+                fetchBugs={fetchBugs}
+              />
             </ul>
           </nav>
           <input
@@ -181,8 +176,7 @@ const BugsPage = ({ project, switchToProject }) => {
             <Popup
               content={
                 <>
-                  <div class="col-3 col-s-3">
-                  </div>
+                  <div class="col-3 col-s-3"></div>
                   <h2>Report a new bug</h2>
                   <p>Enter details about new bugs here</p>
                   <form className="report-form" onSubmit={(e) => reportBug(e)}>
@@ -205,16 +199,31 @@ const BugsPage = ({ project, switchToProject }) => {
                           type="date"
                         />
                       </div>
-                      <div class="col-1 col-s-1">    
+                      <div class="col-1 col-s-1">
                         <h3 className="input-label">Bug priority</h3>
-                        <select className="dropdown enter-selection" id="priority" onChange={(e) => handle(e)}>
+                        <select
+                          className="dropdown enter-selection"
+                          id="priority"
+                          onChange={(e) => handle(e)}
+                        >
                           <option value="High">High</option>
-                          <option value="Medium" selected>Medium</option>
+                          <option value="Medium" selected>
+                            Medium
+                          </option>
                           <option value="Low">Low</option>
-                        </select>                    
+                        </select>
                         <h3 className="input-label">Assign to</h3>
-                        <select className="enter-selection" id="devID" onChange={(e) => handle(e)} label="Multiple Select" required>
-                          <option disabled selected value="">{" "} -- select a developer -- {" "}</option>
+                        <select
+                          className="enter-selection"
+                          id="devID"
+                          onChange={(e) => handle(e)}
+                          label="Multiple Select"
+                          required
+                        >
+                          <option disabled selected value="">
+                            {" "}
+                            -- select a developer --{" "}
+                          </option>
                           <option value="$self">Assign to self</option>
                           {createSelectDevs()}
                         </select>
@@ -230,12 +239,11 @@ const BugsPage = ({ project, switchToProject }) => {
                         type="text"
                       />
                       <div>
-                        <h3
-                          value="Unresolved"
-                          id="status"
-                        >Bug status: Unresolved</h3>
+                        <h3 value="Unresolved" id="status">
+                          Bug status: Unresolved
+                        </h3>
                       </div>
-                      <br/>
+                      <br />
                       <input className="rpt" type="submit" value="Report" />
                     </div>
                   </form>
@@ -248,7 +256,12 @@ const BugsPage = ({ project, switchToProject }) => {
       ) : (
         <div>
           <h2 className="bugs-reported">There is no bug</h2>
-          <input className="rptbtn" type="button" value="Report new bug" onClick={togglePopup} />
+          <input
+            className="rptbtn"
+            type="button"
+            value="Report new bug"
+            onClick={togglePopup}
+          />
           {isOpen && (
             <Popup
               content={
@@ -275,16 +288,31 @@ const BugsPage = ({ project, switchToProject }) => {
                           type="date"
                         />
                       </div>
-                      <div class="col-1 col-s-1">    
+                      <div class="col-1 col-s-1">
                         <h3 className="input-label">Bug priority</h3>
-                        <select className="dropdown enter-selection" id="priority" onChange={(e) => handle(e)}>
+                        <select
+                          className="dropdown enter-selection"
+                          id="priority"
+                          onChange={(e) => handle(e)}
+                        >
                           <option value="High">High</option>
-                          <option value="Medium" selected>Medium</option>
+                          <option value="Medium" selected>
+                            Medium
+                          </option>
                           <option value="Low">Low</option>
-                        </select>                    
+                        </select>
                         <h3 className="input-label">Assign to</h3>
-                        <select className="enter-selection" id="devID" onChange={(e) => handle(e)} label="Multiple Select" required>
-                          <option disabled selected value="">{" "} -- select a developer -- {" "}</option>
+                        <select
+                          className="enter-selection"
+                          id="devID"
+                          onChange={(e) => handle(e)}
+                          label="Multiple Select"
+                          required
+                        >
+                          <option disabled selected value="">
+                            {" "}
+                            -- select a developer --{" "}
+                          </option>
                           <option value="$self">Assign to self</option>
                           {createSelectDevs()}
                         </select>
@@ -300,12 +328,11 @@ const BugsPage = ({ project, switchToProject }) => {
                         type="text"
                       />
                       <div>
-                        <h3
-                          value="Unresolved"
-                          id="status"
-                        >Bug status: Unresolved</h3>
+                        <h3 value="Unresolved" id="status">
+                          Bug status: Unresolved
+                        </h3>
                       </div>
-                      <br/>
+                      <br />
                       <input className="rpt" type="submit" value="Report" />
                     </div>
                   </form>
